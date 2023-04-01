@@ -7,8 +7,8 @@ export default function About() {
         <>
             <Header />
 
-            <div className="max-2xl:px-6 container mx-auto pt-40 pb-20 space-y-32 xl:max-w-screen-xl">
-                <section className="space-y-24">
+            <div className="max-2xl:px-6 container mx-auto pt-40 pb-20 space-y-32 sm:space-y-40 xl:max-w-screen-xl">
+                <section className="space-y-24 xl:space-y-12">
                     <div>
                         <h2 className="max-w-xl mx-auto text-3xl font-bold tracking-tight text-center sm:text-5xl dark:text-white">Crowdly is a <span className="text-violet-600 dark:text-violet-400">trouble-free</span> social platform.</h2>
                         <p className="max-w-xl mx-auto mt-5 leading-normal text-xl text-center text-gray-700 dark:text-gray-300">Designed to bring people together and inspire meaningful conversations, Crowdly helps you discover new connections and share your thoughts with the world.</p>

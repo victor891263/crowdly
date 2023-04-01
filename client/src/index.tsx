@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
-import Root from './routes/root';
+import Help from './routes/help';
 import About from './routes/about';
 import Login from './routes/login';
 import Feed from './routes/feed';
@@ -12,7 +12,7 @@ import reportWebVitals from './reportWebVitals';
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Root />,
+        element: <Feed />,
         errorElement: <ErrorPage />
     },
     {
@@ -24,8 +24,8 @@ const router = createBrowserRouter([
         element: <Login />
     },
     {
-        path: "/feed",
-        element: <Feed />
+        path: "/help",
+        element: <Help />
     },
 ]);
 
