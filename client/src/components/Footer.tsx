@@ -8,7 +8,7 @@ export default function Footer() {
 
     return (
         <footer className="border-t text-gray-700 dark:text-gray-300 dark:border-gray-700">
-            <div className="container p-6 mx-auto xl:max-w-screen-xl 2xl:px-0">
+            <div className="container p-6 mx-auto xl:max-w-screen-xl">
                 <div className="flex gap-6 justify-between max-sm:flex-col">
                     <div className="">
                         <Link to="/" className="font-bold text-black dark:text-white">👋 Crowdly</Link>

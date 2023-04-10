@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import Header from '../components/Header';
 import FeedPost from '../components/FeedPost';
-import FeedProfile from '../components/FeedProfile';
 import FeedSuggestions from '../components/FeedSuggestions';
+import FeedAddPost from "../components/FeedAddPost";
 
-export default function Feed() {
+export default function Feed({ isTrending }: { isTrending?: boolean }) {
     const posts = [
         {
             id: '1',
@@ -33,52 +33,104 @@ export default function Feed() {
             username: 'Robert76118512',
             score: 18,
             replies: 1
+        },
+        {
+            id: '4',
+            _createdAt: new Date(2023, 2, 21).toString(),
+            body: `Republicans may think they won today in Tennessee, but their fascism is only further radicalizing and awakening an earthquake of young people, both in the South and across the nation.`,
+            username: 'AOC',
+            score: 225,
+            replies: 91,
+            image: 'https://source.unsplash.com/151x151/?portrait?6'
+        },
+        {
+            id: '5',
+            _createdAt: new Date(2023, 2, 22).toString(),
+            body: `I agree it shouldn’t have been done. Removal isn’t the answer awful precedent. But you & other hyper partisan establishment & extremist politicians brought us here. Are you sorry yet. It’s awful. But radicals pushing & indoctrinating/ forcing people further apart has consequences`,
+            username: 'WTPAreTheNews',
+            score: 183,
+            replies: 55
         }
     ];
+    const currentUser = localStorage.getItem('jwt'); // localStorage.getItem('jwt')
 
     function toggleTheme() {
         document.documentElement.classList.toggle('dark');
     }
 
+    const [paddingTop, setPaddingTop] = useState(0);
+
+    useEffect(() => {
+        function updatePaddingTop() {
+            const header = document.getElementById('the-header');
+            if (header) setPaddingTop(header.clientHeight);
+        }
+
+        updatePaddingTop(); // initial call
+        window.addEventListener('resize', updatePaddingTop); // add/bind the event listener
+
+        return () => window.removeEventListener('resize', updatePaddingTop); // remove/unbind the event listener when the component is unmounted
+    }, []);
+
     return (
         <>
-            <Header />
-            <div className="sm:pt-32 pt-20 bg-gray-100 text-gray-700 dark:text-gray-300 dark:bg-gray-900">
-                <div className="container mx-auto flex gap-5 xl:max-w-screen-xl sm:px-6 2xl:px-0">
-                    <div className="w-7/12 max-xl:hidden">
-                        <FeedProfile />
-                    </div>
-                    <div className="space-y-3.5 sm:space-y-4">
-                        <div className="bg-white sm:rounded-lg p-5 grid grid-cols-[max-content_auto] items-center max-sm:px-6 dark:bg-gray-800">
-                            <img className="object-cover w-10 h-10 mr-4 rounded-full" src="https://source.unsplash.com/155x155/?portrait?3" alt="avatar"/>
-                            <input type="search" name="Search" placeholder="What's on your mind?" className="h-10 py-2 pl-4 text-sm bg-transparent rounded-full focus:outline-none border placeholder:text-gray-400 focus:border-violet-600 dark:border-gray-700 dark:focus:border-violet-400 dark:placeholder:text-gray-600"/>
-                        </div>
-                        <div className="max-sm:pl-6 flex gap-4 text-sm text-gray-400 dark:text-gray-500">
-                            <p>Posted by: <span className="font-bold">Everyone</span></p>
-                            <p>Sort by: <span className="font-bold">Engagement</span></p>
-                        </div>
-                        <div className="divide-y bg-white sm:rounded-lg dark:bg-gray-800 dark:divide-gray-700">
+            <Header isFeed={true} />
+            <div style={{ paddingTop }} className="text-gray-700 dark:text-gray-300 dark:bg-gray-900">
+                <div className="container mx-auto flex gap-7 lg:max-w-screen-lg px-6">
+                    <div className="flex flex-col gap-5 lg:border-r lg:pr-7 dark:border-gray-700">
+                        <div className="divide-y dark:divide-gray-700">
+                            <div className="py-4 flex items-center justify-between">
+                                <h1 className="font-bold text-lg text-black dark:text-white">{isTrending ? "Trending" : "Your feed"}</h1>
+                                <button>
+                                    <svg fill="currentColor" viewBox="0 0 512 512" className="w-4 h-4"><path d="M479.6,399.716l-81.084-81.084-62.368-25.767A175.014,175.014,0,0,0,368,192c0-97.047-78.953-176-176-176S16,94.953,16,192,94.953,368,192,368a175.034,175.034,0,0,0,101.619-32.377l25.7,62.2L400.4,478.911a56,56,0,1,0,79.2-79.195ZM48,192c0-79.4,64.6-144,144-144s144,64.6,144,144S271.4,336,192,336,48,271.4,48,192ZM456.971,456.284a24.028,24.028,0,0,1-33.942,0l-76.572-76.572-23.894-57.835L380.4,345.771l76.573,76.572A24.028,24.028,0,0,1,456.971,456.284Z"></path></svg>
+                                </button>
+                            </div>
                             {posts.map((p, i) => (
                                 <FeedPost post={p} key={i} />
                             ))}
                         </div>
                     </div>
-                    <div className="max-xl:w-5/6 w-4/6 flex flex-col gap-5 max-lg:hidden">
-                        <div className="xl:hidden">
-                            <FeedProfile />
-                        </div>
-                        <FeedSuggestions />
-                        <div className="bg-white rounded-lg px-6 py-5 h-fit dark:bg-gray-800">
-                            <h2 className="text-lg font-bold text-black dark:text-white">Need help? <span className="text-lg">😕</span></h2>
-                            <p className="mt-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-                            <a href="/" className="text-violet-600 block mt-3 dark:text-violet-400">Visit help section</a>
-                        </div>
-                        <div className="text-sm text-gray-400 dark:text-gray-600">
+                    <div style={{ top: paddingTop }} className="sticky self-start flex flex-col gap-6 max-lg:hidden">
+                        {currentUser ? (
+                            <div className="pt-6">
+                                <FeedAddPost />
+                            </div>
+                        ):(
+                            <div className="pt-5 pb-0.5">
+                                <h2 className="font-bold text-lg text-black dark:text-white">Join the conversation</h2>
+                                <p className="mt-2.5">Login if you already have an account or sign up now to get your own personalized timeline!</p>
+                                <div className="flex items-center mt-4 gap-2">
+                                    <Link to="/join" className="rounded-md px-3 py-2 text-sm font-semibold bg-indigo-600 text-white dark:bg-indigo-400 dark:text-black">Sign up</Link>
+                                    <Link to="/login" className="rounded-md border px-3 py-2 text-sm font-semibold text-indigo-600 dark:border-gray-700 dark:text-indigo-400">Login</Link>
+                                </div>
+                            </div>
+                        )}
+                        {currentUser && (
+                            <div className="border-t pt-4 dark:border-gray-700">
+                                <FeedSuggestions />
+                            </div>
+                        )}
+                        <div className="w-72 border-t pt-6 text-sm text-gray-400 dark:text-gray-500 dark:border-gray-700">
                             <div className="flex gap-4 items-center justify-center">
-                                <Link to="/">Home</Link>
-                                <Link to="/">Search</Link>
-                                <Link to="/">About</Link>
-                                <Link to="/">Help</Link>
+                                {currentUser ? (
+                                    <>
+                                        <Link to="/feed">Feed</Link>
+                                        <Link to="/about">About</Link>
+                                        <Link to="/help">Help</Link>
+                                        <button>Logout</button>
+                                    </>
+                                ):(
+                                    <>
+                                        <Link to="/trending">Trending</Link>
+                                        <Link to="/about">About</Link>
+                                        <Link to="/help">Help</Link>
+                                        <Link to="/join">Join</Link>
+                                        <Link to="/login">Login</Link>
+                                    </>
+                                )}
+                            </div>
+                            <p className="text-center mt-3">© 2023 Victor. All rights reserved.</p>
+                            <div className="flex gap-4 items-center justify-center mt-4">
                                 <a href="/">
                                     <svg fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
                                 </a>
@@ -87,7 +139,6 @@ export default function Feed() {
                                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 hidden dark:block"><path d="M12 21.0001C9.5 21.0001 7.375 20.1251 5.625 18.3751C3.875 16.6251 3 14.5001 3 12.0001C3 9.75011 3.6625 7.84178 4.9875 6.27511C6.3125 4.70844 8.05 3.70011 10.2 3.25011C10.8833 3.11678 11.35 3.23344 11.6 3.60011C11.85 3.96678 11.8417 4.46678 11.575 5.10011C11.425 5.48344 11.3083 5.87511 11.225 6.27511C11.1417 6.67511 11.1 7.08344 11.1 7.50011C11.1 9.00011 11.625 10.2751 12.675 11.3251C13.725 12.3751 15 12.9001 16.5 12.9001C16.9167 12.9001 17.3208 12.8626 17.7125 12.7876C18.1042 12.7126 18.4833 12.6084 18.85 12.4751C19.5667 12.2084 20.1 12.2209 20.45 12.5126C20.8 12.8043 20.8917 13.3001 20.725 14.0001C20.275 16.0168 19.2667 17.6876 17.7 19.0126C16.1333 20.3376 14.2333 21.0001 12 21.0001ZM12 19.5001C13.8167 19.5001 15.4 18.9376 16.75 17.8126C18.1 16.6876 18.9417 15.3668 19.275 13.8501C18.8583 14.0334 18.4125 14.1709 17.9375 14.2626C17.4625 14.3543 16.9833 14.4001 16.5 14.4001C14.5833 14.4001 12.9542 13.7293 11.6125 12.3876C10.2708 11.0459 9.6 9.41678 9.6 7.50011C9.6 7.10011 9.64167 6.67094 9.725 6.21261C9.80833 5.75428 9.95833 5.23344 10.175 4.65011C8.54167 5.10011 7.1875 6.01261 6.1125 7.38761C5.0375 8.76261 4.5 10.3001 4.5 12.0001C4.5 14.0834 5.22917 15.8543 6.6875 17.3126C8.14583 18.7709 9.91667 19.5001 12 19.5001Z"/></svg>
                                 </button>
                             </div>
-                            <p className="text-center mt-3">© 2023 Victor. All rights reserved.</p>
                         </div>
                     </div>
                 </div>

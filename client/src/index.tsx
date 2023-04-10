@@ -2,18 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
+import Home from "./routes/home";
 import Help from './routes/help';
+import HelpTopic from "./routes/helpTopic";
+import HelpArticle from "./routes/helpArticle";
 import About from './routes/about';
 import Login from './routes/login';
-import Feed from './routes/feed';
+import YourFeed from './routes/yourFeed';
+import Trending from './routes/trending';
 import ErrorPage from './ErrorPage';
 import reportWebVitals from './reportWebVitals';
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Feed />,
+        element: <Home />,
         errorElement: <ErrorPage />
+    },
+    {
+        path: "/feed",
+        element: <YourFeed />
+    },
+    {
+        path: "/trending",
+        element: <Trending />
     },
     {
         path: "/about",
@@ -26,6 +38,14 @@ const router = createBrowserRouter([
     {
         path: "/help",
         element: <Help />
+    },
+    {
+        path: "/help/:topic",
+        element: <HelpTopic />
+    },
+    {
+        path: "/help/articles/:article",
+        element: <HelpArticle />
     },
 ]);
 
