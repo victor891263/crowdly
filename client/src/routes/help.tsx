@@ -21,7 +21,7 @@ export default function Help() {
                         </div>
                     </div>
 
-                    <div className="flex pt-8 pb-16 border-t mt-9 text-gray-700 dark:text-gray-300">
+                    <div className="flex pt-8 pb-16 border-t mt-9 text-gray-700 dark:border-gray-700 dark:text-gray-300">
                         <div className="lg:w-8/12 lg:border-r lg:pr-6 w-full dark:border-gray-700">
                             <div>
                                 <h2 className="font-bold tracking-tight text-xl text-black dark:text-white">Shortcuts</h2>
@@ -36,38 +36,38 @@ export default function Help() {
                             </div>
                             <div className="mt-14">
                                 <h2 className="font-bold tracking-tight text-xl text-black dark:text-white">All topics</h2>
-                                <div className="grid-cols-2 md:grid-cols-3 mt-6 grid gap-6 font-semibold text-indigo-600 dark:text-indigo-400">
-                                    <Link to="/" className="flex flex-col items-center text-center p-6 border rounded dark:border-gray-700">
+                                <div className="grid-cols-2 md:grid-cols-3 mt-6 grid gap-5 font-semibold text-indigo-600 dark:text-indigo-400">
+                                    <Link to="/" className="flex flex-col items-center text-center p-6 border rounded-md dark:border-gray-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
                                         </svg>
                                         <div className="mt-2">Getting started</div>
                                     </Link>
-                                    <Link to="/" className="flex flex-col items-center text-center p-6 border rounded dark:border-gray-700">
+                                    <Link to="/" className="flex flex-col items-center text-center p-6 border rounded-md dark:border-gray-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
                                         </svg>
                                         <div className="mt-2">Following accounts</div>
                                     </Link>
-                                    <Link to="/" className="flex flex-col items-center text-center p-6 border rounded dark:border-gray-700">
+                                    <Link to="/" className="flex flex-col items-center text-center p-6 border rounded-md dark:border-gray-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
                                         </svg>
                                         <div className="mt-2">Posts and replies</div>
                                     </Link>
-                                    <Link to="/" className="flex flex-col items-center text-center p-6 border rounded dark:border-gray-700">
+                                    <Link to="/" className="flex flex-col items-center text-center p-6 border rounded-md dark:border-gray-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
                                         </svg>
                                         <div className="mt-2">The voting system</div>
                                     </Link>
-                                    <Link to="/" className="flex flex-col items-center text-center p-6 border rounded dark:border-gray-700">
+                                    <Link to="/" className="flex flex-col items-center text-center p-6 border rounded-md dark:border-gray-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
                                         <div className="mt-2">Your profile</div>
                                     </Link>
-                                    <Link to="/" className="flex flex-col items-center text-center p-6 border rounded dark:border-gray-700">
+                                    <Link to="/" className="flex flex-col items-center text-center p-6 border rounded-md dark:border-gray-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
                                         </svg>

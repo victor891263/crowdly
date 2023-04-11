@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from "react-router-dom";
 
 export default function Footer() {
     function toggleTheme() {
-        document.documentElement.classList.toggle('dark');
+        if (localStorage.getItem('theme') === 'dark') localStorage.setItem('theme', 'light');
+        else localStorage.setItem('theme', 'dark');
+        window.dispatchEvent(new Event('storage'));
     }
 
     return (
