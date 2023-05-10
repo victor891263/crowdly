@@ -2,53 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-SF PRO
-letter-spacing: -0.022em;
-*/
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased;
+    }
 
-@font-face {
-    font-family: 'SF Pro Text';
-    font-style: normal;
-    font-weight: 400;
-    src: url("./assets/fonts/sfpro-text-regular.woff2") format('woff2');
-}
-@font-face {
-    font-family: 'SF Pro Text';
-    font-style: normal;
-    font-weight: 700;
-    src: url("./assets/fonts/sfpro-text-semibold.woff2") format('woff2');
-}
-
-/*
-INTER
-font-feature-settings: "cv02","cv03","cv04","cv11";
-*/
-
-@font-face {
-    font-family: 'Inter';
-    font-weight: 100 900;
-    font-display: block;
-    font-style: normal;
-    src: url("./assets/fonts/inter-variable.woff2") format('woff2');
-}
-
-html {
-
-    -webkit-font-smoothing: antialiased;
-}
-
-/* clears the ‘X’ from Internet Explorer */
-input[type=search]::-ms-clear,
-input[type=search]::-ms-reveal {
-    display: none;
-    width : 0;
-    height: 0;
-}
-/* clears the ‘X’ from Chrome */
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration {
-    display: none;
+    /* clears the ‘X’ from Internet Explorer */
+    input[type=search]::-ms-clear,
+    input[type=search]::-ms-reveal {
+        display: none;
+        width : 0;
+        height: 0;
+    }
+    /* clears the ‘X’ from Chrome */
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration {
+        display: none;
+    }
 }

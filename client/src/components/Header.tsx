@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import getCurrentUser from "../utils/getCurrentUser";
 
 export default function Header({ isFeed }: { isFeed?: boolean }) {
-    const currentUser = localStorage.getItem('jwt'); // localStorage.getItem('jwt')
+    const currentUser = getCurrentUser()
 
     return (
         <header id="the-header" className="fixed w-full bg-white border-b text-gray-700 dark:text-gray-300 dark:bg-gray-900 dark:border-gray-700">
-            <div className={"container flex items-center justify-between mx-auto text-sm px-6" + (currentUser ? " py-4 md:py-5" : " py-4") + (isFeed ? " lg:max-w-screen-lg" : " xl:max-w-screen-xl")}>
+            <div className={"h-[52px] sm:h-16 container flex items-center justify-between mx-auto text-sm px-6" + (isFeed ? " lg:max-w-screen-lg" : " xl:max-w-screen-xl")}>
                 <nav className="flex items-center gap-6">
                     <Link to="/" className="font-bold text-black dark:text-white">👋 Crowdly</Link>
                     <div className="flex items-center gap-6 max-md:hidden">
@@ -32,8 +33,8 @@ export default function Header({ isFeed }: { isFeed?: boolean }) {
                     </div>
                 ):(
                     <div className="flex items-center gap-2 max-md:hidden">
-                        <Link to="/login" className="rounded-md border px-3 py-2 font-semibold text-indigo-600 dark:border-gray-700 dark:text-indigo-400">Login</Link>
-                        <Link to="/join" className="rounded-md px-3 py-2 bg-indigo-600 text-white font-semibold dark:text-black dark:bg-indigo-400">Sign up</Link>
+                        <Link to="/login" className="rounded-md border px-3.5 py-2 text-indigo-600 dark:border-gray-700 dark:text-indigo-400">Login</Link>
+                        <Link to="/join" className="rounded-md px-3.5 py-2 bg-indigo-600 text-white dark:text-black dark:bg-indigo-400">Sign up</Link>
                     </div>
                 )}
                 <div className="flex items-center gap-4 md:hidden">

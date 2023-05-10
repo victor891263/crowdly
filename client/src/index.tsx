@@ -11,6 +11,7 @@ import Login from './routes/login';
 import YourFeed from './routes/yourFeed';
 import Trending from './routes/trending';
 import ErrorPage from './ErrorPage';
+import initTheme from "./utils/initTheme";
 import reportWebVitals from './reportWebVitals';
 
 // function to change class of <html> tag accordingly based on value of theme variable
@@ -65,15 +66,7 @@ root.render(
     </React.StrictMode>
 );
 
-// if theme variable has no value yet, give it a value based on user's system theme
-if (!localStorage.getItem('theme')) {
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) localStorage.setItem('theme', 'dark');
-    else localStorage.setItem('theme', 'light');
-}
-
-toggleThemeClass(); // once value has been given to theme variable, change class of <html> tag accordingly
-window.addEventListener('storage', toggleThemeClass); // whenever theme variable is modified, change class of <html> tag accordingly
-
+initTheme();
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
