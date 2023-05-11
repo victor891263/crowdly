@@ -4,7 +4,7 @@ const Like = require("../models/like")
 const Dislike = require("../models/dislike")
 
 module.exports = async (req, res) => {
-    const postId = req.query.id // id of the post that the user retrieved
+    const postId = req.params.id // id of the post that the user retrieved
     const currentUserId = req.user.id // the user that is logged in now
 
     // find the post with the specified id

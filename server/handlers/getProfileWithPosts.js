@@ -3,7 +3,7 @@ const Post = require('../models/post')
 const Follow = require('../models/follow')
 
 module.exports = async (req, res) => {
-    const profileId = req.query.id // id of the user/profile that the user retrieved
+    const profileId = req.params.id // id of the user/profile that the user retrieved
     const currentUserId = req.user.id // id of the currently logged in user
 
     // get this user's data

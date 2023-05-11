@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const jwt = require('jsonwebtoken')
 const hash = require('../utilities/hash')
 
 module.exports = async (req, res) => {
@@ -9,6 +10,7 @@ module.exports = async (req, res) => {
         where: { username: accountData.username }
     })
 
+    // if the username is already taken, don't proceed
     if (user) {
         res.status(400).send('The username you provided is already taken')
         return
@@ -22,5 +24,10 @@ module.exports = async (req, res) => {
         username: accountData.username,
         password: hashed
     })
-    res.send(createdUser.id)
+
+    // create the json web token
+    const token = jwt.sign({ id: createdUser.id }, process.env.JWT_SECRET)
+
+    // send the json web token to the client
+    res.send(token)
 }

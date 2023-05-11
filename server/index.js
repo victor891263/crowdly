@@ -1,20 +1,29 @@
 require('dotenv').config()
 const express = require('express')
+require('express-async-errors')
 
 // initialize api
 const app = express()
+
+// handle errors that are not caught by anything
+process.on('uncaughtException', (error, source) => {
+    console.log('uncaughtException', error, source);
+});
+
+// handle promises that are rejected and not handled by anything
+process.on('unhandledRejection', (error, source) => {
+    console.log('unhandledRejection', error, source);
+});
 
 // test database and handle disconnection
 require('./startup/initDb')()
 
 // routes
+app.use('/auth', require('./routes/auth'))
 app.use(require('./middleware/auth')) // authentication middleware
-// get routes
-app.use('/trending', require('./routes/trending'))
 app.use('/posts', require('./routes/posts'))
 app.use('/users', require('./routes/users'))
-app.use('/myfeed', require('./routes/myfeed'))
-// post routes
+app.use(require('./middleware/handleError'))
 
 // begin listening
 app.listen(process.env.PORT || 5000, () => console.log('API is running'))

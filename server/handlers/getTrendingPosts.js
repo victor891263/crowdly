@@ -1,14 +1,14 @@
 const Post = require("../models/post")
-const sequelize = require("../startup/db")
+const Sequelize = require("sequelize")
 
 module.exports = async (req, res) => {
     const posts = await Post.findAll({
         attributes: {
             include: [
-                [sequelize.literal('likes + dislikes + replies'), 'total']
+                [Sequelize.literal('likes + dislikes + replies'), 'total']
             ]
         },
-        order: [sequelize.literal('total DESC')]
+        order: [Sequelize.literal('total DESC')]
     })
     res.send(JSON.stringify(posts, null, 2))
 }

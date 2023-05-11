@@ -3,12 +3,7 @@ const User = require("../models/user")
 const Post = require("../models/post")
 
 module.exports = async (req, res) => {
-    if (!req.user.id) {
-        res.status(400).send('Unable to verify your identity')
-        return
-    }
-
-    const currentUserId = req.user.id // the user that is logged in now
+    const currentUserId = req.user.id // id of currently logged in user
 
     // retrieve rows from 'Follow' table where 'followerId' property has the same value as 'currentUserId' variable
     const followedUsers = await Follow.findAll({
