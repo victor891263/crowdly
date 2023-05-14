@@ -42,9 +42,9 @@ User.hasMany(Post, {
 Post.belongsTo(User, {
     foreignKey: 'userId'
 })
-
+/*
 Post.sync({ alter: true })
     .then(() => console.log('The `posts` table was just (re)created!'))
     .catch(error => console.log('Error synchronizing `posts` table', error))
-
+*/
 module.exports = Post

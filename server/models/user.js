@@ -24,9 +24,9 @@ const User = sequelize.define('User', {
         defaultValue: 0
     }
 })
-
+/*
 User.sync({ alter: true })
     .then(() => console.log('The `users` table was just (re)created!'))
     .catch(error => console.log('Error synchronizing `users` table', error))
-
+*/
 module.exports = User

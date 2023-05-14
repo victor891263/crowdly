@@ -7,6 +7,19 @@
         -webkit-font-smoothing: antialiased;
     }
 
+    input, textarea {
+        background: none;
+        outline: none;
+    }
+
+    h2 {
+        @apply text-xl font-bold -my-2
+    }
+
+    input, textarea {
+        @apply flex rounded-lg bg-gray-100 border border-gray-100 focus:border-blue-600 dark:placeholder:text-zinc-500 dark:bg-zinc-800 dark:border-zinc-800 dark:focus:border-blue-400
+    }
+
     /* clears the ‘X’ from Internet Explorer */
     input[type=search]::-ms-clear,
     input[type=search]::-ms-reveal {
@@ -21,4 +34,44 @@
     input[type="search"]::-webkit-search-results-decoration {
         display: none;
     }
+
+    #root {
+        @apply text-gray-700 dark:text-zinc-300 dark:bg-zinc-900
+    }
+}
+
+@layer components {
+    .btn-primary {
+        @apply font-medium rounded-lg bg-blue-600 text-gray-100 dark:bg-blue-400 dark:text-zinc-900
+    }
+}
+
+@layer utilities {
+    .divide-y {
+        @apply dark:divide-zinc-700/75
+    }
+
+    .border, .border-r, .border-b, .border-t {
+        @apply dark:border-zinc-700/75
+    }
+
+    .font-bold, .font-semibold {
+        @apply text-gray-900 dark:text-zinc-100
+    }
+
+    .font-bold {
+        @apply tracking-tight
+    }
+}
+
+.text-gray-400 {
+    @apply dark:text-zinc-500
+}
+
+.text-blue-600 {
+    @apply dark:text-blue-400
+}
+
+.border-blue-600 {
+    @apply dark:border-blue-400
 }

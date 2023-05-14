@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const getProfile = require('../handlers/getProfile')
 const getProfileWithPosts = require('../handlers/getProfileWithPosts')
 const getProfileWithFollowers = require('../handlers/getProfileWithFollowers')
 const getProfileWithFollows = require('../handlers/getProfileWithFollows')
@@ -11,8 +12,11 @@ const deleteFollow = require('../handlers/deleteFollow')
 const handleAccess = require('../middleware/handleAccess')
 
 
-// get data about the specified profile along with posts made by that profile
-router.get('/:id', getProfileWithPosts)
+// get data about the specified profile
+router.get('/:id', getProfile)
+
+// get posts made by that profile
+router.get('/:id/posts', getProfileWithPosts)
 
 // get users that have followed the specified profile
 router.get('/:id/followers', getProfileWithFollowers)

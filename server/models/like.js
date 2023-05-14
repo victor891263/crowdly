@@ -30,11 +30,11 @@ User.belongsToMany(Post, {
     through: Like,
     foreignKey: 'userId'
 })
-
+/*
 Like.sync({ alter: true })
     .then(() => console.log('The `likes` table was just (re)created!'))
     .catch(error => console.log('Error synchronizing `likes` table', error))
-
+*/
 module.exports = Like
 
 

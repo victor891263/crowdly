@@ -18,6 +18,18 @@ module.exports = async (req, res) => {
         ],
     })
 
+    // if the post with the given id doesn't exist, tell that to the client, instead of proceeding
+    if (!post) {
+        res.status(404).send(`The post you're trying to view doesn't exist`)
+        return
+    }
+
+    // get info of user who made the post
+    const poster = await User.findOne({
+        where: { id: post.userId },
+        attributes: ['username']
+    })
+
     // retrieve all replies made to the current post
     const repliedPosts = await Post.findAll({
         where: { repliedId: postId },
@@ -50,5 +62,5 @@ module.exports = async (req, res) => {
         })
     }
 
-    res.send({ ...post, repliedPosts, liked: likeByCurrentUser ? true : false, disliked: dislikeByCurrentUser ? true : false})
+    res.send({ ...post, ...poster, repliedPosts, liked: likeByCurrentUser ? true : false, disliked: dislikeByCurrentUser ? true : false})
 }

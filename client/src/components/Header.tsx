@@ -1,15 +1,18 @@
-import React from 'react';
-import { Link } from "react-router-dom";
-import getCurrentUser from "../utils/getCurrentUser";
+import React from 'react'
+import { Link } from "react-router-dom"
+import ThemeButton from "./ThemeButton"
+import BarsIcon from "../icons/BarsIcon"
+import BellIcon from '../icons/BellIcon'
+import getCurrentUser from "../utilities/getCurrentUser"
 
 export default function Header({ isFeed }: { isFeed?: boolean }) {
     const currentUser = getCurrentUser()
 
     return (
-        <header id="the-header" className="fixed w-full bg-white border-b text-gray-700 dark:text-gray-300 dark:bg-gray-900 dark:border-gray-700">
-            <div className={"h-[52px] sm:h-16 container flex items-center justify-between mx-auto text-sm px-6" + (isFeed ? " lg:max-w-screen-lg" : " xl:max-w-screen-xl")}>
+        <header className="fixed w-full bg-white border-b text-gray-700 dark:text-zinc-300 dark:bg-zinc-900 dark:border-zinc-700">
+            <div className={"h-14 sm:h-16 container flex items-center justify-between mx-auto text-sm px-4 sm:px-6 lg:px-8" + (isFeed ? " lg:max-w-screen-lg" : " xl:max-w-screen-xl")}>
                 <nav className="flex items-center gap-6">
-                    <Link to="/" className="font-bold text-black dark:text-white">👋 Crowdly</Link>
+                    <Link to="/" className="font-semibold text-black dark:text-white">Crowdly</Link>
                     <div className="flex items-center gap-6 max-md:hidden">
                         <Link to="/trending">Trending</Link>
                         <Link to="/about">About</Link>
@@ -18,28 +21,23 @@ export default function Header({ isFeed }: { isFeed?: boolean }) {
                 </nav>
                 {currentUser ? (
                     <div className="flex items-center gap-6 max-md:hidden">
-                        <div className="flex items-center gap-1">
-                            <div>Notifications</div>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </div>
-                        <div className="flex items-center gap-1">
-                            <div>Account</div>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </div>
+                        <Link to="/notifications">Notifications</Link>
+                        <Link to="/profile">Profile</Link>
+                        <button className="text-red-600 dark:text-red-400">Logout</button>
                     </div>
                 ):(
-                    <div className="flex items-center gap-2 max-md:hidden">
-                        <Link to="/login" className="rounded-md border px-3.5 py-2 text-indigo-600 dark:border-gray-700 dark:text-indigo-400">Login</Link>
-                        <Link to="/join" className="rounded-md px-3.5 py-2 bg-indigo-600 text-white dark:text-black dark:bg-indigo-400">Sign up</Link>
+                    <div className="flex items-center gap-6 max-md:hidden">
+                        <Link to="/login">Login</Link>
+                        <Link to="/join">Sign up</Link>
                     </div>
                 )}
-                <div className="flex items-center gap-4 md:hidden">
+                <div className="flex items-center gap-3 md:hidden">
+                    <ThemeButton className={'w-5 h-5'} />
                     <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        <BellIcon className={'w-4 h-4'} />
+                    </button>
+                    <button>
+                        <BarsIcon className={'w-6 h-6'} />
                     </button>
                 </div>
             </div>

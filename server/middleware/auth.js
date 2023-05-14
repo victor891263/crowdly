@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken')
 
 module.exports = (req, res, next) => {
-    const token = req.header('x-auth-token') // get jwt sent by client
+    const token = req.headers.authorization // get jwt sent by client
+    req.user = {} // empty object to prevent "cannot read id of undefined" errors
 
     // if a logged in user is present, decode the user's jwt and pass the decoded value onto the next middlewares
     if (token) {

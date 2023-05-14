@@ -4,12 +4,6 @@ const Follow = require('../models/follow')
 module.exports = async (req, res) => {
     const profileId = req.params.id // id of the user/profile that the user retrieved
 
-    // get this user's data
-    const profile = await User.findOne({
-        where: { id: profileId },
-        attributes: ['id', 'username']
-    })
-
     // get ids of all users that this user has followed
     const follows = await Follow.findAll({
         where: { followerId: profileId }
@@ -24,5 +18,5 @@ module.exports = async (req, res) => {
         attributes: ['id', 'username']
     })
 
-    res.send({ ...profile, users })
+    res.send(users)
 }

@@ -1,0 +1,57 @@
+import React from "react"
+import FeedAddPost from "./FeedAddPost"
+import {Link} from "react-router-dom"
+import ThemeButton from "./ThemeButton"
+import GitHubIcon from "../icons/GitHubIcon"
+import getCurrentUser from "../utilities/getCurrentUser"
+
+export default function FeedSidebar() {
+    const currentUser = getCurrentUser()
+
+    // pt-5 pb-8
+
+    return (
+        <>
+            {currentUser ? (
+                <div className="mt-8">
+                    <FeedAddPost />
+                </div>
+            ):(
+                <div className="mt-8 rounded-2xl">
+                    <h2>New to Crowdly?</h2>
+                    <p className='mt-5 mb-5'>Join us now to get your own personalized timeline!</p>
+                    <input type='text' placeholder='Choose a username' className='mb-2 w-full py-2 px-3 text-sm' />
+                    <Link to="/join" className="btn-primary block py-2 text-center text-sm">Create account</Link>
+                </div>
+            )}
+
+            <div className="w-72 pt-6 text-sm text-gray-400">
+                <div className="flex gap-3.5 items-center justify-center">
+                    {currentUser ? (
+                        <>
+                            <Link to="/feed">Feed</Link>
+                            <Link to="/about">About</Link>
+                            <Link to="/help">Help</Link>
+                            <button>Logout</button>
+                        </>
+                    ):(
+                        <>
+                            <Link to="/trending">Trending</Link>
+                            <Link to="/about">About</Link>
+                            <Link to="/help">Help</Link>
+                            <Link to="/join">Join</Link>
+                            <Link to="/login">Login</Link>
+                        </>
+                    )}
+                </div>
+                <p className="text-center mt-2">© 2023 Victor. All rights reserved.</p>
+                <div className="flex gap-2 items-center justify-center mt-4">
+                    <ThemeButton className={'w-[22px] h-[22px]'} />
+                    <a href="/">
+                        <GitHubIcon className={"w-[22px] h-[22px] p-[1px]"} />
+                    </a>
+                </div>
+            </div>
+        </>
+    )
+}

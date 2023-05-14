@@ -1,9 +1,13 @@
 require('dotenv').config()
 const express = require('express')
 require('express-async-errors')
+const cors = require('cors')
 
 // initialize api
 const app = express()
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 // handle errors that are not caught by anything
 process.on('uncaughtException', (error, source) => {

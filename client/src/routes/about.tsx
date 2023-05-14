@@ -1,6 +1,7 @@
-import React from 'react';
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import React from 'react'
+import Header from "../components/Header"
+import Footer from "../components/Footer"
+import CheckIcon from "../icons/CheckIcon";
 
 export default function About() {
     return (
@@ -10,13 +11,13 @@ export default function About() {
             <div className="max-2xl:px-6 container mx-auto pt-40 pb-20 space-y-32 sm:space-y-40 xl:max-w-screen-xl">
                 <section className="space-y-24 xl:space-y-12">
                     <div>
-                        <h2 className="max-w-xl mx-auto text-3xl font-bold tracking-tight text-center sm:text-5xl dark:text-white">Crowdly is a <span className="text-violet-600 dark:text-violet-400">trouble-free</span> social platform.</h2>
+                        <h2 className="max-w-xl mx-auto text-3xl font-bold tracking-tight text-center sm:text-5xl dark:text-white">Crowdly is a <span className="text-blue-600">trouble-free</span> social platform.</h2>
                         <p className="max-w-xl mx-auto mt-5 leading-normal text-xl text-center text-gray-700 dark:text-gray-300">Designed to bring people together and inspire meaningful conversations, Crowdly helps you discover new connections and share your thoughts with the world.</p>
                     </div>
 
                     <div className="grid lg:gap-8 lg:grid-cols-2 lg:items-center">
                         <div>
-                            <div className="font-black text-4xl text-gray-400 sm:text-5xl dark:text-gray-600">#1</div>
+                            <div className="font-black text-4xl text-gray-400 sm:text-5xl dark:text-gray-600">1</div>
 
                             <h3 className="mt-3 max-w-sm text-2xl font-bold tracking-tight sm:text-3xl dark:text-white">Straightforward account creation process.</h3>
                             <p className="mt-4 text-lg text-gray-700 dark:text-gray-300">Creating an account has never been simpler. With just a unique username and a valid email address, you can become part of our vibrant social media community. Give up the lengthy sign-up processes for an instant access to all the features you need to connect with others.</p>
@@ -28,7 +29,7 @@ export default function About() {
 
                     <div className="grid lg:gap-8 lg:grid-cols-2 lg:items-center">
                         <div className="lg:col-start-2">
-                            <div className="font-black text-4xl text-gray-400 sm:text-5xl dark:text-gray-600">#2</div>
+                            <div className="font-black text-4xl text-gray-400 sm:text-5xl dark:text-gray-600">2</div>
 
                             <h3 className="mt-3 max-w-sm text-2xl font-bold tracking-tight sm:text-3xl dark:text-white">Never miss an update from your favorite people.</h3>
                             <p className="mt-4 text-lg text-gray-700 dark:text-gray-300">Crowdly's easy-to-use follow feature makes it effortless to build and maintain meaningful connections on our social media platform - simply follow them and their posts will appear on your personalized feed. This way, you'll be able to stay in the loop at all times.</p>
@@ -40,7 +41,7 @@ export default function About() {
 
                     <div className="grid lg:gap-8 lg:grid-cols-2 lg:items-center">
                         <div>
-                            <div className="font-black text-4xl text-gray-400 sm:text-5xl dark:text-gray-600">#3</div>
+                            <div className="font-black text-4xl text-gray-400 sm:text-5xl dark:text-gray-600">3</div>
 
                             <h3 className="mt-3 max-w-sm text-2xl font-bold tracking-tight sm:text-3xl dark:text-white">Join the conversation and let your voice be heard.</h3>
                             <p className="mt-4 text-lg text-gray-700 dark:text-gray-300">Whether you want to upvote or downvote a post to show your approval or disapproval, reply to express your thoughts, or quote a post to share it with your own followers, our interactive features allow you to be an active participant in the community.</p>
@@ -58,59 +59,59 @@ export default function About() {
                     </div>
                     <dl className="mx-auto mt-14 space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-3 lg:gap-x-8">
                         <div className="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-violet-600 dark:text-violet-400"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                            <CheckIcon className={"flex-shrink-0 w-6 h-6 text-blue-600"} />
                             <div className="ml-3">
                                 <dt className="text-lg font-bold dark:text-white">Get the pulse of the community.</dt>
                                 <dd className="mt-2 text-gray-700 dark:text-gray-300">Upvote or downvote posts to help determine the most popular content. The "score" lets you discover posts that align with your interests.</dd>
                             </div>
                         </div>
                         <div className="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-violet-600 dark:text-violet-400"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                            <CheckIcon className={"flex-shrink-0 w-6 h-6 text-blue-600"} />
                             <div className="ml-3">
                                 <dt className="text-lg font-bold dark:text-white">Amplify others' voices and yours as well.</dt>
                                 <dd className="mt-2 text-gray-700 dark:text-gray-300">Share other users' posts and add your own commentary. The quoted post appears on your profile, making it easy for revisiting.</dd>
                             </div>
                         </div>
                         <div className="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-violet-600 dark:text-violet-400"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                            <CheckIcon className={"flex-shrink-0 w-6 h-6 text-blue-600"} />
                             <div className="ml-3">
                                 <dt className="text-lg font-bold dark:text-white">Take control of your experience.</dt>
                                 <dd className="mt-2 text-gray-700 dark:text-gray-300">On Crowdly, you can block others - say goodbye to unwanted content and hello to a more personalized and enjoyable social media experience.</dd>
                             </div>
                         </div>
                         <div className="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-violet-600 dark:text-violet-400"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                            <CheckIcon className={"flex-shrink-0 w-6 h-6 text-blue-600"} />
                             <div className="ml-3">
                                 <dt className="text-lg font-bold dark:text-white">Discover the best of our community.</dt>
                                 <dd className="mt-2 text-gray-700 dark:text-gray-300">Whether you're looking for the most upvoted, downvoted, or replied-to content, Crowdly makes it easy to discover what's trending.</dd>
                             </div>
                         </div>
                         <div className="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-violet-600 dark:text-violet-400"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                            <CheckIcon className={"flex-shrink-0 w-6 h-6 text-blue-600"} />
                             <div className="ml-3">
                                 <dt className="text-lg font-bold dark:text-white">Simplify your social media experience.</dt>
                                 <dd className="mt-2 text-gray-700 dark:text-gray-300">Comprehensive documentation designed to make using our platform easy and intuitive will help you get the most out of our platform.</dd>
                             </div>
                         </div>
                         <div className="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-violet-600 dark:text-violet-400"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                            <CheckIcon className={"flex-shrink-0 w-6 h-6 text-blue-600"} />
                             <div className="ml-3">
                                 <dt className="text-lg font-bold dark:text-white">Transparency and collaboration.</dt>
-                                <dd className="mt-2 text-gray-700 dark:text-gray-300">As an open-source app, our code is available for all to see on <a href="https://github.com/victor891263/crowdly" target="_blank" className="text-violet-600 dark:text-violet-400">GitHub</a>. This allows the people to contribute to Crowdly's development.</dd>
+                                <dd className="mt-2 text-gray-700 dark:text-gray-300">As an open-source app, our code is available for all to see on <a href="https://github.com/victor891263/crowdly" target="_blank" rel='noreferrer' className="text-blue-600">GitHub</a>. This allows the people to contribute to Crowdly's development.</dd>
                             </div>
                         </div>
                     </dl>
                 </section>
 
-                <section className="bg-violet-600 text-white p-6 rounded-xl flex flex-col justify-center space-y-8 sm:p-10 lg:space-y-0 lg:space-x-12 lg:justify-between lg:flex-row dark:bg-violet-400 dark:text-gray-900">
+                <section className="bg-blue-600 text-white p-6 rounded-2xl flex flex-col justify-center space-y-8 sm:p-10 lg:space-y-0 lg:space-x-12 lg:justify-between lg:flex-row dark:bg-blue-400 dark:text-gray-900">
                     <div className="max-w-sm flex flex-col space-y-4 text-center max-lg:mx-auto lg:text-left">
-                        <h1 className="text-3xl font-bold tracking-tight leading-none sm:text-4xl">Join us now</h1>
+                        <h1 className="text-3xl font-bold tracking-tight leading-none !text-gray-100 sm:text-4xl dark:!text-zinc-900">Join us now</h1>
                         <p className="text-lg">Create a Crowdly account and start connecting with the crowd and share your stories!</p>
                     </div>
                     <div className="max-sm:w-full flex flex-row items-center self-center justify-center flex-shrink-0 lg:justify-end">
                         <div className="w-full flex max-sm:flex-col">
-                            <input type="text" placeholder="example@email.com" className="max-sm:rounded-md outline-none p-3 pl-4 bg-transparent border rounded-l-md placeholder:text-white sm:w-2/3 dark:border-gray-900 dark:placeholder:text-gray-900"/>
-                            <button type="button" className="max-sm:rounded-md max-sm:mt-3 p-3 font-semibold rounded-r-md sm:w-1/3 bg-white text-violet-600 dark:bg-gray-900 dark:text-violet-400">Sign up</button>
+                            <input type="text" placeholder="example@email.com" className="!rounded-r-none p-3 pl-4 !bg-transparent border placeholder:text-white sm:w-2/3 dark:border-gray-900 dark:placeholder:text-gray-900"/>
+                            <button type="button" className="max-sm:mt-3 p-3 font-semibold rounded-r-lg sm:w-1/3 bg-white !text-blue-600 dark:bg-gray-900 dark:!text-blue-400">Sign up</button>
                         </div>
                     </div>
                 </section>

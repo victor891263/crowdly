@@ -10,5 +10,7 @@ module.exports = async (req, res) => {
         },
         order: [Sequelize.literal('total DESC')]
     })
+
+    console.log(posts)
     res.send(JSON.stringify(posts, null, 2))
 }

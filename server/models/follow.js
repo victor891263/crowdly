@@ -11,9 +11,9 @@ const Follow = sequelize.define('Follow', {
         allowNull: false
     }
 })
-
+/*
 Follow.sync({ alter: true })
     .then(() => console.log('The `follows` table was just (re)created!'))
     .catch(error => console.log('Error synchronizing `follows` table', error))
-
+*/
 module.exports = Follow

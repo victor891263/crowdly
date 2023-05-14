@@ -1,24 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css';
-import Home from "./routes/home";
-import Help from './routes/help';
-import HelpTopic from "./routes/helpTopic";
-import HelpArticle from "./routes/helpArticle";
-import About from './routes/about';
-import Login from './routes/login';
-import YourFeed from './routes/yourFeed';
-import Trending from './routes/trending';
-import ErrorPage from './ErrorPage';
-import initTheme from "./utils/initTheme";
-import reportWebVitals from './reportWebVitals';
-
-// function to change class of <html> tag accordingly based on value of theme variable
-function toggleThemeClass() {
-    if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
-    else document.documentElement.classList.remove('dark');
-}
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import './index.css'
+import Home from "./routes/home"
+import Help from './routes/help'
+import HelpTopic from "./routes/helpTopic"
+import HelpArticle from "./routes/helpArticle"
+import About from './routes/about'
+import Login from './routes/login'
+import Feed from './routes/feed'
+import Post from "./routes/post"
+import Profile from "./routes/profile"
+import ErrorPage from './ErrorPage'
+import initTheme from "./utilities/initTheme"
+import reportWebVitals from './reportWebVitals'
 
 const router = createBrowserRouter([
     {
@@ -28,11 +23,27 @@ const router = createBrowserRouter([
     },
     {
         path: "/feed",
-        element: <YourFeed />
+        element: <Feed isFeed={true} />
     },
     {
         path: "/trending",
-        element: <Trending />
+        element: <Feed />
+    },
+    {
+        path: "/posts/:postId",
+        element: <Post />
+    },
+    {
+        path: "/users/:userId",
+        element: <Profile showing={'posts'} />
+    },
+    {
+        path: "/users/:userId/follows",
+        element: <Profile showing={'follows'} />
+    },
+    {
+        path: "/users/:userId/followers",
+        element: <Profile showing={'followers'} />
     },
     {
         path: "/about",
@@ -54,20 +65,18 @@ const router = createBrowserRouter([
         path: "/help/articles/:article",
         element: <HelpArticle />
     },
-]);
+])
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
-);
+)
 
 root.render(
-    <React.StrictMode>
-        <RouterProvider router={router} />
-    </React.StrictMode>
-);
+    <RouterProvider router={router} />
+)
 
-initTheme();
+initTheme()
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals()
