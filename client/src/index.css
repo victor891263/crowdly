@@ -51,7 +51,7 @@
         @apply dark:divide-zinc-700/75
     }
 
-    .border, .border-r, .border-b, .border-t {
+    .border, .border-r, .border-b, .border-t, .border-l {
         @apply dark:border-zinc-700/75
     }
 

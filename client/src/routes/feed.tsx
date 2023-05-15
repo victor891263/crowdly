@@ -45,7 +45,7 @@ export default function Feed({ isFeed }: { isFeed?: boolean }) {
     return (
         <MainWrapper>
             <div className='divide-y h-full flex flex-col'>
-                <div className="py-6 flex items-center justify-between">
+                <div className="pb-6 flex items-center justify-between">
                     <h2>{isFeed ? "Your feed" : "Trending"}</h2>
                     <button>
                         <GlassIcon className={"w-4 h-4"} />

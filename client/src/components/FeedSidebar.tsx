@@ -13,11 +13,9 @@ export default function FeedSidebar() {
     return (
         <>
             {currentUser ? (
-                <div className="mt-8">
-                    <FeedAddPost />
-                </div>
+                <FeedAddPost />
             ):(
-                <div className="mt-8 rounded-2xl">
+                <div>
                     <h2>New to Crowdly?</h2>
                     <p className='mt-5 mb-5'>Join us now to get your own personalized timeline!</p>
                     <input type='text' placeholder='Choose a username' className='mb-2 w-full py-2 px-3 text-sm' />
@@ -25,7 +23,7 @@ export default function FeedSidebar() {
                 </div>
             )}
 
-            <div className="w-72 pt-6 text-sm text-gray-400">
+            <div className="w-72 pt-5 mt-6 text-sm text-gray-400 border-t">
                 <div className="flex gap-3.5 items-center justify-center">
                     {currentUser ? (
                         <>
@@ -45,12 +43,6 @@ export default function FeedSidebar() {
                     )}
                 </div>
                 <p className="text-center mt-2">© 2023 Victor. All rights reserved.</p>
-                <div className="flex gap-2 items-center justify-center mt-4">
-                    <ThemeButton className={'w-[22px] h-[22px]'} />
-                    <a href="/">
-                        <GitHubIcon className={"w-[22px] h-[22px] p-[1px]"} />
-                    </a>
-                </div>
             </div>
         </>
     )

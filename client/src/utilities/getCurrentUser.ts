@@ -1,4 +1,7 @@
-export default function getCurrentUser() {
+import jwtDecode from 'jwt-decode'
 
-    return localStorage.getItem('jwt')
+export default function getCurrentUser() {
+    const token = localStorage.getItem('jwt')
+    if (token) return jwtDecode(token) as { id: number }
+    return null
 }

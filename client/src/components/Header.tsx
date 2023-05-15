@@ -4,41 +4,56 @@ import ThemeButton from "./ThemeButton"
 import BarsIcon from "../icons/BarsIcon"
 import BellIcon from '../icons/BellIcon'
 import getCurrentUser from "../utilities/getCurrentUser"
+import GitHubIcon from "../icons/GitHubIcon";
+import HandWavingIcon from "../icons/HandWavingIcon";
 
 export default function Header({ isFeed }: { isFeed?: boolean }) {
     const currentUser = getCurrentUser()
 
     return (
-        <header className="fixed w-full bg-white border-b text-gray-700 dark:text-zinc-300 dark:bg-zinc-900 dark:border-zinc-700">
-            <div className={"h-14 sm:h-16 container flex items-center justify-between mx-auto text-sm px-4 sm:px-6 lg:px-8" + (isFeed ? " lg:max-w-screen-lg" : " xl:max-w-screen-xl")}>
-                <nav className="flex items-center gap-6">
-                    <Link to="/" className="font-semibold text-black dark:text-white">Crowdly</Link>
-                    <div className="flex items-center gap-6 max-md:hidden">
-                        <Link to="/trending">Trending</Link>
-                        <Link to="/about">About</Link>
-                        <Link to="/help">Help</Link>
+        <header className="fixed w-full bg-white dark:bg-zinc-900">
+            <div className={'container mx-auto px-4 sm:px-6 lg:px-8' + (isFeed ? " lg:max-w-screen-lg" : " xl:max-w-screen-xl")}>
+                <div className={"h-14 sm:h-16 border-b flex items-center justify-between text-sm font-medium"}>
+                    <nav className="flex items-center gap-[22px]">
+                        <Link to="/"> <HandWavingIcon className={'w-4 h-4'} /> </Link>
+                        <div className="flex items-center gap-[22px] max-md:hidden">
+                            <Link to="/trending">Trending</Link>
+                            <Link to="/about">About</Link>
+                            <Link to="/help">Help</Link>
+                        </div>
+                    </nav>
+
+                    <div className="flex items-center max-md:hidden">
+
+                        {currentUser ? (
+                            <div className="flex items-center gap-[22px]">
+                                <Link to="/notifications">Notifications</Link>
+                                <Link to="/profile">Profile</Link>
+                                <button>Logout</button>
+                            </div>
+                        ):(
+                            <div className='flex items-center gap-[22px]'>
+                                <Link to="/login">Login</Link>
+                                <Link to="/join">Sign up</Link>
+                            </div>
+                        )}
+                        <div className="flex gap-4 items-center justify-center ml-5">
+                            <ThemeButton className={'w-[22px] h-[22px]'} />
+                            <a href="/">
+                                <GitHubIcon className={"w-[22px] h-[22px] p-[1px]"} />
+                            </a>
+                        </div>
                     </div>
-                </nav>
-                {currentUser ? (
-                    <div className="flex items-center gap-6 max-md:hidden">
-                        <Link to="/notifications">Notifications</Link>
-                        <Link to="/profile">Profile</Link>
-                        <button className="text-red-600 dark:text-red-400">Logout</button>
+
+                    <div className="flex items-center gap-3 md:hidden">
+                        <ThemeButton className={'w-5 h-5'} />
+                        <button>
+                            <BellIcon className={'w-4 h-4'} />
+                        </button>
+                        <button>
+                            <BarsIcon className={'w-6 h-6'} />
+                        </button>
                     </div>
-                ):(
-                    <div className="flex items-center gap-6 max-md:hidden">
-                        <Link to="/login">Login</Link>
-                        <Link to="/join">Sign up</Link>
-                    </div>
-                )}
-                <div className="flex items-center gap-3 md:hidden">
-                    <ThemeButton className={'w-5 h-5'} />
-                    <button>
-                        <BellIcon className={'w-4 h-4'} />
-                    </button>
-                    <button>
-                        <BarsIcon className={'w-6 h-6'} />
-                    </button>
                 </div>
             </div>
         </header>

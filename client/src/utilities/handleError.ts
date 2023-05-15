@@ -1,4 +1,4 @@
-export default function handleError(error: any, callback: (msg: string) => void) {
+export default function handleError(error: any, callback: (msg: string) => void, timeout?: boolean) {
     if (error.response) {
         if (error.response.data.includes('<pre>')) {
             callback(extractMsg(error.response.data))
@@ -9,6 +9,11 @@ export default function handleError(error: any, callback: (msg: string) => void)
         callback("Couldn't connect to server")
     } else {
         callback(error.message)
+    }
+    if (timeout) {
+        setTimeout(() => {
+            callback('')
+        }, 3000)
     }
 }
 

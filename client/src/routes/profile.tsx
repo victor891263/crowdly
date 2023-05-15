@@ -31,7 +31,6 @@ export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'f
     const { userId } = useParams()
 
     useEffect(() => {
-        console.log('usf called')
         axios.get(`${process.env.REACT_APP_API_URL}/users/${userId}`)
             .then(response => {
                 console.log(response)

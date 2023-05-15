@@ -1,20 +1,47 @@
-import React from 'react'
+import React, {useState} from 'react'
+import resizeInput from "../utilities/resizeInput"
+import axios from "axios";
+import handleError from "../utilities/handleError";
+import {useNavigate} from "react-router-dom";
+import PopUp from "./PopUp";
 
 export default function FeedAddPost() {
-    function resize(e: React.ChangeEvent<HTMLTextAreaElement>) {
-        const textarea = e.target
-        textarea.style.height = ''
-        textarea.style.height = `${textarea.scrollHeight}px`
+    const [body, setBody] = useState('')
+    const [operationError, setOperationError] = useState('')
+    const navigate = useNavigate()
+
+    function submitPost(e: any) {
+        e.target.innerText = 'Submitting...'
+        axios.post(`${process.env.REACT_APP_API_URL}/posts`, { body })
+            .then(response => {
+                navigate(`/posts/${response.data.id}`)
+            })
+            .catch(error => {
+                handleError(error, (msg: string) => setOperationError(msg), true)
+            })
+            .finally(() => {
+                e.target.innerText = 'Submit'
+            })
     }
 
     return (
-        <div className="h-fit">
-            <h2>Post something</h2>
-            <div className="w-full mt-5">
-                <textarea onChange={resize} style={{ resize: 'none', overflow: 'hidden' }} className="w-full py-2 px-3 h-24" placeholder="What's on your mind?" />
-                <button className="btn-primary block ml-auto mt-2 py-2 px-3 text-sm">Submit</button>
+        <>
+            {operationError && <PopUp msg={operationError} />}
+            <div className="h-fit">
+                <h2>Post something</h2>
+                <div className="w-full mt-5">
+                <textarea onChange={e => {
+                    resizeInput(e)
+                    setBody(e.target.value)
+                }}
+                          style={{ resize: 'none', overflow: 'hidden' }}
+                          className="w-full py-2.5 px-3.5 h-24"
+                          placeholder="What's on your mind?"
+                />
+                    <button onClick={submitPost} className="btn-primary block ml-auto mt-2 py-2 px-3 text-sm">Submit</button>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
