@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import ThemeButton from "./ThemeButton"
 import BarsIcon from "../icons/BarsIcon"
 import BellIcon from '../icons/BellIcon'
@@ -9,13 +9,14 @@ import HandWavingIcon from "../icons/HandWavingIcon";
 
 export default function Header({ isFeed }: { isFeed?: boolean }) {
     const currentUser = getCurrentUser()
+    const navigate = useNavigate()
 
     return (
         <header className="fixed w-full bg-white dark:bg-zinc-900">
             <div className={'container mx-auto px-4 sm:px-6 lg:px-8' + (isFeed ? " lg:max-w-screen-lg" : " xl:max-w-screen-xl")}>
                 <div className={"h-14 sm:h-16 border-b flex items-center justify-between text-sm font-medium"}>
                     <nav className="flex items-center gap-[22px]">
-                        <Link to="/"> <HandWavingIcon className={'w-4 h-4'} /> </Link>
+                        <Link to="/">Crowdly</Link>
                         <div className="flex items-center gap-[22px] max-md:hidden">
                             <Link to="/trending">Trending</Link>
                             <Link to="/about">About</Link>
@@ -28,8 +29,11 @@ export default function Header({ isFeed }: { isFeed?: boolean }) {
                         {currentUser ? (
                             <div className="flex items-center gap-[22px]">
                                 <Link to="/notifications">Notifications</Link>
-                                <Link to="/profile">Profile</Link>
-                                <button>Logout</button>
+                                <Link to={`/users/${currentUser.id}`}>Profile</Link>
+                                <button onClick={() => {
+                                    localStorage.removeItem('jwt')
+                                    navigate('/')
+                                }} >Logout</button>
                             </div>
                         ):(
                             <div className='flex items-center gap-[22px]'>

@@ -1,7 +1,8 @@
 module.exports = (error, req, res, next) => {
     if (error) {
-        if (error.message) res.status(res.statusCode || 500).send(error.message);
-        else res.sendStatus(res.statusCode || 500);
+        const statusCode = (res.statusCode < 400) ? 500 : res.statusCode
+        if (error.message) res.status(statusCode).send(error.message);
+        else res.sendStatus(statusCode);
     }
     next()
 }

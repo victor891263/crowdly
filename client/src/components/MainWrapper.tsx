@@ -15,7 +15,7 @@ export default function MainWrapper({ children }: { children: ReactNode }) {
             pb-8
             px-4 sm:px-6 lg:px-8
             ">
-                <div className="lg:border-r lg:pr-8 lg:mr-8">
+                <div className="lg:border-r lg:pr-8 lg:mr-8 flex flex-col">
                     {children}
                 </div>
                 <div className="top-16 sticky self-start max-lg:hidden">

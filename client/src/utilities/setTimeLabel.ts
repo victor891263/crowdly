@@ -1,6 +1,6 @@
 export default function setTimeLabel(time: string): string {
     let timeLabel = 's';
-    let elapsedTime = (new Date().getTime() - new Date(time).getTime()) / 1000;
+    let elapsedTime = Math.floor((new Date().getTime() - new Date(time).getTime()) / 1000);
     if (60 < elapsedTime && elapsedTime < 3600) {
         elapsedTime = Math.floor(elapsedTime / 60);
         timeLabel = 'min';

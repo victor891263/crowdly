@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const Follow = require('../models/follow')
+const JSONSimplify = require("../utilities/JSONsimplify");
 
 module.exports = async (req, res) => {
     const profileId = req.params.id // id of the user/profile that the user retrieved
@@ -10,7 +11,7 @@ module.exports = async (req, res) => {
     })
 
     // extract userids
-    const userIds = follows.map(row => row.followedId)
+    const userIds = follows.map(row => row.followerId)
 
     // get data (from users table) of users that chose to follow this user
     const users = await User.findAll({
@@ -18,5 +19,5 @@ module.exports = async (req, res) => {
         attributes: ['id', 'username']
     })
 
-    res.send(users)
+    res.send(JSONSimplify(users))
 }

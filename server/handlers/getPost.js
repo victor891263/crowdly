@@ -2,6 +2,7 @@ const User = require("../models/user")
 const Post = require("../models/post")
 const Like = require("../models/like")
 const Dislike = require("../models/dislike")
+const JSONSimplify = require("../utilities/JSONsimplify");
 
 module.exports = async (req, res) => {
     const postId = req.params.id // id of the post that the user retrieved
@@ -13,9 +14,9 @@ module.exports = async (req, res) => {
         include: [
             {
                 model: User,
-                attributes: ['username'],
-            },
-        ],
+                attributes: ['id', 'username']
+            }
+        ]
     })
 
     // if the post with the given id doesn't exist, tell that to the client, instead of proceeding
@@ -24,21 +25,15 @@ module.exports = async (req, res) => {
         return
     }
 
-    // get info of user who made the post
-    const poster = await User.findOne({
-        where: { id: post.userId },
-        attributes: ['username']
-    })
-
     // retrieve all replies made to the current post
     const repliedPosts = await Post.findAll({
         where: { repliedId: postId },
         include: [
             {
                 model: User,
-                attributes: ['username'],
-            },
-        ],
+                attributes: ['username']
+            }
+        ]
     })
 
     let likeByCurrentUser
@@ -62,5 +57,5 @@ module.exports = async (req, res) => {
         })
     }
 
-    res.send({ ...post, ...poster, repliedPosts, liked: likeByCurrentUser ? true : false, disliked: dislikeByCurrentUser ? true : false})
+    res.send({ ...JSONSimplify(post), repliedPosts, liked: likeByCurrentUser ? true : false, disliked: dislikeByCurrentUser ? true : false})
 }

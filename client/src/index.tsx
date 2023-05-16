@@ -7,7 +7,7 @@ import Help from './routes/help'
 import HelpTopic from "./routes/helpTopic"
 import HelpArticle from "./routes/helpArticle"
 import About from './routes/about'
-import Login from './routes/login'
+import Auth from './routes/auth'
 import Feed from './routes/feed'
 import Post from "./routes/post"
 import Profile from "./routes/profile"
@@ -51,7 +51,11 @@ const router = createBrowserRouter([
     },
     {
         path: "/login",
-        element: <Login />
+        element: <Auth />
+    },
+    {
+        path: "/join",
+        element: <Auth newUser={true} />
     },
     {
         path: "/help",

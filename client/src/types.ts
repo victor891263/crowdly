@@ -30,8 +30,11 @@ export type Post = {
 } & metadata
 
 export type PostDetailed = {
-    username: string
-    image?: string
+    User: {
+        id: number
+        username: string
+        image?: string
+    }
 } & Post
 
 export type Like = {

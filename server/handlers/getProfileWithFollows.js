@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const Follow = require('../models/follow')
+const JSONSimplify = require("../utilities/JSONsimplify");
 
 module.exports = async (req, res) => {
     const profileId = req.params.id // id of the user/profile that the user retrieved
@@ -18,5 +19,5 @@ module.exports = async (req, res) => {
         attributes: ['id', 'username']
     })
 
-    res.send(users)
+    res.send(JSONSimplify(users))
 }

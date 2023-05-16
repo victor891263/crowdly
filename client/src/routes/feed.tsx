@@ -12,15 +12,18 @@ import DownloadFolderIcon from "../icons/DownloadFolderIcon";
 import EmptyFolderIcon from "../icons/EmptyFolderIcon";
 import getToken from "../utilities/getToken";
 import RetrievalWrapper from "../components/RetrievalWrapper";
+import TextBalloonIcon from "../icons/TextBalloonIcon";
 
 export default function Feed({ isFeed }: { isFeed?: boolean }) {
     const [posts, setPosts] = useState<PostDetailed[] | null>(null)
     const [retrievalError, setRetrievalError] = useState('')
     const currentUser = getCurrentUser()
 
-    const dummyPosts = getDummyPosts()
-
     useEffect(() => {
+        // set the states back to their original states to trigger data retrieval from API when visiting 'feed' from 'trending' and vice versa
+        setPosts(null)
+        setRetrievalError('')
+
         if (isFeed && !currentUser) return // if the user visits the feed page without logging in, don't proceed
 
         axios.get(`${process.env.REACT_APP_API_URL}/posts/${isFeed ? 'feed' : 'trending'}`, {
@@ -32,7 +35,7 @@ export default function Feed({ isFeed }: { isFeed?: boolean }) {
         }).catch(error => {
             handleError(error, (msg: string) => setRetrievalError(msg))
         })
-    }, [])
+    }, [isFeed]) // re-retrieve the data when visiting 'feed' from 'trending' and vice versa
 
     if (isFeed && !currentUser) return (
         <div className='flex flex-col items-center justify-center h-screen'>
@@ -44,7 +47,7 @@ export default function Feed({ isFeed }: { isFeed?: boolean }) {
 
     return (
         <MainWrapper>
-            <div className='divide-y h-full flex flex-col'>
+            <div className='divide-y min-h-full flex flex-col'>
                 <div className="pb-6 flex items-center justify-between">
                     <h2>{isFeed ? "Your feed" : "Trending"}</h2>
                     <button>
@@ -61,8 +64,8 @@ export default function Feed({ isFeed }: { isFeed?: boolean }) {
                         </>
                     ):(
                         <div className='flex flex-col items-center justify-center py-10 grow'>
-                            <EmptyFolderIcon className={'h-10 w-10 text-gray-400'} />
-                            <h2 className='mt-3 mb-1.5'>No posts found</h2>
+                            <TextBalloonIcon slash={true} className={'h-10 w-10 text-gray-400'} />
+                            <h2 className='mt-4 mb-1.5'>No posts found</h2>
                             <span>Start following users to view their posts here.</span>
                         </div>
                     )}

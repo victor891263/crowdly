@@ -1,4 +1,6 @@
 const Post = require('../models/post')
+const JSONSimplify = require("../utilities/JSONsimplify");
+const Sequelize = require("sequelize");
 
 module.exports = async (req, res) => {
     const currentUserId = req.user.id // id of currently logged in user
@@ -13,5 +15,15 @@ module.exports = async (req, res) => {
         quotedId: post.quotedId,
         userId: currentUserId
     })
-    res.send(createdPost.id)
+
+    // if the post is a reply, find the target post and increment its reply count
+    if (post.repliedId) {
+        await Post.update({
+            replies: Sequelize.literal('replies + 1')
+        }, {
+            where: { id: post.repliedId }
+        })
+    }
+
+    res.send(JSON.stringify(createdPost, null, 2))
 }

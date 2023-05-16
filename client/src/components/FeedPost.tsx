@@ -1,23 +1,18 @@
 import React from 'react'
 import setTimeLabel from '../utilities/setTimeLabel'
-import {Post} from "../types"
+import {PostDetailed} from "../types"
 import TextBalloonIcon from "../icons/TextBalloonIcon"
 import ExclaimIcon from "../icons/ExclaimIcon";
 import {Link} from "react-router-dom";
 import Avatar from "./Avatar";
 
-type Props = {
-    username: string
-    image?: string
-} & Post
-
-export default function FeedPost({ post }: { post: Props }) {
+export default function FeedPost({ post }: { post: PostDetailed }) {
     return (
         <Link to={`/posts/${post.id}`} className="block py-7 space-y-4">
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                    <Avatar img={post.image} className={'w-8 h-8'} svgClassName={'w-6 h-6'} />
-                    <Link to='/' className="font-semibold text-sm">{post.username}</Link>
+                    <Avatar img={post.User.image} className={'w-8 h-8'} svgClassName={'w-6 h-6'} />
+                    <span className="font-semibold text-sm">{post.User.username}</span>
                 </div>
                 <span className="text-sm text-gray-400">{setTimeLabel(post.createdAt)}</span>
             </div>

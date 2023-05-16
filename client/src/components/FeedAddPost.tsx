@@ -4,6 +4,7 @@ import axios from "axios";
 import handleError from "../utilities/handleError";
 import {useNavigate} from "react-router-dom";
 import PopUp from "./PopUp";
+import getToken from "../utilities/getToken";
 
 export default function FeedAddPost() {
     const [body, setBody] = useState('')
@@ -12,15 +13,15 @@ export default function FeedAddPost() {
 
     function submitPost(e: any) {
         e.target.innerText = 'Submitting...'
-        axios.post(`${process.env.REACT_APP_API_URL}/posts`, { body })
+        e.target.disabled = true
+        axios.post(`${process.env.REACT_APP_API_URL}/posts`, { body }, { headers: { Authorization: getToken() }})
             .then(response => {
                 navigate(`/posts/${response.data.id}`)
             })
             .catch(error => {
                 handleError(error, (msg: string) => setOperationError(msg), true)
-            })
-            .finally(() => {
                 e.target.innerText = 'Submit'
+                e.target.disabled = false
             })
     }
 
@@ -34,9 +35,10 @@ export default function FeedAddPost() {
                     resizeInput(e)
                     setBody(e.target.value)
                 }}
-                          style={{ resize: 'none', overflow: 'hidden' }}
-                          className="w-full py-2.5 px-3.5 h-24"
-                          placeholder="What's on your mind?"
+                    value={body}
+                    style={{ resize: 'none', overflow: 'hidden' }}
+                    className="w-full py-2.5 px-3.5 pb-4 h-24"
+                    placeholder="What's on your mind?"
                 />
                     <button onClick={submitPost} className="btn-primary block ml-auto mt-2 py-2 px-3 text-sm">Submit</button>
                 </div>
