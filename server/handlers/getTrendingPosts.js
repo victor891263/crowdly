@@ -5,6 +5,7 @@ const User = require("../models/user");
 
 module.exports = async (req, res) => {
     const posts = await Post.findAll({
+        where: { repliedId: null },
         attributes: {
             include: [
                 [Sequelize.literal('likes + dislikes + replies'), 'total']

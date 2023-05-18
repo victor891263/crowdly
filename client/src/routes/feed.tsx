@@ -13,10 +13,13 @@ import EmptyFolderIcon from "../icons/EmptyFolderIcon";
 import getToken from "../utilities/getToken";
 import RetrievalWrapper from "../components/RetrievalWrapper";
 import TextBalloonIcon from "../icons/TextBalloonIcon";
+import SkeletonFeed from "../components/SkeletonFeed";
+import SearchBox from "../components/searchBox";
 
 export default function Feed({ isFeed }: { isFeed?: boolean }) {
     const [posts, setPosts] = useState<PostDetailed[] | null>(null)
     const [retrievalError, setRetrievalError] = useState('')
+    const [isSearchOpen, setIsSearchOpen] = useState(false)
     const currentUser = getCurrentUser()
 
     useEffect(() => {
@@ -47,14 +50,15 @@ export default function Feed({ isFeed }: { isFeed?: boolean }) {
 
     return (
         <MainWrapper>
+            {isSearchOpen && <SearchBox close={() => setIsSearchOpen(false)} />}
             <div className='divide-y min-h-full flex flex-col'>
-                <div className="pb-6 flex items-center justify-between">
+                <div className="pb-6 pt-0.5 flex items-center justify-between">
                     <h2>{isFeed ? "Your feed" : "Trending"}</h2>
-                    <button>
+                    <button onClick={() => setIsSearchOpen(true)}>
                         <GlassIcon className={"w-4 h-4"} />
                     </button>
                 </div>
-                <RetrievalWrapper data={posts} error={retrievalError} >
+                <RetrievalWrapper data={posts} error={retrievalError} skeleton={<SkeletonFeed />} >
                     {(posts && posts.length > 0) ? (
                         <>
                             {posts!.map((p, i) => (
@@ -64,8 +68,8 @@ export default function Feed({ isFeed }: { isFeed?: boolean }) {
                         </>
                     ):(
                         <div className='flex flex-col items-center justify-center py-10 grow'>
-                            <TextBalloonIcon slash={true} className={'h-10 w-10 text-gray-400'} />
-                            <h2 className='mt-4 mb-1.5'>No posts found</h2>
+                            <TextBalloonIcon slash={true} className={'h-8 w-8 text-gray-400'} />
+                            <h2 className='mt-4 mb-1'>No posts found</h2>
                             <span>Start following users to view their posts here.</span>
                         </div>
                     )}

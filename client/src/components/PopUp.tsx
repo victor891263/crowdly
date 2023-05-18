@@ -7,7 +7,7 @@ export default function PopUp({ msg}: { msg:string }) {
             <div className="sm:px-6 lg:px-8 px-4 bg-red-50 py-3.5 dark:bg-red-900/50">
                 <div className="grid grid-cols-[1.25rem_auto] items-center justify-center gap-2">
                     <ErrorIcon className={'w-5 h-5 text-red-400 dark:text-red-300'} />
-                    <span className='text-red-600 dark:text-red-300'>{msg}</span>
+                    <span className='first-letter:capitalize text-red-600 dark:text-red-300'>{msg}</span>
                 </div>
             </div>
         </div>

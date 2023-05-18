@@ -16,6 +16,9 @@ import UserIcon from "../icons/UserIcon";
 import EditProfile from "../components/editProfile";
 import PopUp from "../components/PopUp";
 import getToken from "../utilities/getToken";
+import SkeletonProfile from "../components/SkeletonProfile";
+import SkeletonFeed from "../components/SkeletonFeed";
+import SkeletonTinyProfile from "../components/SkeletonTinyProfile";
 
 type SimpleProfile = {
     id: string
@@ -157,7 +160,7 @@ export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'f
         <MainWrapper>
             {(profile && isEditBoxOpen) && <EditProfile user={profile} handleSubmit={submitNewProfile} close={() => setIsEditBoxOpen(false)} />}
             {operationError && <PopUp msg={operationError} />}
-            <RetrievalWrapper data={profile} error={profileRetrievalError} >
+            <RetrievalWrapper data={profile} error={profileRetrievalError} skeleton={<SkeletonProfile />} >
                 {profile && (
                     <div className='flex flex-col min-h-full'>
                         <div className="space-y-5 pb-7">
@@ -182,14 +185,14 @@ export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'f
                                 )}
                             </div>
                             {profile!.about && (
-                                <p>{profile!.about}</p>
+                                <p className='leading-[1.6]'>{profile!.about}</p>
                             )}
                             {profile!.link && (
-                                <a href="/" className="block w-fit pb-1 text-blue-600" rel='noreferrer'>{profile!.link}</a>
+                                <a href={profile!.link} className="block w-fit pb-1 text-blue-600" rel='noreferrer' target='_blank'>{profile!.link}</a>
                             )}
                             <div className="flex gap-4">
-                                <a><span className='font-semibold'>{profile!.follows}</span> follows</a>
-                                <a><span className='font-semibold'>{profile!.followers}</span> followers</a>
+                                <span><span className='font-semibold'>{profile!.follows}</span> follows</span>
+                                <span><span className='font-semibold'>{profile!.followers}</span> followers</span>
                             </div>
                             {profile.followingMe && (
                                 <div className='flex items-center gap-1.5 text-gray-400'>
@@ -208,7 +211,7 @@ export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'f
                         </div>
 
                         {(showing === 'posts') && (
-                            <RetrievalWrapper data={posts} error={postsRetrievalError} >
+                            <RetrievalWrapper data={posts} error={postsRetrievalError} skeleton={<SkeletonFeed />} >
                                 {(posts && posts.length > 0) ? (
                                     <div className='divide-y'>
                                         {posts!.map((post, index) => (
@@ -218,8 +221,8 @@ export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'f
                                     </div>
                                 ):(
                                     <div className='flex flex-col items-center justify-center py-10 grow'>
-                                        <TextBalloonIcon slash={true} className={'h-10 w-10 text-gray-400'} />
-                                        <h2 className='mt-4 mb-1.5'>No posts found</h2>
+                                        <TextBalloonIcon slash={true} className={'h-8 w-8 text-gray-400'} />
+                                        <h2 className='mt-4 mb-1'>No posts found</h2>
                                         <span>It looks like this user hasn't posted anything yet.</span>
                                     </div>
                                 )}
@@ -227,21 +230,21 @@ export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'f
                         )}
 
                         {(showing === 'follows') && (
-                            <RetrievalWrapper data={follows} error={followsRetrievalError} >
+                            <RetrievalWrapper data={follows} error={followsRetrievalError} skeleton={<SkeletonTinyProfile />} >
                                 {(follows && follows.length > 0) ? (
                                     <div className='divide-y'>
                                         {follows!.map((profile, index) => (
                                             <div className="py-4 flex items-center gap-3" key={index}>
                                                 <Avatar img={profile.image} className={'w-10 h-10'} svgClassName={'w-8 h-8'} />
-                                                <a className="cursor-pointer font-semibold text-black dark:text-white" role="link">{profile.username}</a>
+                                                <Link to={`/users/${profile.id}`} className="cursor-pointer font-semibold text-black dark:text-white">{profile.username}</Link>
                                             </div>
                                         ))}
                                         <span className='block pt-4 pb-8 text-center text-sm text-gray-400'>End of results</span>
                                     </div>
                                 ):(
                                     <div className='flex flex-col items-center justify-center py-10 grow'>
-                                        <UserIcon slash={true} className={'h-10 w-10 text-gray-400'} />
-                                        <h2 className='mt-3 mb-1.5'>No users found</h2>
+                                        <UserIcon slash={true} className={'h-8 w-8 text-gray-400'} />
+                                        <h2 className='mt-4 mb-1'>No followees found</h2>
                                         <span>It looks like this user hasn't followed anyone yet.</span>
                                     </div>
                                 )}
@@ -249,21 +252,21 @@ export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'f
                         )}
 
                         {(showing === 'followers') && (
-                            <RetrievalWrapper data={followers} error={followersRetrievalError} >
+                            <RetrievalWrapper data={followers} error={followersRetrievalError} skeleton={<SkeletonTinyProfile />} >
                                 {(followers && followers.length > 0) ? (
                                     <div className='divide-y'>
                                         {followers!.map((profile, index) => (
                                             <div className="py-4 flex items-center gap-3" key={index}>
                                                 <Avatar img={profile.image} className={'w-10 h-10'} svgClassName={'w-8 h-8'} />
-                                                <a className="cursor-pointer font-semibold text-black dark:text-white" role="link">{profile.username}</a>
+                                                <Link to={`/users/${profile.id}`} className="cursor-pointer font-semibold text-black dark:text-white">{profile.username}</Link>
                                             </div>
                                         ))}
                                         <span className='block pt-4 pb-8 text-center text-sm text-gray-400'>End of results</span>
                                     </div>
                                 ):(
                                     <div className='flex flex-col items-center justify-center py-10 grow'>
-                                        <UserIcon slash={true} className={'h-10 w-10 text-gray-400'} />
-                                        <h2 className='mt-3 mb-1.5'>No followers found</h2>
+                                        <UserIcon slash={true} className={'h-8 w-8 text-gray-400'} />
+                                        <h2 className='mt-4 mb-1'>No followers found</h2>
                                         <span>It looks like this user hasn't been followed by anyone yet.</span>
                                     </div>
                                 )}

@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
 
     // retrieve posts where 'userId' property's value is included in the 'followedUsersIds' array. Then, for 'userId' in each row, search for rows in 'User' whose 'id' has the same value and then retrieve 'username' from the same row. Finally, order the query results by 'createdAt' property, which the most recent ones appearing first
     const posts = await Post.findAll({
-        where: { userId: followedUsersIds },
+        where: { userId: followedUsersIds, repliedId: null },
         include: [
             {
                 model: User,

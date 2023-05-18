@@ -1,14 +1,11 @@
 import React from "react"
 import FeedAddPost from "./FeedAddPost"
-import {Link} from "react-router-dom"
-import ThemeButton from "./ThemeButton"
-import GitHubIcon from "../icons/GitHubIcon"
+import {Link, useNavigate} from "react-router-dom"
 import getCurrentUser from "../utilities/getCurrentUser"
 
 export default function FeedSidebar() {
     const currentUser = getCurrentUser()
-
-    // pt-5 pb-8
+    const navigate = useNavigate()
 
     return (
         <>
@@ -17,7 +14,7 @@ export default function FeedSidebar() {
             ):(
                 <div>
                     <h2>New to Crowdly?</h2>
-                    <p className='mt-5 mb-5'>Join us now to get your own personalized timeline!</p>
+                    <p className='mt-4 mb-5'>Join us now to get your own personalized timeline!</p>
                     <input type='text' placeholder='Choose a username' className='mb-2 w-full py-2 px-3 text-sm' />
                     <Link to="/join" className="btn-primary block py-2 text-center text-sm">Create account</Link>
                 </div>
@@ -30,7 +27,10 @@ export default function FeedSidebar() {
                             <Link to="/feed">Feed</Link>
                             <Link to="/about">About</Link>
                             <Link to="/help">Help</Link>
-                            <button>Logout</button>
+                            <button onClick={() => {
+                                localStorage.removeItem('jwt')
+                                navigate('/')
+                            }} >Logout</button>
                         </>
                     ):(
                         <>

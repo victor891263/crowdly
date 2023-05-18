@@ -14,6 +14,7 @@ import Profile from "./routes/profile"
 import ErrorPage from './ErrorPage'
 import initTheme from "./utilities/initTheme"
 import reportWebVitals from './reportWebVitals'
+import SearchResults from "./routes/searchResults";
 
 const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
     {
         path: "/users/:userId/followers",
         element: <Profile showing={'followers'} />
+    },
+    {
+        path: "/search",
+        element: <SearchResults />
     },
     {
         path: "/about",

@@ -16,6 +16,7 @@ import PopUp from "../components/PopUp";
 import TextBox from "../components/TextBox";
 import getToken from "../utilities/getToken";
 import TextBalloonIcon from "../icons/TextBalloonIcon";
+import SkeletonPost from "../components/SkeletonPost";
 
 type Response = {
     repliedPosts: PostDetailed[]
@@ -31,7 +32,6 @@ export default function Post() {
     const [isEditBoxOpen, setIsEditBoxOpen] = useState(false)
 
     const [retrievalError, setRetrievalError] = useState('')
-
     const [operationError, setOperationError] = useState('')
 
     const navigate = useNavigate()
@@ -42,10 +42,10 @@ export default function Post() {
         // set the states to empty if new post has to be retrieved
         setPost(null)
         setRetrievalError('')
+        setIsQuoteBoxOpen(false)
 
         axios.get(`${process.env.REACT_APP_API_URL}/posts/${postId}`, { headers: { Authorization: getToken() }})
             .then(response => {
-                console.log(response.data)
                 setPost(response.data)
             })
             .catch(error => {
@@ -115,7 +115,6 @@ export default function Post() {
         axios.post(`${process.env.REACT_APP_API_URL}/posts`, { body, quotedId: post!.id }, { headers: { Authorization: getToken() }})
             .then(response => {
                 navigate(`/posts/${response.data.id}`)
-                setIsQuoteBoxOpen(false)
             })
             .catch(error => {
                 handleError(error, (msg: string) => setOperationError(msg), true)
@@ -162,8 +161,6 @@ export default function Post() {
             })
             .catch(error => {
                 handleError(error, (msg: string) => setOperationError(msg), true)
-            })
-            .finally(() => {
                 e.target.innerText = 'Submit'
                 e.target.disabled = false
             })
@@ -174,8 +171,8 @@ export default function Post() {
         <MainWrapper>
             {operationError && <PopUp msg={operationError} />}
             {isQuoteBoxOpen && <TextBox handleSubmit={submitQuotedPost} close={() => setIsQuoteBoxOpen(false)} />}
-            {isEditBoxOpen && <TextBox handleSubmit={submitEditedPost} close={() => setIsQuoteBoxOpen(false)} content={post!.body} />}
-            <RetrievalWrapper data={post} error={retrievalError} >
+            {isEditBoxOpen && <TextBox handleSubmit={submitEditedPost} close={() => setIsEditBoxOpen(false)} content={post!.body} />}
+            <RetrievalWrapper data={post} error={retrievalError} skeleton={<SkeletonPost />} >
                 {post && (
                     <div className='divide-y'>
                         <div className="pb-7 space-y-4">
@@ -186,7 +183,7 @@ export default function Post() {
                                 </div>
                                 <span className="text-gray-400">{setTimeLabel(post.createdAt)}</span>
                             </div>
-                            <p className='text-lg'>{post.body}</p>
+                            <p className='text-lg leading-[1.6]'>{post.body}</p>
                             <div className="flex items-center gap-4">
                                 <span><span className='font-semibold'>{post.likes}</span> likes</span>
                                 <span><span className='font-semibold'>{post.dislikes}</span> dislikes</span>
@@ -199,19 +196,21 @@ export default function Post() {
                         )}
 
                         {currentUser && (
-                            <div className='flex gap-6 py-5'>
-                                {(currentUser && (currentUser.id !== post.userId)) && (
-                                    <>
-                                        <button onClick={handleLike} className='text-blue-600'>{post.liked ? 'Liked' : 'Like'}</button>
-                                        <button onClick={handleDislike} className='text-blue-600'>{post.disliked ? 'Disliked' : 'Dislike'}</button>
-                                    </>
-                                )}
-                                <button onClick={() => setIsQuoteBoxOpen(true)} className='text-blue-600'>Quote</button>
+                            <div className='flex justify-between py-5'>
+                                <div className='flex gap-5'>
+                                    {(currentUser && (currentUser.id !== post.userId)) && (
+                                        <>
+                                            <button onClick={handleLike} className='text-blue-600'>{post.liked ? 'Liked' : 'Like'}</button>
+                                            <button onClick={handleDislike} className='text-blue-600'>{post.disliked ? 'Disliked' : 'Dislike'}</button>
+                                        </>
+                                    )}
+                                    <button onClick={() => setIsQuoteBoxOpen(true)} className='text-blue-600'>Quote</button>
+                                </div>
                                 {(currentUser && (currentUser.id === post.userId)) && (
-                                    <>
+                                    <div className='flex gap-5'>
                                         <button onClick={() => setIsEditBoxOpen(true)} className='text-blue-600 dark:text-blue-400'>Edit post</button>
                                         <button onClick={deletePost} className='text-red-600 dark:text-red-400'>Delete post</button>
-                                    </>
+                                    </div>
                                 )}
                             </div>
                         )}
@@ -234,7 +233,7 @@ export default function Post() {
                         )}
                         {post.repliedPosts.length > 0 ? (
                             <div>
-                                <h2 className='pt-8 pb-3'>{post.repliedPosts.length} replies</h2>
+                                <h2 className='pt-6 pb-3'>{post.repliedPosts.length} {post.repliedPosts.length > 1 ? 'replies' : 'reply'}</h2>
                                 <div className='divide-y'>
                                     {post.repliedPosts.map((reply, index) => (
                                         <FeedPost post={reply} key={index} />
@@ -244,8 +243,8 @@ export default function Post() {
                             </div>
                         ):(
                             <div className='flex flex-col items-center py-10'>
-                                <TextBalloonIcon slash={true} className={'h-10 w-10 text-gray-400'} />
-                                <h2 className='mt-3 mb-1.5'>No replies found</h2>
+                                <TextBalloonIcon slash={true} className={'h-8 w-8 text-gray-400'} />
+                                <h2 className='mt-4 mb-1'>No replies found</h2>
                                 <span>Have an opinion? Why not reply to this thread?</span>
                             </div>
                         )}

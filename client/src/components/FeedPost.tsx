@@ -16,7 +16,7 @@ export default function FeedPost({ post }: { post: PostDetailed }) {
                 </div>
                 <span className="text-sm text-gray-400">{setTimeLabel(post.createdAt)}</span>
             </div>
-            <p>{post.body}</p>
+            <p className='leading-[1.6]'>{post.body}</p>
             {post.quotedId && (
                 <div className='pb-1 flex items-center gap-1.5 text-gray-400'>
                     <ExclaimIcon className={"w-4 h-4"} />

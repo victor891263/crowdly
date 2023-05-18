@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
 
     let followByCurrentUser
     let followToCurrentUser
-    console.log(currentUserId, profileId)
+
     if (currentUserId) {
         // check if currently logged in user followed this user
         followByCurrentUser = await Follow.findOne({
@@ -37,10 +37,6 @@ module.exports = async (req, res) => {
                 followedId: currentUserId
             }
         })
-
-        console.log(followByCurrentUser)
-        console.log(followToCurrentUser)
-        console.log(currentUserId, profileId)
     }
 
 

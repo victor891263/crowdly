@@ -13,7 +13,7 @@
     }
 
     h2 {
-        @apply text-xl font-bold -my-1.5
+        @apply text-xl font-semibold tracking-tight -my-1.5
     }
 
     input, textarea {
@@ -66,8 +66,8 @@
     }
 }
 
-@layer utilities {
-
+.bg-gray-100 {
+    @apply dark:bg-zinc-800
 }
 
 .text-gray-400 {

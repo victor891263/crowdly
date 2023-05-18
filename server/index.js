@@ -24,6 +24,7 @@ require('./startup/initDb')()
 
 // routes
 app.use('/auth', require('./routes/auth'))
+app.use('/search', require('./routes/search'))
 app.use(require('./middleware/auth')) // authentication middleware
 app.use('/posts', require('./routes/posts'))
 app.use('/users', require('./routes/users'))
