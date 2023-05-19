@@ -30,39 +30,11 @@ User.belongsToMany(Post, {
     through: Like,
     foreignKey: 'userId'
 })
+
 /*
 Like.sync({ alter: true })
     .then(() => console.log('The `likes` table was just (re)created!'))
     .catch(error => console.log('Error synchronizing `likes` table', error))
 */
+
 module.exports = Like
-
-
-
-
-
-
-
-
-
-/*
-
-
-// relationship between post table and like table
-Post.hasMany(Like, {
-    foreignKey: 'postId'
-})
-Like.belongsTo(Post, {
-    foreignKey: 'postId'
-})
-
-// relationship between user table and like table
-User.hasMany(Like, {
-    foreignKey: 'userId'
-})
-Like.hasMany(User, {
-    foreignKey: 'userId'
-})
-
-
- */

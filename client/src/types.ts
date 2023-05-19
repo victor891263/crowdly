@@ -1,7 +1,13 @@
-type metadata = {
+type Metadata = {
     id: number
     createdAt: string
     updatedAt: string
+}
+
+export type UserTiny = {
+    id: number
+    username: string
+    image?: string
 }
 
 export type User = {
@@ -12,7 +18,7 @@ export type User = {
     link?: string
     follows: number
     followers: number
-} & metadata
+} & Metadata
 
 export type UserDetailed = {
     followed: boolean
@@ -27,7 +33,7 @@ export type Post = {
     likes: number
     dislikes: number
     replies: number
-} & metadata
+} & Metadata
 
 export type PostDetailed = {
     User: {
@@ -47,7 +53,14 @@ export type Dislike = {
     userId: number
 }
 
-export type Follow = {
-    followerId: number
-    followedId: number
-}
+export type NotiType = {
+    postId?: number,
+    isReply: boolean,
+    targetUserId: number
+    userId: number
+    User: {
+        id: number
+        username: string
+        image?: string
+    }
+} & Metadata

@@ -1,5 +1,4 @@
 import React from "react"
-import Avatar from "./Avatar"
 import setTimeLabel from "../utilities/setTimeLabel"
 import getDummyPosts from "../utilities/getDummyPosts"
 import SkeletonTinyPost from "./SkeletonTinyPost"

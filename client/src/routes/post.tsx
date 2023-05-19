@@ -155,7 +155,7 @@ export default function Post() {
     function submitReply(e: any) {
         e.target.innerText = 'Submitting...'
         e.target.disabled = true
-        axios.post(`${process.env.REACT_APP_API_URL}/posts`, { body: reply, repliedId: post?.id }, { headers: { Authorization: getToken() }})
+        axios.post(`${process.env.REACT_APP_API_URL}/posts`, { body: reply, repliedId: post?.id, targetUserId: post?.User.id }, { headers: { Authorization: getToken() }})
             .then(response => {
                 navigate(0)
             })
@@ -189,6 +189,11 @@ export default function Post() {
                                 <span><span className='font-semibold'>{post.dislikes}</span> dislikes</span>
                             </div>
                         </div>
+                        {post.repliedId && (
+                            <div className='py-4'>
+                                <Link to={`/posts/${post.repliedId}`} className='text-blue-600'>View original post</Link>
+                            </div>
+                        )}
                         {post.quotedId && (
                             <div className='py-4'>
                                 <Link to={`/posts/${post.quotedId}`} className='text-blue-600'>View quoted post</Link>

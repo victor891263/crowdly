@@ -12,6 +12,8 @@ import RetrievalWrapper from "../components/RetrievalWrapper";
 import SkeletonTinyProfile from "../components/SkeletonTinyProfile";
 import Avatar from "../components/Avatar";
 import UserIcon from "../icons/UserIcon";
+import SkeletonProfiles from "../components/SkeletonProfiles";
+import SearchBox from "../components/SearchBox";
 
 export default function SearchResults() {
     const [posts, setPosts] = useState<PostDetailed[] | null>(null)
@@ -19,6 +21,8 @@ export default function SearchResults() {
 
     const [postsError, setPostsError] = useState('')
     const [profilesError, setProfilesError] = useState('')
+
+    const [isSearchOpen, setIsSearchOpen] = useState(false)
 
     const [searchParams] = useSearchParams()
     const postKeyword = searchParams.get('post')
@@ -48,6 +52,7 @@ export default function SearchResults() {
 
     return (
         <MainWrapper>
+            {isSearchOpen && <SearchBox close={() => setIsSearchOpen(false)} />}
             <div className='min-h-full flex flex-col'>
                 <div className="pb-6 pt-0.5 flex items-center justify-between border-b">
                     <h2>Search</h2>
@@ -77,7 +82,7 @@ export default function SearchResults() {
                     </RetrievalWrapper>
                 )}
                 {(usernameKeyword && !postKeyword) && (
-                    <RetrievalWrapper data={profiles} error={profilesError} skeleton={<SkeletonTinyProfile />} >
+                    <RetrievalWrapper data={profiles} error={profilesError} skeleton={<SkeletonProfiles />} >
                         {(profiles && profiles.length > 0) ? (
                             <>
                                 <span className='pt-4 text-sm text-gray-400'>{profiles.length} result{profiles.length > 1 ? 's' : ''} returned for '{postKeyword}'</span>

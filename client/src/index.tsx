@@ -15,6 +15,7 @@ import ErrorPage from './ErrorPage'
 import initTheme from "./utilities/initTheme"
 import reportWebVitals from './reportWebVitals'
 import SearchResults from "./routes/searchResults";
+import Notifications from "./routes/notifications";
 
 const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
     {
         path: "/search",
         element: <SearchResults />
+    },
+    {
+        path: "/notifications",
+        element: <Notifications />
     },
     {
         path: "/about",

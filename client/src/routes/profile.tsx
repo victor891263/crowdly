@@ -3,7 +3,7 @@ import MainWrapper from "../components/MainWrapper"
 import FeedPost from "../components/FeedPost"
 import {Link, useNavigate, useParams} from "react-router-dom"
 import Avatar from "../components/Avatar"
-import {PostDetailed, UserDetailed} from "../types"
+import {PostDetailed, UserDetailed, UserTiny} from "../types"
 import axios from "axios"
 import handleError from "../utilities/handleError"
 import DownloadFolderIcon from "../icons/DownloadFolderIcon";
@@ -19,19 +19,14 @@ import getToken from "../utilities/getToken";
 import SkeletonProfile from "../components/SkeletonProfile";
 import SkeletonFeed from "../components/SkeletonFeed";
 import SkeletonTinyProfile from "../components/SkeletonTinyProfile";
-
-type SimpleProfile = {
-    id: string
-    username: string
-    image?: string
-}
+import SkeletonProfiles from "../components/SkeletonProfiles";
 
 export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'followers' }) {
     const [profile, setProfile] = useState<UserDetailed | null>(null)
 
     const [posts, setPosts] = useState<PostDetailed[] | null>(null)
-    const [follows, setFollows] = useState<SimpleProfile[] | null>(null)
-    const [followers, setFollowers] = useState<SimpleProfile[] | null>(null)
+    const [follows, setFollows] = useState<UserTiny[] | null>(null)
+    const [followers, setFollowers] = useState<UserTiny[] | null>(null)
 
     const [profileRetrievalError, setProfileRetrievalError] = useState('')
     const [postsRetrievalError, setPostsRetrievalError] = useState('')
@@ -230,7 +225,7 @@ export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'f
                         )}
 
                         {(showing === 'follows') && (
-                            <RetrievalWrapper data={follows} error={followsRetrievalError} skeleton={<SkeletonTinyProfile />} >
+                            <RetrievalWrapper data={follows} error={followsRetrievalError} skeleton={<SkeletonProfiles />} >
                                 {(follows && follows.length > 0) ? (
                                     <div className='divide-y'>
                                         {follows!.map((profile, index) => (
@@ -252,7 +247,7 @@ export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'f
                         )}
 
                         {(showing === 'followers') && (
-                            <RetrievalWrapper data={followers} error={followersRetrievalError} skeleton={<SkeletonTinyProfile />} >
+                            <RetrievalWrapper data={followers} error={followersRetrievalError} skeleton={<SkeletonProfiles />} >
                                 {(followers && followers.length > 0) ? (
                                     <div className='divide-y'>
                                         {followers!.map((profile, index) => (

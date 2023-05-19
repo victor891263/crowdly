@@ -28,6 +28,7 @@ app.use('/search', require('./routes/search'))
 app.use(require('./middleware/auth')) // authentication middleware
 app.use('/posts', require('./routes/posts'))
 app.use('/users', require('./routes/users'))
+app.use('/notifications', require('./routes/notifications'))
 app.use(require('./middleware/handleError'))
 
 // begin listening

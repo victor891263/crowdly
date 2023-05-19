@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import React, {ReactNode} from "react"
 import Header from "./Header"
 import FeedSidebar from "./FeedSidebar"
 
@@ -11,7 +11,7 @@ export default function MainWrapper({ children }: { children: ReactNode }) {
             min-h-screen
             container lg:max-w-screen-lg
             mx-auto
-            pt-20 sm:pt-[5.5rem]
+            pt-[4.75rem] sm:pt-[5.5rem]
             pb-8
             px-4 sm:px-6 lg:px-8
             ">

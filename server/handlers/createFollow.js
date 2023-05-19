@@ -1,6 +1,8 @@
 const Follow = require('../models/follow')
 const User = require('../models/user')
 const Sequelize = require('sequelize')
+const Notification = require("../models/notification");
+const JSONSimplify = require("../utilities/JSONsimplify");
 
 module.exports = async (req, res) => {
     const currentUserId = req.user.id // id of currently logged in user
@@ -25,6 +27,16 @@ module.exports = async (req, res) => {
     }, {
         where: { id: userId }
     })
+
+    console.log('first!')
+
+    // send a notification to the user being followed
+    await Notification.create({
+        userId: String(currentUserId),
+        targetUserId: userId
+    })
+
+    console.log('second!')
 
     res.sendStatus(200)
 }

@@ -5,6 +5,17 @@ const JSONSimplify = require("../utilities/JSONsimplify");
 module.exports = async (req, res) => {
     const profileId = req.params.id // id of the user/profile that the user retrieved
     const currentUserId = req.user.id // id of the currently logged in user
+    const isSmall = req.query.small // if the user requested a small version of the profile
+
+    if (isSmall === true || isSmall === 'true') {
+        // get this user's data
+        const profile = await User.findOne({
+            where: { id: profileId },
+            attributes: ['id', 'username']
+        })
+        res.send(JSONSimplify(profile))
+        return
+    }
 
     // get this user's data
     const profile = await User.findOne({
@@ -38,8 +49,6 @@ module.exports = async (req, res) => {
             }
         })
     }
-
-
 
     res.send({ ...JSONSimplify(profile), followed: followByCurrentUser ? true : false, followingMe: followToCurrentUser ? true : false })
 }

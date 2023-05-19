@@ -2,19 +2,17 @@ import React, {useEffect, useState} from 'react'
 import MainWrapper from "../components/MainWrapper"
 import FeedPost from '../components/FeedPost'
 import GlassIcon from "../icons/GlassIcon"
-import getDummyPosts from "../utilities/getDummyPosts"
 import axios from "axios"
 import getCurrentUser from "../utilities/getCurrentUser"
-import {Post, PostDetailed} from "../types"
+import {PostDetailed} from "../types"
 import handleError from "../utilities/handleError";
 import ExclaimIcon from "../icons/ExclaimIcon";
-import DownloadFolderIcon from "../icons/DownloadFolderIcon";
-import EmptyFolderIcon from "../icons/EmptyFolderIcon";
 import getToken from "../utilities/getToken";
 import RetrievalWrapper from "../components/RetrievalWrapper";
 import TextBalloonIcon from "../icons/TextBalloonIcon";
 import SkeletonFeed from "../components/SkeletonFeed";
-import SearchBox from "../components/searchBox";
+import SearchBox from "../components/SearchBox";
+import FeedAddPost from "../components/FeedAddPost";
 
 export default function Feed({ isFeed }: { isFeed?: boolean }) {
     const [posts, setPosts] = useState<PostDetailed[] | null>(null)
@@ -42,8 +40,8 @@ export default function Feed({ isFeed }: { isFeed?: boolean }) {
 
     if (isFeed && !currentUser) return (
         <div className='flex flex-col items-center justify-center h-screen'>
-            <ExclaimIcon className={'h-10 w-10 text-gray-400'} triangle={true} />
-            <h2 className='mt-3 mb-1.5'>Access denied</h2>
+            <ExclaimIcon className={'h-8 w-8 text-gray-400'} triangle={true} />
+            <h2 className='mt-4 mb-1'>Access denied</h2>
             <span>You must be logged in to view this page.</span>
         </div>
     )
@@ -58,6 +56,11 @@ export default function Feed({ isFeed }: { isFeed?: boolean }) {
                         <GlassIcon className={"w-4 h-4"} />
                     </button>
                 </div>
+                {currentUser && (
+                    <div className='lg:hidden py-5'>
+                        <FeedAddPost />
+                    </div>
+                )}
                 <RetrievalWrapper data={posts} error={retrievalError} skeleton={<SkeletonFeed />} >
                     {(posts && posts.length > 0) ? (
                         <>
