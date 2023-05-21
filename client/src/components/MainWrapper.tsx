@@ -5,7 +5,7 @@ import FeedSidebar from "./FeedSidebar"
 export default function MainWrapper({ children }: { children: ReactNode }) {
     return (
         <>
-            <Header isFeed={true} />
+            <Header />
             <div className="
             grid lg:grid-cols-[auto_280px]
             min-h-screen

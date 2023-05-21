@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
     const repliedId = req.query.repliedId
 
     // if the post to be deleted is a reply to another post, decrement the reply count of said post
-    if (repliedId) {
+    if (repliedId !== 'null') {
         await Post.update({
             replies: Sequelize.literal('replies - 1')
         }, {

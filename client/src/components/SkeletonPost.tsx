@@ -8,7 +8,7 @@ export default function SkeletonPost() {
     const post = posts[0]
 
     return (
-        <div className='divide-y !text-transparent'>
+        <div className='divide-y animate-pulse !text-transparent'>
             <div className="pb-7 space-y-4">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">

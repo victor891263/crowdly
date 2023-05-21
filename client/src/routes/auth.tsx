@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {Link, useNavigate} from "react-router-dom"
+import React, {useEffect, useState} from 'react'
+import {Link, useNavigate, useSearchParams} from "react-router-dom"
 import Joi from 'joi'
 import UserIcon from "../icons/UserIcon"
 import LockIcon from "../icons/LockIcon"
@@ -12,10 +12,17 @@ export default function Auth({ newUser }: { newUser?: boolean }) {
     const [password, setPassword] = useState('')
     const [errors, setErrors] = useState({ username: '', password: '' })
     const [submitError, setSubmitError] = useState('')
+
+    const [searchParams, setSearchParams] = useSearchParams()
     const navigate = useNavigate()
 
+    useEffect(() => {
+        const name = searchParams.get('username')
+        if (name) setUsername(name)
+    }, [])
+
     const schema = Joi.object({
-        username: Joi.string().alphanum().min(1).max(30).required(),
+        username: Joi.string().alphanum().min(1).max(15).required(),
         password: Joi.string().min(5).max(20).required()
     })
 

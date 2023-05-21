@@ -138,7 +138,7 @@ export default function Post() {
     }
 
     function deletePost(e: any) {
-        e.target.innerText = 'Deleting...'
+        e.target.innerText = 'Deleting post...'
         e.target.disabled = true
         axios.delete(`${process.env.REACT_APP_API_URL}/posts/${post!.id}?repliedId=${post?.repliedId}`, { headers: { Authorization: getToken() }})
             .then(response => {
@@ -146,7 +146,7 @@ export default function Post() {
             })
             .catch(error => {
                 handleError(error, (msg: string) => setOperationError(msg), true)
-                e.target.innerText = 'Delete'
+                e.target.innerText = 'Delete post'
                 e.target.disabled = false
             })
     }
@@ -171,7 +171,7 @@ export default function Post() {
         <MainWrapper>
             {operationError && <PopUp msg={operationError} />}
             {isQuoteBoxOpen && <TextBox handleSubmit={submitQuotedPost} close={() => setIsQuoteBoxOpen(false)} />}
-            {isEditBoxOpen && <TextBox handleSubmit={submitEditedPost} close={() => setIsEditBoxOpen(false)} content={post!.body} />}
+            {isEditBoxOpen && <TextBox handleSubmit={submitEditedPost} close={() => setIsEditBoxOpen(false)} content={post!.body} deletePost={deletePost} />}
             <RetrievalWrapper data={post} error={retrievalError} skeleton={<SkeletonPost />} >
                 {post && (
                     <div className='divide-y'>
@@ -205,8 +205,8 @@ export default function Post() {
                                 <div className='flex gap-5'>
                                     {(currentUser && (currentUser.id !== post.userId)) && (
                                         <>
-                                            <button onClick={handleLike} className='text-blue-600'>{post.liked ? 'Liked' : 'Like'}</button>
-                                            <button onClick={handleDislike} className='text-blue-600'>{post.disliked ? 'Disliked' : 'Dislike'}</button>
+                                            <button disabled={post.disliked} onClick={handleLike} className='text-blue-600'>{post.liked ? 'Liked' : 'Like'}</button>
+                                            <button disabled={post.liked} onClick={handleDislike} className='text-blue-600'>{post.disliked ? 'Disliked' : 'Dislike'}</button>
                                         </>
                                     )}
                                     <button onClick={() => setIsQuoteBoxOpen(true)} className='text-blue-600'>Quote</button>
@@ -214,7 +214,6 @@ export default function Post() {
                                 {(currentUser && (currentUser.id === post.userId)) && (
                                     <div className='flex gap-5'>
                                         <button onClick={() => setIsEditBoxOpen(true)} className='text-blue-600 dark:text-blue-400'>Edit post</button>
-                                        <button onClick={deletePost} className='text-red-600 dark:text-red-400'>Delete post</button>
                                     </div>
                                 )}
                             </div>

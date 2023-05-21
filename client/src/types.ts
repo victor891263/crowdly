@@ -64,3 +64,27 @@ export type NotiType = {
         image?: string
     }
 } & Metadata
+
+// help section
+
+type HeadContent = {
+    type: 'head',
+    body: string
+}
+
+type TextContent = {
+    type: 'text',
+    body: string
+}
+
+type ListContent = {
+    type: 'list',
+    body: string[]
+}
+
+export type Article = {
+    id: number,
+    topics: string[],
+    title: string,
+    content: (HeadContent | TextContent | ListContent)[]
+}

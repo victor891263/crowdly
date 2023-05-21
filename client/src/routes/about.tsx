@@ -1,14 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import CheckIcon from "../icons/CheckIcon";
+import {Link} from "react-router-dom";
 
 export default function About() {
+    const [username, setUsername] = useState('')
+
     return (
         <>
             <Header />
 
-            <div className="max-2xl:px-6 container mx-auto pt-40 pb-20 space-y-32 sm:space-y-40 xl:max-w-screen-xl">
+            <div className="px-4 sm:px-6 lg:px-8 container mx-auto pt-40 pb-20 space-y-32 sm:space-y-40 xl:max-w-screen-xl">
                 <section className="space-y-24 xl:space-y-12">
                     <div>
                         <h2 className="max-w-xl mx-auto text-3xl font-bold tracking-tight text-center sm:text-5xl dark:text-white">Crowdly is a <span className="text-blue-600">trouble-free</span> social platform.</h2>
@@ -23,7 +26,7 @@ export default function About() {
                             <p className="mt-4 text-lg text-gray-700 dark:text-gray-300">Creating an account has never been simpler. With just a unique username and a valid email address, you can become part of our vibrant social media community. Give up the lengthy sign-up processes for an instant access to all the features you need to connect with others.</p>
                         </div>
                         <div aria-hidden="true" className="mt-10 lg:mt-0">
-                            <img src="https://source.unsplash.com/random/360x420" alt="" className="max-lg:w-full mx-auto rounded-lg shadow-lg bg-gray-500"/>
+                            <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=360&h=420" alt="" className="max-lg:w-full mx-auto rounded-lg shadow-lg bg-gray-500"/>
                         </div>
                     </div>
 
@@ -35,7 +38,7 @@ export default function About() {
                             <p className="mt-4 text-lg text-gray-700 dark:text-gray-300">Crowdly's easy-to-use follow feature makes it effortless to build and maintain meaningful connections on our social media platform - simply follow them and their posts will appear on your personalized feed. This way, you'll be able to stay in the loop at all times.</p>
                         </div>
                         <div className="mt-10 lg:mt-0 lg:col-start-1 lg:row-start-1">
-                            <img src="https://source.unsplash.com/random/361x421" alt="" className="max-lg:w-full mx-auto rounded-lg shadow-lg bg-gray-500"/>
+                            <img src="https://images.unsplash.com/photo-1497008386681-a7941f08011e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=360&h=420" alt="" className="max-lg:w-full mx-auto rounded-lg shadow-lg bg-gray-500"/>
                         </div>
                     </div>
 
@@ -47,7 +50,7 @@ export default function About() {
                             <p className="mt-4 text-lg text-gray-700 dark:text-gray-300">Whether you want to upvote or downvote a post to show your approval or disapproval, reply to express your thoughts, or quote a post to share it with your own followers, our interactive features allow you to be an active participant in the community.</p>
                         </div>
                         <div aria-hidden="true" className="mt-10 lg:mt-0">
-                            <img src="https://source.unsplash.com/random/360x420" alt="" className="max-lg:w-full mx-auto rounded-lg shadow-lg bg-gray-500"/>
+                            <img src="https://images.unsplash.com/photo-1601932151223-b66cde61b081?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=360&h=420" alt="" className="max-lg:w-full mx-auto rounded-lg shadow-lg bg-gray-500"/>
                         </div>
                     </div>
                 </section>
@@ -110,8 +113,8 @@ export default function About() {
                     </div>
                     <div className="max-sm:w-full flex flex-row items-center self-center justify-center flex-shrink-0 lg:justify-end">
                         <div className="w-full flex max-sm:flex-col">
-                            <input type="text" placeholder="example@email.com" className="!rounded-r-none p-3 pl-4 !bg-transparent border placeholder:text-white sm:w-2/3 dark:border-gray-900 dark:placeholder:text-gray-900"/>
-                            <button type="button" className="max-sm:mt-3 p-3 font-semibold rounded-r-lg sm:w-1/3 bg-white !text-blue-600 dark:bg-gray-900 dark:!text-blue-400">Sign up</button>
+                            <input onChange={e => setUsername(e.target.value)} value={username} type="text" placeholder="Pick a username" className="sm:!rounded-r-none p-3 pl-4 !bg-transparent border placeholder:text-white sm:w-2/3 focus:border-white dark:border-gray-900 dark:placeholder:text-gray-900 dark:focus:border-black"/>
+                            <Link to={`/join?username=${username}`} className="max-sm:mt-3 max-sm:rounded-l-lg text-center p-3 font-semibold rounded-r-lg sm:w-1/3 bg-white !text-blue-600 dark:bg-gray-900 dark:!text-blue-400">Sign up</Link>
                         </div>
                     </div>
                 </section>

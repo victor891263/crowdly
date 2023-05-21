@@ -1,9 +1,10 @@
-import React from "react"
+import React, {useState} from "react"
 import {Link, useNavigate} from "react-router-dom"
 import getCurrentUser from "../utilities/getCurrentUser"
 import FeedAddPost from './FeedAddPost'
 
 export default function FeedSidebar() {
+    const [username, setUsername] = useState('')
     const currentUser = getCurrentUser()
     const navigate = useNavigate()
 
@@ -15,8 +16,8 @@ export default function FeedSidebar() {
                 <div>
                     <h2>New to Crowdly?</h2>
                     <p className='mt-5 mb-6'>Join us now to get your own personalized timeline!</p>
-                    <input type='text' placeholder='Choose a username' className='mb-2 w-full py-2 px-3 text-sm' />
-                    <Link to="/join" className="btn-primary block py-2 text-center text-sm">Create account</Link>
+                    <input onChange={e => setUsername(e.target.value)} value={username} type='text' placeholder='Choose a username' className='mb-2 w-full py-2 px-3 text-sm' />
+                    <Link to={`/join?username=${username}`} className="btn-primary block py-2 text-center text-sm">Create account</Link>
                 </div>
             )}
             <div className="w-72 pt-5 mt-6 text-sm text-gray-400 border-t">

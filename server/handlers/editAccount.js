@@ -9,8 +9,8 @@ module.exports = async (req, res) => {
         where: { username: accountData.username }
     })
 
-    // if the username is already taken, don't proceed
-    if (user) {
+    // if the username already belongs to the currently logged in user (that is - they didn't change the username), dont send an error. Otherwise, send an error
+    if (user.id !== currentUserId) {
         res.status(400).send('The new username you picked is already taken')
         return
     }

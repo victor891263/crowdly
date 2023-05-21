@@ -6,6 +6,7 @@ import Home from "./routes/home"
 import Help from './routes/help'
 import HelpTopic from "./routes/helpTopic"
 import HelpArticle from "./routes/helpArticle"
+import HelpSearch from "./routes/helpSearch"
 import About from './routes/about'
 import Auth from './routes/auth'
 import Feed from './routes/feed'
@@ -76,8 +77,12 @@ const router = createBrowserRouter([
         element: <HelpTopic />
     },
     {
-        path: "/help/articles/:article",
+        path: "/help/articles/:articleId",
         element: <HelpArticle />
+    },
+    {
+        path: "/help/search",
+        element: <HelpSearch />
     },
 ])
 
