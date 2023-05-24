@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  DOCKERFILE_PATH: ./server/dockerfile
+  DOCKERFILE_PATH: ./server/Dockerfile
 
 jobs:
   build-and-push:
