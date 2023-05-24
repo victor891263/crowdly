@@ -39,7 +39,8 @@ export default function getHelpArticles(): Article[] {
                         'If a user decides to delete their account, their username will become available for new users to select.'
                     ]
                 }
-            ]
+            ],
+            lastUpdate: new Date(2023, 4, 22)
         },
         {
             id: 2,
@@ -106,7 +107,8 @@ export default function getHelpArticles(): Article[] {
                         'The bio cannot contain more than 255 characters.'
                     ]
                 },
-            ]
+            ],
+            lastUpdate: new Date(2023, 4, 22)
         },
         {
             id: 3,
@@ -142,7 +144,8 @@ export default function getHelpArticles(): Article[] {
                         'Additionally, users can reply to your post, initiating a conversation and encouraging further engagement.'
                     ]
                 },
-            ]
+            ],
+            lastUpdate: new Date(2023, 4, 22)
         },
         {
             id: 4,
@@ -193,7 +196,8 @@ export default function getHelpArticles(): Article[] {
                     type: 'text',
                     body: 'Editing a post does not affect the ability of users to react or reply to it. Users can still engage with the post, provide likes or dislikes, and participate in conversations by replying to the edited version of the post.'
                 },
-            ]
+            ],
+            lastUpdate: new Date(2023, 4, 22)
         },
         {
             id: 5,
@@ -225,7 +229,8 @@ export default function getHelpArticles(): Article[] {
                         'Deleted posts cannot be retrieved or restored. Once a post is deleted, it is permanently removed from the platform.'
                     ]
                 },
-            ]
+            ],
+            lastUpdate: new Date(2023, 4, 22)
         },
         {
             id: 6,
@@ -275,7 +280,8 @@ export default function getHelpArticles(): Article[] {
                         'Deleting a quoted post will remove it from your profile and also eliminate all associated likes, dislikes, replies, and any subsequent quotes. Deleted quoted posts cannot be recovered.'
                     ]
                 },
-            ]
+            ],
+            lastUpdate: new Date(2023, 4, 22)
         },
         {
             id: 7,
@@ -327,7 +333,8 @@ export default function getHelpArticles(): Article[] {
                         'Deleting a reply will remove it from the post page, along with all associated likes, dislikes, quotes, and replies. Deleted replies cannot be recovered.'
                     ]
                 },
-            ]
+            ],
+            lastUpdate: new Date(2023, 4, 22)
         },
         {
             id: 8,
@@ -378,7 +385,8 @@ export default function getHelpArticles(): Article[] {
                     type: 'text',
                     body: `You cannot like or dislike posts that you have made, including replies and quotes. This limitation ensures that the reaction feature remains focused on engaging with others' content and promoting diverse perspectives within the community.`
                 },
-            ]
+            ],
+            lastUpdate: new Date(2023, 4, 22)
         },
         {
             id: 9,
@@ -428,7 +436,8 @@ export default function getHelpArticles(): Article[] {
                     type: 'text',
                     body: `If a user decides to delete their profile on Crowdly, all their posts and associated reactions will be removed from the platform. If you were following such a user, their posts will no longer appear in your feed. This ensures that the content you see remains relevant and up-to-date.`
                 },
-            ]
+            ],
+            lastUpdate: new Date(2023, 4, 22)
         }
     ]
 }

@@ -40,7 +40,7 @@ export default function HelpArticle() {
             <Header />
             <div className="px-4 sm:px-6 lg:px-8 container mx-auto pt-32 pb-16 text-gray-700 xl:max-w-screen-xl dark:text-gray-300">
                 <h1 className="first-letter:capitalize">{article.title}</h1>
-                <div className="sm:mt-5 mt-4 text-sm">Last updated 2 days ago</div>
+                <div className="sm:mt-5 mt-4 text-sm">Last updated on {article.lastUpdate.toLocaleDateString()}</div>
                 <div className="flex border-t pt-8 mt-9">
                     <div className="lg:w-8/12 lg:pr-10">
                         <div className="flex flex-col gap-4 leading-relaxed whitespace-pre-wrap">

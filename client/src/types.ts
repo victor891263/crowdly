@@ -83,8 +83,9 @@ type ListContent = {
 }
 
 export type Article = {
-    id: number,
-    topics: string[],
-    title: string,
+    id: number
+    topics: string[]
+    title: string
     content: (HeadContent | TextContent | ListContent)[]
+    lastUpdate: Date
 }
