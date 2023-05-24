@@ -32,7 +32,7 @@ export default function MainWrapper({ children }: { children: ReactNode }) {
                     {children}
                 </div>
                 <div className="top-[5.5rem] sticky self-start max-lg:hidden">
-                    <div className='xl:hidden mb-6 pb-6 border-b'>
+                    <div className='xl:hidden mb-7 pb-7 border-b'>
                         {currentUser ? (
                             <FeedAddPost />
                         ):(
@@ -40,7 +40,7 @@ export default function MainWrapper({ children }: { children: ReactNode }) {
                         )}
                     </div>
                     <FeedArticles />
-                    <div className="pt-5 mt-6 text-sm text-gray-400 border-t">
+                    <div className="pt-7 mt-7 text-sm text-gray-400 border-t">
                         <FeedFooter />
                     </div>
                 </div>

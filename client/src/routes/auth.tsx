@@ -65,14 +65,14 @@ export default function Auth({ newUser }: { newUser?: boolean }) {
                     <div className="hidden bg-cover lg:block lg:w-2/3" style={{backgroundImage: `url('https://images.unsplash.com/photo-1486704155675-e4c07f8ad160?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')`}}>
                         <div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
                             <div>
-                                <h1 className="text-2xl font-bold tracking-tight !text-gray-100">Join the community</h1>
-                                <p className="max-w-sm mt-3 text-gray-300">Bringing people together and inspire meaningful conversations, helping you discover new connections and share your ideas with the world.</p>
+                                <h1>Join the community</h1>
+                                <p className="max-w-sm mt-5 text-gray-300">Bringing people together and inspire meaningful conversations, helping you discover new connections and share your ideas with the world.</p>
                             </div>
                         </div>
                     </div>
                     <div className="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
                         <form className="w-full max-w-md">
-                            <h2 className="text-2xl">{ newUser ? 'Join Crowdly' : 'Welcome back!' }</h2>
+                            <h2 className='text-2xl'>{ newUser ? 'Join Crowdly' : 'Welcome back!' }</h2>
                             {newUser ? (
                                 <p className="mt-4 text-gray-700 dark:text-gray-300">Already have an account? <Link to='/login' className="text-blue-600">Login</Link></p>
                             ):(
