@@ -6,9 +6,9 @@ export default function Footer() {
     const { pathname } = useLocation()
 
     return (
-        <footer>
-            <div className={"px-4 sm:px-6 lg:px-8 pb-6 container mx-auto" + ((pathname.includes('/about')) ? " xl:max-w-screen-xl" : " lg:max-w-screen-lg")}>
-                <div className="border-t pt-6 flex gap-6 justify-between max-sm:flex-col">
+        <footer className='border-t'>
+            <div className={"px-4 sm:px-6 lg:px-8 pb-6 container mx-auto xl:max-w-screen-xl"}>
+                <div className="pt-6 flex gap-6 justify-between max-sm:flex-col">
                     <div className="">
                         <Link to="/" className="font-semibold text-black dark:text-white">Crowdly</Link>
                         <p className="max-w-xs mt-2">Join Crowdly to discover new connections and share your thoughts with the world.</p>

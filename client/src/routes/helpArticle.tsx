@@ -38,7 +38,7 @@ export default function HelpArticle() {
     return (
         <>
             <Header />
-            <div className="px-4 sm:px-6 lg:px-8 container mx-auto pt-32 pb-16 text-gray-700 lg:max-w-screen-lg dark:text-gray-300">
+            <div className="px-4 sm:px-6 lg:px-8 container mx-auto pt-32 pb-16 text-gray-700 xl:max-w-screen-xl dark:text-gray-300">
                 <h1 className="first-letter:capitalize">{article.title}</h1>
                 <div className="sm:mt-5 mt-4 text-sm">Last updated 2 days ago</div>
                 <div className="flex border-t pt-8 mt-9">
@@ -61,7 +61,7 @@ export default function HelpArticle() {
                             })}
                         </div>
                         <div className="lg:hidden mt-10 pt-8 border-t dark:border-gray-700">
-                            <h3 className="font-semibold text-lg text-black dark:text-white">Tagged in</h3>
+                            <h3>Tagged in</h3>
                             <div className="flex gap-2 flex-wrap mt-4">
                                 {article.topics.map((t, i) => (
                                     <Link to={`/help/${t}`} className="first-letter:capitalize border rounded-lg py-2 px-3 text-blue-600 font-medium dark:border-zinc-700 dark:text-blue-400" key={i}>{t}</Link>
@@ -69,7 +69,7 @@ export default function HelpArticle() {
                             </div>
                         </div>
                         <div className="lg:hidden mt-10 pt-8 border-t dark:border-gray-700">
-                            <h3 className="font-semibold text-lg text-black dark:text-white">Related articles</h3>
+                            <h3>Related articles</h3>
                             {randomArticles.map((article, index) => (
                                 <Link to={`/help/articles/${article.id}`} className="block w-fit mt-3.5 font-medium text-blue-600 dark:text-blue-400" key={index}>{article.title}</Link>
                             ))}
@@ -101,13 +101,13 @@ export default function HelpArticle() {
                     </div>
 
                     <div className="max-lg:hidden w-4/12 pl-10 border-l">
-                        <h3 className="font-semibold text-lg text-black dark:text-white">Tagged in</h3>
-                        <div className="flex gap-2 flex-wrap mt-4">
+                        <h3>Tagged in</h3>
+                        <div className="flex gap-2 flex-wrap mt-4 mb-8">
                             {article.topics.map((t, i) => (
                                 <Link to={`/help/${t}`} className="first-letter:capitalize border rounded-lg py-2 px-3 text-blue-600 font-medium dark:border-zinc-700 dark:text-blue-400" key={i}>{t}</Link>
                             ))}
                         </div>
-                        <h3 className="mt-8 font-semibold text-lg text-black dark:text-white">Related articles</h3>
+                        <h3>Related articles</h3>
                         {randomArticles.map((article, index) => (
                             <Link to={`/help/articles/${article.id}`} className="block w-fit mt-3.5 font-medium text-blue-600 dark:text-blue-400" key={index}>{article.title}</Link>
                         ))}

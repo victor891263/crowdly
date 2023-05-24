@@ -41,7 +41,7 @@ export default function Help() {
         <>
             <Header />
             <div className="text-gray-700 pb-8 dark:text-gray-300 dark:border-gray-700">
-                <div className="px-4 sm:px-6 lg:px-8 container mx-auto pt-32 lg:max-w-screen-lg">
+                <div className="px-4 sm:px-6 lg:px-8 container mx-auto pt-32 xl:max-w-screen-xl">
                     <div className="lg:w-8/12">
                         <h1>Hi, we're here to help.</h1>
                         <div className="relative mt-9 mx-auto">
@@ -52,7 +52,7 @@ export default function Help() {
                         </div>
                     </div>
 
-                    <div className="flex pt-8 pb-16 border-t mt-9 text-gray-700 dark:border-gray-700 dark:text-gray-300">
+                    <div className="flex pt-8 pb-16 border-t mt-9">
                         <div className="lg:w-8/12 lg:border-r lg:pr-6 w-full">
                             <div>
                                 <h2>Shortcuts</h2>
@@ -108,15 +108,15 @@ export default function Help() {
                         <div className="max-lg:hidden w-4/12 pl-8 h-full">
                             <div className="flex gap-4">
                                 <div>
-                                    <h3 className="font-semibold text-lg text-black dark:text-white">Contact directly</h3>
-                                    <p className="mt-1.5">Have a question and can't find an answer? Contact the developer directly.</p>
+                                    <h3>Contact directly</h3>
+                                    <p className="mt-1.5 max-w-xs">Have a question and can't find an answer? Contact the developer directly.</p>
                                     <a href='mailto:victor891263@gmail.com' target='_blank' className="block mt-2.5 font-medium text-blue-600 dark:text-blue-400">Send email</a>
                                 </div>
                             </div>
                             <div className="flex gap-4 mt-8">
                                 <div>
-                                    <h3 className="font-semibold text-lg text-black dark:text-white">View source code</h3>
-                                    <p className="mt-1.5">Crowdly is fully open-source and contributions are highly welcomed.</p>
+                                    <h3>View source code</h3>
+                                    <p className="mt-1.5 max-w-xs">Crowdly is fully open-source and contributions are highly welcomed.</p>
                                     <a href="https://github.com/victor891263/crowdly" target='_blank' className="block mt-2.5 font-medium text-blue-600 dark:text-blue-400">Visit GitHub</a>
                                 </div>
                             </div>

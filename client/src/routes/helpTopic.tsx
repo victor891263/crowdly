@@ -12,7 +12,7 @@ export default function HelpTopic() {
     return (
         <>
             <Header />
-            <div style={{ minHeight: `calc(100vh - 226px)` }} className="px-4 sm:px-6 lg:px-8 container mx-auto pt-32 pb-16 lg:max-w-screen-lg">
+            <div style={{ minHeight: `calc(100vh - 226px)` }} className="px-4 sm:px-6 lg:px-8 container mx-auto pt-32 pb-16 xl:max-w-screen-xl">
                 <h1 className='first-letter:capitalize'>{topic}</h1>
                 <p className="sm:mt-5 mt-4 text-sm">{relevantArticles.length} articles</p>
                 <div className="border-t pt-8 mt-9">
@@ -20,7 +20,7 @@ export default function HelpTopic() {
                         {relevantArticles.map((article, index) => (
                             <div key={index}>
                                 <Link to={`/help/articles/${article.id}`} className="font-medium text-lg text-blue-600 dark:text-blue-400">{article.title}</Link>
-                                <p className="mt-2">{article.content.find(content => content.type === 'text')!.body.slice(0, 150)}...</p>
+                                <p className="mt-2">{article.content.find(content => content.type === 'text')!.body.slice(0, 200)}...</p>
                             </div>
                         ))}
                     </div>

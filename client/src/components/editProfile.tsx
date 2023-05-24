@@ -44,7 +44,7 @@ export default function EditProfile({ user, handleSubmit, close }: Props) {
                            value={userData.username}
                            type='text'
                            placeholder='Username'
-                           className='py-2 px-3 w-full dark:bg-zinc-700/50'
+                           className='py-2 px-3 w-full'
                     />
                     <span className='block font-medium mb-2 mt-5'>About you</span>
                     <textarea
@@ -54,7 +54,7 @@ export default function EditProfile({ user, handleSubmit, close }: Props) {
                         }}
                         value={userData.about}
                         style={{ resize: 'none', overflow: 'hidden' }}
-                        className="w-full py-2.5 px-3.5 pb-3.5 h-24 dark:bg-zinc-700/50"
+                        className="w-full py-2.5 px-3.5 pb-3.5 h-24"
                         placeholder="Introduce yourself"
                     />
                     <div className='mt-6 text-sm flex justify-between'>

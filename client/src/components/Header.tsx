@@ -41,9 +41,9 @@ export default function Header() {
         <>
             {error && <PopUp msg={error} />}
             {isMenuOpen && <MobileMenu close={() => setIsMenuOpen(false)} />}
-            <header className="fixed w-full bg-white z[5] dark:bg-zinc-900">
-                <div className={'container mx-auto px-4 sm:px-6 lg:px-8' + ((pathname.includes('/about')) ? " xl:max-w-screen-xl" : " lg:max-w-screen-lg")}>
-                    <div className={"h-14 sm:h-16 border-b flex items-center justify-between text-sm font-medium"}>
+            <header className="fixed w-full bg-white border-b z-[5] dark:bg-zinc-900">
+                <div className={'container mx-auto px-4 sm:px-6 lg:px-8 xl:max-w-screen-xl'}>
+                    <div className={"h-14 sm:h-16 flex items-center justify-between text-sm font-medium"}>
                         <nav className="flex items-center gap-[22px]">
                             <Link to="/">Crowdly</Link>
                             <div className="flex items-center gap-[22px] max-md:hidden">
@@ -57,7 +57,7 @@ export default function Header() {
 
                             {currentUser ? (
                                 <div className="flex items-center gap-[22px]">
-                                    <Link to="/notifications">
+                                    <Link to="/notifications" className='flex items-center'>
                                         {(notiCount && (notiCount > 0)) ? <span className='py-0.5 px-2 rounded-full bg-blue-600 text-white text-xs mr-1 dark:bg-blue-400 dark:text-black'>{notiCount}</span> : ''}
                                         <span>Notifications</span>
                                     </Link>
