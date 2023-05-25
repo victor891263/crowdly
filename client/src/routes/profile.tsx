@@ -215,9 +215,9 @@ export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'f
                                         <span className='block pt-4 pb-8 text-center text-sm text-gray-400'>End of results</span>
                                     </div>
                                 ):(
-                                    <div className='flex flex-col items-center justify-center py-10 grow'>
+                                    <div className='flex flex-col items-center justify-center text-center py-10 grow'>
                                         <TextBalloonIcon slash={true} className={'h-8 w-8 text-gray-400'} />
-                                        <h2 className='mt-4 mb-1'>No posts found</h2>
+                                        <h2 className='mt-4 mb-1.5'>No posts found</h2>
                                         <span>It looks like this user hasn't posted anything yet.</span>
                                     </div>
                                 )}
@@ -237,9 +237,9 @@ export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'f
                                         <span className='block pt-4 pb-8 text-center text-sm text-gray-400'>End of results</span>
                                     </div>
                                 ):(
-                                    <div className='flex flex-col items-center justify-center py-10 grow'>
+                                    <div className='flex flex-col items-center justify-center text-center py-10 grow'>
                                         <UserIcon slash={true} className={'h-8 w-8 text-gray-400'} />
-                                        <h2 className='mt-4 mb-1'>No followees found</h2>
+                                        <h2 className='mt-4 mb-1.5'>No followees found</h2>
                                         <span>It looks like this user hasn't followed anyone yet.</span>
                                     </div>
                                 )}
@@ -259,9 +259,9 @@ export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'f
                                         <span className='block pt-4 pb-8 text-center text-sm text-gray-400'>End of results</span>
                                     </div>
                                 ):(
-                                    <div className='flex flex-col items-center justify-center py-10 grow'>
+                                    <div className='flex flex-col items-center justify-center text-center py-10 grow'>
                                         <UserIcon slash={true} className={'h-8 w-8 text-gray-400'} />
-                                        <h2 className='mt-4 mb-1'>No followers found</h2>
+                                        <h2 className='mt-4 mb-1.5'>No followers found</h2>
                                         <span>It looks like this user hasn't been followed by anyone yet.</span>
                                     </div>
                                 )}

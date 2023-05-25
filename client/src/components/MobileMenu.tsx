@@ -19,6 +19,10 @@ export default function MobileMenu({ close }: { close: () => void }) {
                                 <span>Feed</span>
                                 <ArrowIcon className={'w-5 h-5 -rotate-90'} />
                             </Link>
+                            <Link to="/trending" className='py-3 flex items-center justify-between'>
+                                <span>Trending</span>
+                                <ArrowIcon className={'w-5 h-5 -rotate-90'} />
+                            </Link>
                             <Link to="/about" className='py-3 flex items-center justify-between'>
                                 <span>About</span>
                                 <ArrowIcon className={'w-5 h-5 -rotate-90'} />

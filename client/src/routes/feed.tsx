@@ -70,9 +70,9 @@ export default function Feed({ isFeed }: { isFeed?: boolean }) {
                             <span className='block pt-4 pb-8 text-center text-sm text-gray-400'>End of results</span>
                         </>
                     ):(
-                        <div className='flex flex-col items-center justify-center py-10 grow'>
+                        <div className='flex flex-col items-center justify-center text-center py-10 grow'>
                             <TextBalloonIcon slash={true} className={'h-8 w-8 text-gray-400'} />
-                            <h2 className='mt-4 mb-1'>No posts found</h2>
+                            <h2 className='mt-4 mb-1.5'>No posts found</h2>
                             <span>Start following users to view their posts here.</span>
                         </div>
                     )}

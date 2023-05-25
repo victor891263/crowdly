@@ -13,7 +13,8 @@ module.exports = async (req, res) => {
                 model: User,
                 attributes: ['username']
             }
-        ]
+        ],
+        order: [['createdAt', 'DESC']]
     })
 
     res.send(JSONSimplify(posts))

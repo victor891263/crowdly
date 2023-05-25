@@ -38,7 +38,7 @@ export default function HelpArticle() {
     return (
         <>
             <Header />
-            <div className="px-6 lg:px-8 container mx-auto pt-32 pb-16 text-gray-700 xl:max-w-screen-xl dark:text-gray-300">
+            <div className="px-6 lg:px-8 container mx-auto pt-32 pb-16 xl:max-w-screen-xl">
                 <h1 className="first-letter:capitalize">{article.title}</h1>
                 <div className="sm:mt-5 mt-4 text-sm">Last updated on {article.lastUpdate.toLocaleDateString()}</div>
                 <div className="flex border-t pt-8 mt-9">
@@ -61,7 +61,7 @@ export default function HelpArticle() {
                                 return <div></div>
                             })}
                         </div>
-                        <div className="lg:hidden mt-10 pt-8 border-t dark:border-gray-700">
+                        <div className="lg:hidden mt-10 pt-8 border-t">
                             <h3>Tagged in</h3>
                             <div className="flex gap-2 flex-wrap mt-4">
                                 {article.topics.map((t, i) => (
@@ -69,7 +69,7 @@ export default function HelpArticle() {
                                 ))}
                             </div>
                         </div>
-                        <div className="lg:hidden mt-10 pt-8 border-t dark:border-gray-700">
+                        <div className="lg:hidden mt-10 pt-8 border-t">
                             <h3>Related articles</h3>
                             {randomArticles.map((article, index) => (
                                 <Link to={`/help/articles/${article.id}`} className="block w-fit mt-3.5 font-medium text-blue-600 dark:text-blue-400" key={index}>{article.title}</Link>

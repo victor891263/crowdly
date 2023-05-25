@@ -201,7 +201,7 @@ export default function Post() {
                         )}
 
                         {currentUser && (
-                            <div className='flex justify-between py-5'>
+                            <div className='flex justify-between py-4'>
                                 <div className='flex gap-5'>
                                     {(currentUser && (currentUser.id !== post.userId)) && (
                                         <>
@@ -232,7 +232,7 @@ export default function Post() {
                         {!currentUser && (
                             <div className='py-4 flex items-center gap-1.5 text-gray-400'>
                                 <ExclaimIcon className={"w-5 h-5"} />
-                                <span>You must be logged in to react or reply to this post</span>
+                                <span>You must be logged in to participate</span>
                             </div>
                         )}
                         {post.repliedPosts.length > 0 ? (
@@ -246,9 +246,9 @@ export default function Post() {
                                 </div>
                             </div>
                         ):(
-                            <div className='flex flex-col items-center py-10'>
+                            <div className='flex flex-col items-center text-center py-10'>
                                 <TextBalloonIcon slash={true} className={'h-8 w-8 text-gray-400'} />
-                                <h2 className='mt-4 mb-1'>No replies found</h2>
+                                <h2 className='mt-4 mb-1.5'>No replies found</h2>
                                 <span>Have an opinion? Why not reply to this thread?</span>
                             </div>
                         )}
