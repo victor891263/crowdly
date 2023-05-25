@@ -6,7 +6,7 @@ export default function Footer() {
     return (
         <footer className='border-t'>
             <div className={"px-6 lg:px-8 pb-6 container mx-auto xl:max-w-screen-xl"}>
-                <div className="pt-6 flex gap-6 justify-between max-sm:flex-col">
+                <div className="pt-6 flex gap-8 justify-between max-sm:flex-col">
                     <div className="">
                         <Link to="/" className="font-semibold text-black dark:text-white">Crowdly</Link>
                         <p className="max-w-xs mt-2">Join Crowdly to discover new connections and share your thoughts with the world.</p>

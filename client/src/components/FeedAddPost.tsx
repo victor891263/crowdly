@@ -47,8 +47,8 @@ export default function FeedAddPost() {
              {operationError && <PopUp msg={operationError} />}
              <div className="h-fit">
                  {profile ? (
-                     <div className="flex items-center gap-3">
-                         <Avatar img={profile.image} className={'w-10 h-10'} svgClassName={'w-8 h-8'} />
+                     <div className="flex items-center gap-2.5">
+                         <Avatar img={profile.image} className={'w-9 h-9'} svgClassName={'w-7 h-7'} />
                          <Link to={`/users/${profile.id}`} className="cursor-pointer font-semibold text-black dark:text-white">{profile.username}</Link>
                      </div>
                  ):(

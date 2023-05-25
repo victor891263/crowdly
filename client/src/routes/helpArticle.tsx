@@ -42,7 +42,7 @@ export default function HelpArticle() {
                 <h1 className="first-letter:capitalize">{article.title}</h1>
                 <div className="sm:mt-5 mt-4 text-sm">Last updated on {article.lastUpdate.toLocaleDateString()}</div>
                 <div className="flex border-t pt-8 mt-9">
-                    <div className="lg:w-8/12 lg:pr-10">
+                    <div className="lg:w-8/12 lg:pr-8">
                         <div className="flex flex-col gap-4 whitespace-pre-wrap">
                             {article.content.map((c, i) => {
                                 if (c.type === 'head') return (
@@ -62,38 +62,38 @@ export default function HelpArticle() {
                             })}
                         </div>
                         <div className="lg:hidden mt-10 pt-8 border-t">
-                            <h3>Tagged in</h3>
-                            <div className="flex gap-2 flex-wrap mt-4">
+                            <h2>Tagged in</h2>
+                            <div className="flex gap-2 flex-wrap mt-6">
                                 {article.topics.map((t, i) => (
-                                    <Link to={`/help/${t}`} className="first-letter:capitalize border rounded-lg py-2 px-3 text-blue-600 font-medium dark:border-zinc-700 dark:text-blue-400" key={i}>{t}</Link>
+                                    <Link to={`/help/${t}`} className="first-letter:capitalize border rounded-lg py-2 px-3 text-indigo-600 font-medium dark:bg-gray-800/75" key={i}>{t}</Link>
                                 ))}
                             </div>
                         </div>
                         <div className="lg:hidden mt-10 pt-8 border-t">
-                            <h3>Related articles</h3>
+                            <h2 className='mb-3'>Related articles</h2>
                             {randomArticles.map((article, index) => (
-                                <Link to={`/help/articles/${article.id}`} className="block w-fit mt-3.5 font-medium text-blue-600 dark:text-blue-400" key={index}>{article.title}</Link>
+                                <Link to={`/help/articles/${article.id}`} className="block w-fit mt-3.5 font-medium text-indigo-600 " key={index}>{article.title}</Link>
                             ))}
                         </div>
                         <div className="mt-10 pt-8 md:pt-10 border-t grid grid-cols-2 gap-4">
                             {previousArticle ? (
-                                <Link to={`/help/articles/${previousArticle.id}`} className="block md:border rounded-xl md:py-3 md:px-4">
+                                <Link to={`/help/articles/${previousArticle.id}`} className="block shadow-sm md:border rounded-xl md:py-3 md:px-4 md:dark:bg-gray-800/75">
                                     <div>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="rotate-180 w-3 h-auto inline"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                                         <div className="inline md:text-sm ml-1">Previous article</div>
                                     </div>
-                                    <div className="max-md:hidden mt-0.5 font-semibold text-blue-600 dark:text-blue-400">{previousArticle.title}</div>
+                                    <div className="max-md:hidden mt-0.5 font-semibold text-indigo-600 ">{previousArticle.title}</div>
                                 </Link>
                             ):(
                                 <div></div>
                             )}
                             {nextArticle ? (
-                                <Link to={`/help/articles/${nextArticle.id}`} className="text-right block md:border rounded-xl md:py-3 md:px-4">
+                                <Link to={`/help/articles/${nextArticle.id}`} className="text-right block shadow-sm md:border rounded-xl md:py-3 md:px-4 md:dark:bg-gray-800/75">
                                     <div>
                                         <div className="inline md:text-sm mr-1">Next article</div>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-auto inline"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                                     </div>
-                                    <div className="max-md:hidden mt-0.5 font-semibold text-blue-600 dark:text-blue-400">{nextArticle.title}</div>
+                                    <div className="max-md:hidden mt-0.5 font-semibold text-indigo-600 ">{nextArticle.title}</div>
                                 </Link>
                             ):(
                                 <div></div>
@@ -101,16 +101,16 @@ export default function HelpArticle() {
                         </div>
                     </div>
 
-                    <div className="max-lg:hidden w-4/12 pl-10 border-l">
-                        <h3>Tagged in</h3>
-                        <div className="flex gap-2 flex-wrap mt-4 mb-8">
+                    <div className="max-lg:hidden w-4/12 pl-8 border-l">
+                        <h2>Tagged in</h2>
+                        <div className="flex gap-2 flex-wrap mt-6 mb-10">
                             {article.topics.map((t, i) => (
-                                <Link to={`/help/${t}`} className="first-letter:capitalize border rounded-lg py-2 px-3 text-blue-600 font-medium dark:border-zinc-700 dark:text-blue-400" key={i}>{t}</Link>
+                                <Link to={`/help/${t}`} className="first-letter:capitalize shadow-sm border rounded-lg py-2 px-3 text-indigo-600 font-medium dark:bg-gray-800/75" key={i}>{t}</Link>
                             ))}
                         </div>
-                        <h3>Related articles</h3>
+                        <h2 className='mb-3'>Related articles</h2>
                         {randomArticles.map((article, index) => (
-                            <Link to={`/help/articles/${article.id}`} className="block w-fit mt-3.5 font-medium text-blue-600 dark:text-blue-400" key={index}>{article.title}</Link>
+                            <Link to={`/help/articles/${article.id}`} className="block w-fit mt-3.5 font-medium text-indigo-600 " key={index}>{article.title}</Link>
                         ))}
                     </div>
                 </div>
@@ -126,7 +126,7 @@ export default function HelpArticle() {
 
 <div className="mt-10 pt-8 border-t flex flex-col items-center">
     <h3 className="font-semibold text-lg text-black dark:text-white">Was this article useful?</h3>
-    <div className="flex gap-2 mt-4 font-medium text-blue-600 dark:text-blue-400">
+    <div className="flex gap-2 mt-4 font-medium text-indigo-600 ">
         <button className="block border rounded-lg py-2 px-6">Yes</button>
         <button className="block border rounded-lg py-2 px-6">No</button>
     </div>

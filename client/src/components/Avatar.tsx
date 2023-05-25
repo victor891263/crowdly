@@ -6,7 +6,7 @@ export default function Avatar({ img, className, svgClassName }: { img?: string,
         <img className={"object-cover rounded-full " + className} src={img} alt="avatar"/>
     )
     return (
-        <div className={"rounded-full bg-gray-200 flex justify-center items-end dark:bg-zinc-700 " + className}>
+        <div className={"rounded-full bg-gray-200 flex justify-center items-end dark:bg-gray-700 " + className}>
             <UserIcon className={"text-gray-400 rounded-full " + svgClassName} />
         </div>
     )

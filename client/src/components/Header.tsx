@@ -39,7 +39,7 @@ export default function Header() {
         <>
             {error && <PopUp msg={error} />}
             {isMenuOpen && <MobileMenu close={() => setIsMenuOpen(false)} />}
-            <header className="fixed w-full bg-white border-b z-[5] dark:bg-zinc-900">
+            <header className="fixed w-full shadow-sm bg-white border-b z-[5] dark:bg-gray-900">
                 <div className={'container mx-auto px-6 lg:px-8 xl:max-w-screen-xl'}>
                     <div className={"h-14 sm:h-16 flex items-center justify-between text-sm font-medium"}>
                         <nav className="flex items-center gap-[22px]">
@@ -56,7 +56,7 @@ export default function Header() {
                             {currentUser ? (
                                 <div className="flex items-center gap-[22px]">
                                     <Link to="/notifications" className='flex items-center'>
-                                        {(notiCount && (notiCount > 0)) ? <span className='py-0.5 px-2 rounded-full bg-blue-600 text-white text-xs mr-1 dark:bg-blue-400 dark:text-black'>{notiCount}</span> : ''}
+                                        {(notiCount && (notiCount > 0)) ? <span className='py-0.5 px-2 rounded-full bg-indigo-600 text-white text-xs mr-1 dark:bg-indigo-500'>{notiCount}</span> : ''}
                                         <span>Notifications</span>
                                     </Link>
                                     <Link to={`/users/${currentUser.id}`}>Profile</Link>
@@ -80,14 +80,13 @@ export default function Header() {
                         </div>
 
                         <div className="flex items-center gap-3 md:hidden">
-                            <Link to='/notifications' className='flex items-center'>
-                                {(notiCount && (notiCount > 0)) ? <span className='py-0.5 px-2 rounded-full bg-blue-600 text-white text-xs mr-1 dark:bg-blue-400 dark:text-black'>{notiCount}</span> : ''}
-                                <BellIcon className={'w-4 h-4'} />
-                            </Link>
+                            {currentUser && (
+                                <Link to='/notifications' className='flex items-center'>
+                                    {(notiCount && (notiCount > 0)) ? <span className='py-0.5 px-2 rounded-full bg-indigo-600 text-white text-xs mr-1 dark:bg-indigo-500'>{notiCount}</span> : ''}
+                                    <BellIcon className={'w-4 h-4'} />
+                                </Link>
+                            )}
                             <ThemeButton className={'w-5 h-5'} />
-                            <a href="https://github.com/victor891263/crowdly" target="_blank" rel="noreferrer">
-                                <GitHubIcon className={"w-[22px] h-[22px] p-[1px]"} />
-                            </a>
                             <button onClick={() => setIsMenuOpen(true)}>
                                 <BarsIcon className={'w-6 h-6'} />
                             </button>

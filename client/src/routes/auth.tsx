@@ -60,7 +60,7 @@ export default function Auth({ newUser }: { newUser?: boolean }) {
     return (
         <>
             {submitError && <PopUp msg={submitError} />}
-            <div className="bg-white dark:bg-zinc-900">
+            <div className="bg-white dark:bg-gray-900">
                 <div className="flex justify-center h-screen">
                     <div className="hidden bg-cover lg:block lg:w-2/3" style={{backgroundImage: `url('https://images.unsplash.com/photo-1486704155675-e4c07f8ad160?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')`}}>
                         <div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
@@ -74,9 +74,9 @@ export default function Auth({ newUser }: { newUser?: boolean }) {
                         <form className="w-full max-w-md">
                             <h2 className='text-2xl'>{ newUser ? 'Join Crowdly' : 'Welcome back!' }</h2>
                             {newUser ? (
-                                <p className="mt-4 text-gray-700 dark:text-gray-300">Already have an account? <Link to='/login' className="text-blue-600">Login</Link></p>
+                                <p className="mt-4 text-gray-700 dark:text-gray-300">Already have an account? <Link to='/login' className="text-indigo-600">Login</Link></p>
                             ):(
-                                <p className="mt-4 text-gray-700 dark:text-gray-300">Don’t have an account yet? <Link to='/join' className="text-blue-600">Sign up</Link></p>
+                                <p className="mt-4 text-gray-700 dark:text-gray-300">Don’t have an account yet? <Link to='/join' className="text-indigo-600">Sign up</Link></p>
                             )}
                             <div className="relative flex items-center mt-8">
                                 <UserIcon outline={true} className={"absolute w-5 h-5 mx-3 text-gray-400"} />

@@ -3,6 +3,7 @@ import BoxFullScreen from "./BoxFullScreen"
 import {Link, useNavigate} from "react-router-dom"
 import getCurrentUser from "../utilities/getCurrentUser"
 import ArrowIcon from "../icons/ArrowIcon";
+import GitHubIcon from "../icons/GitHubIcon";
 
 export default function MobileMenu({ close }: { close: () => void }) {
     const currentUser = getCurrentUser()
@@ -11,7 +12,12 @@ export default function MobileMenu({ close }: { close: () => void }) {
     return (
         <BoxFullScreen close={close}>
             <>
-                <h2>Menu</h2>
+                <div className='flex items-center justify-between'>
+                    <h2>Menu</h2>
+                    <a href="https://github.com/victor891263/crowdly" target="_blank" rel="noreferrer">
+                        <GitHubIcon className={"w-[22px] h-[22px] p-[1px]"} />
+                    </a>
+                </div>
                 <div className='flex flex-col divide-y mt-6'>
                     {currentUser ? (
                         <>

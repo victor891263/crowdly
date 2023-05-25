@@ -183,7 +183,7 @@ export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'f
                                 <p>{profile!.about}</p>
                             )}
                             {profile!.link && (
-                                <a href={profile!.link} className="block w-fit pb-1 text-blue-600" rel='noreferrer' target='_blank'>{profile!.link}</a>
+                                <a href={profile!.link} className="block w-fit pb-1 text-indigo-600" rel='noreferrer' target='_blank'>{profile!.link}</a>
                             )}
                             <div className="flex gap-4">
                                 <span><span className='font-semibold'>{profile!.follows}</span> follows</span>
@@ -199,9 +199,9 @@ export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'f
 
                         <div className="flex">
                             <div className='sm:hidden border-b flex-grow'></div>
-                            <Link to={`/users/${userId}`} className={"flex items-center flex-shrink-0 px-5 py-2.5 font-semibold border-b" + (showing === 'posts' ? ' !text-blue-600 border-blue-600 dark:!text-blue-400' : '')}>Posts</Link>
-                            <Link to={`/users/${userId}/follows`} className={"flex items-center flex-shrink-0 px-5 py-2.5 font-semibold border-b" + (showing === 'follows' ? ' !text-blue-600 border-blue-600 dark:!text-blue-400' : '')}>Follows</Link>
-                            <Link to={`/users/${userId}/followers`} className={"flex items-center flex-shrink-0 px-5 py-2.5 font-semibold border-b" + (showing === 'followers' ? ' !text-blue-600 border-blue-600 dark:!text-blue-400' : '')}>Followers</Link>
+                            <Link to={`/users/${userId}`} className={"flex items-center flex-shrink-0 px-5 py-2.5 font-semibold border-b" + (showing === 'posts' ? ' !text-indigo-600 border-blue-600 dark:!text-indigo-400' : '')}>Posts</Link>
+                            <Link to={`/users/${userId}/follows`} className={"flex items-center flex-shrink-0 px-5 py-2.5 font-semibold border-b" + (showing === 'follows' ? ' !text-indigo-600 border-blue-600 dark:!text-indigo-400' : '')}>Follows</Link>
+                            <Link to={`/users/${userId}/followers`} className={"flex items-center flex-shrink-0 px-5 py-2.5 font-semibold border-b" + (showing === 'followers' ? ' !text-indigo-600 border-blue-600 dark:!text-indigo-400' : '')}>Followers</Link>
                             <div className='border-b flex-grow'></div>
                         </div>
 

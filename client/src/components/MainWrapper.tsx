@@ -40,7 +40,7 @@ export default function MainWrapper({ children }: { children: ReactNode }) {
                         )}
                     </div>
                     <FeedArticles />
-                    <div className="pt-7 mt-7 text-sm text-gray-400 border-t">
+                    <div className="pt-6 mt-7 text-sm text-gray-400 border-t">
                         <FeedFooter />
                     </div>
                 </div>

@@ -22,7 +22,7 @@ export default function ErrorPage() {
             <div className="max-w-sm text-center">
                 <h2 className="text-2xl">{info.status} - {info.statusText}</h2>
                 <p className="mt-6">{info.message}.</p>
-                <Link to='/' className='block border rounded-lg font-medium py-2 px-4 w-fit text-sm mx-auto mt-10 text-blue-600 dark:text-blue-400'>Go back home</Link>
+                <Link to='/' className='block border rounded-lg font-medium py-2 px-4 w-fit text-sm mx-auto mt-10 text-indigo-600 '>Go back home</Link>
             </div>
         </div>
     );

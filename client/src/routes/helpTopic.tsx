@@ -19,7 +19,7 @@ export default function HelpTopic() {
                     <div className="flex flex-col gap-7 lg:w-8/12 lg:pr-8">
                         {relevantArticles.map((article, index) => (
                             <div key={index}>
-                                <Link to={`/help/articles/${article.id}`} className="font-medium text-lg text-blue-600 dark:text-blue-400">{article.title}</Link>
+                                <Link to={`/help/articles/${article.id}`} className="font-medium text-lg text-indigo-600 ">{article.title}</Link>
                                 <p className="mt-2">{article.content.find(content => content.type === 'text')!.body.slice(0, 200)}...</p>
                             </div>
                         ))}

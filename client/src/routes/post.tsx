@@ -178,7 +178,7 @@ export default function Post() {
                         <div className="pb-7 space-y-4">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-2.5">
-                                    <Avatar img={post.User.image} className={'w-10 h-10'} svgClassName={'w-8 h-8'} />
+                                    <Avatar img={post.User.image} className={'w-9 h-9'} svgClassName={'w-7 h-7'} />
                                     <Link to={`/users/${post.User.id}`} className="font-semibold">{post.User.username}</Link>
                                 </div>
                                 <span className="text-gray-400">{setTimeLabel(post.createdAt)}</span>
@@ -191,12 +191,12 @@ export default function Post() {
                         </div>
                         {post.repliedId && (
                             <div className='py-4'>
-                                <Link to={`/posts/${post.repliedId}`} className='text-blue-600'>View original post</Link>
+                                <Link to={`/posts/${post.repliedId}`} className='text-indigo-600'>View original post</Link>
                             </div>
                         )}
                         {post.quotedId && (
                             <div className='py-4'>
-                                <Link to={`/posts/${post.quotedId}`} className='text-blue-600'>View quoted post</Link>
+                                <Link to={`/posts/${post.quotedId}`} className='text-indigo-600'>View quoted post</Link>
                             </div>
                         )}
 
@@ -205,15 +205,15 @@ export default function Post() {
                                 <div className='flex gap-5'>
                                     {(currentUser && (currentUser.id !== post.userId)) && (
                                         <>
-                                            <button disabled={post.disliked} onClick={handleLike} className='text-blue-600'>{post.liked ? 'Liked' : 'Like'}</button>
-                                            <button disabled={post.liked} onClick={handleDislike} className='text-blue-600'>{post.disliked ? 'Disliked' : 'Dislike'}</button>
+                                            <button disabled={post.disliked} onClick={handleLike} className='text-indigo-600'>{post.liked ? 'Liked' : 'Like'}</button>
+                                            <button disabled={post.liked} onClick={handleDislike} className='text-indigo-600'>{post.disliked ? 'Disliked' : 'Dislike'}</button>
                                         </>
                                     )}
-                                    <button onClick={() => setIsQuoteBoxOpen(true)} className='text-blue-600'>Quote</button>
+                                    <button onClick={() => setIsQuoteBoxOpen(true)} className='text-indigo-600'>Quote</button>
                                 </div>
                                 {(currentUser && (currentUser.id === post.userId)) && (
                                     <div className='flex gap-5'>
-                                        <button onClick={() => setIsEditBoxOpen(true)} className='text-blue-600 dark:text-blue-400'>Edit post</button>
+                                        <button onClick={() => setIsEditBoxOpen(true)} className='text-indigo-600 '>Edit post</button>
                                     </div>
                                 )}
                             </div>
