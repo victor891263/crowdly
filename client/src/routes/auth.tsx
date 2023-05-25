@@ -65,7 +65,7 @@ export default function Auth({ newUser }: { newUser?: boolean }) {
                     <div className="hidden bg-cover lg:block lg:w-2/3" style={{backgroundImage: `url('https://images.unsplash.com/photo-1486704155675-e4c07f8ad160?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')`}}>
                         <div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
                             <div>
-                                <h1>Join the community</h1>
+                                <h1 className='!text-white'>Join the community</h1>
                                 <p className="max-w-sm mt-5 text-gray-300">Bringing people together and inspire meaningful conversations, helping you discover new connections and share your ideas with the world.</p>
                             </div>
                         </div>

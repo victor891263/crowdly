@@ -56,7 +56,7 @@ export default function SearchResults() {
             <div className='min-h-full flex flex-col'>
                 <div className="pb-6 pt-0.5 flex items-center justify-between border-b">
                     <h2>Search</h2>
-                    <button>
+                    <button onClick={() => setIsSearchOpen(true)}>
                         <GlassIcon className={"w-4 h-4"} />
                     </button>
                 </div>
@@ -85,7 +85,7 @@ export default function SearchResults() {
                     <RetrievalWrapper data={profiles} error={profilesError} skeleton={<SkeletonProfiles />} >
                         {(profiles && profiles.length > 0) ? (
                             <>
-                                <span className='pt-4 text-sm text-gray-400'>{profiles.length} result{profiles.length > 1 ? 's' : ''} returned for '{postKeyword}'</span>
+                                <span className='pt-4 text-sm text-gray-400'>{profiles.length} result{profiles.length > 1 ? 's' : ''} returned for '{usernameKeyword}'</span>
                                 <div className='divide-y'>
                                     {profiles!.map((profile, index) => (
                                         <div className="py-4 flex items-center gap-3" key={index}>

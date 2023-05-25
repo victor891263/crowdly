@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
     if (usernameKeyword) {
         const profiles = await User.findAll({
             where: {
-                username: { [Op.like]: `%${usernameKeyword}%` }
+                username: { [Op.iLike]: `%${usernameKeyword}%` }
             },
             attributes: ['id', 'username']
         })
