@@ -3,16 +3,15 @@ const express = require('express')
 require('express-async-errors')
 const cors = require('cors')
 
-const corsConfig = {
+// initialize api
+const app = express()
+app.use(cors({
     origin: ["https://crowdlyapp.netlify.app", "http://localhost:3000"],
     credentials: true,
     methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-    allowedHeaders: ['Content-Type']
-}
-
-// initialize api
-const app = express()
-app.use(cors(corsConfig))
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Content-Type', 'Authorization']
+}))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
