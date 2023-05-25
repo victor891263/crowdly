@@ -5,7 +5,7 @@ import ThemeButton from "./ThemeButton";
 export default function Footer() {
     return (
         <footer className='border-t'>
-            <div className={"px-4 sm:px-6 lg:px-8 pb-6 container mx-auto xl:max-w-screen-xl"}>
+            <div className={"px-6 lg:px-8 pb-6 container mx-auto xl:max-w-screen-xl"}>
                 <div className="pt-6 flex gap-6 justify-between max-sm:flex-col">
                     <div className="">
                         <Link to="/" className="font-semibold text-black dark:text-white">Crowdly</Link>

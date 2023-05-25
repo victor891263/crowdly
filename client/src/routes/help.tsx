@@ -41,7 +41,7 @@ export default function Help() {
         <>
             <Header />
             <div className="text-gray-700 pb-8 dark:text-gray-300 dark:border-gray-700">
-                <div className="px-4 sm:px-6 lg:px-8 container mx-auto pt-32 xl:max-w-screen-xl">
+                <div className="px-6 lg:px-8 container mx-auto pt-32 xl:max-w-screen-xl">
                     <div className="lg:w-8/12">
                         <h1>Hi, we're here to help.</h1>
                         <div className="relative mt-9 mx-auto">

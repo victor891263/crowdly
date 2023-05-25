@@ -183,7 +183,7 @@ export default function Post() {
                                 </div>
                                 <span className="text-gray-400">{setTimeLabel(post.createdAt)}</span>
                             </div>
-                            <p className='text-lg leading-[1.6]'>{post.body}</p>
+                            <p className='text-lg'>{post.body}</p>
                             <div className="flex items-center gap-4">
                                 <span><span className='font-semibold'>{post.likes}</span> likes</span>
                                 <span><span className='font-semibold'>{post.dislikes}</span> dislikes</span>

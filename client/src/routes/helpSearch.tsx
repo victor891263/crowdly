@@ -15,7 +15,7 @@ export default function HelpSearch() {
     return (
         <>
             <Header />
-            <div style={{ minHeight: `calc(100vh - 226px)` }} className="px-4 sm:px-6 lg:px-8 container mx-auto pt-32 pb-16 xl:max-w-screen-xl">
+            <div style={{ minHeight: `calc(100vh - 226px)` }} className="px-6 lg:px-8 container mx-auto pt-32 pb-16 xl:max-w-screen-xl">
                 <h1 className='first-letter:capitalize'>Search results</h1>
                 <p className="sm:mt-5 mt-4 text-sm">{result.length} articles found</p>
                 <div className="border-t pt-8 mt-9">

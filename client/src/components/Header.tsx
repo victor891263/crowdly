@@ -40,7 +40,7 @@ export default function Header() {
             {error && <PopUp msg={error} />}
             {isMenuOpen && <MobileMenu close={() => setIsMenuOpen(false)} />}
             <header className="fixed w-full bg-white border-b z-[5] dark:bg-zinc-900">
-                <div className={'container mx-auto px-4 sm:px-6 lg:px-8 xl:max-w-screen-xl'}>
+                <div className={'container mx-auto px-6 lg:px-8 xl:max-w-screen-xl'}>
                     <div className={"h-14 sm:h-16 flex items-center justify-between text-sm font-medium"}>
                         <nav className="flex items-center gap-[22px]">
                             <Link to="/">Crowdly</Link>

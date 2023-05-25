@@ -19,7 +19,7 @@ export default function MainWrapper({ children }: { children: ReactNode }) {
             mx-auto
             pt-[4.75rem] sm:pt-[5.5rem]
             pb-8
-            px-4 sm:px-6 lg:px-8
+            px-6 lg:px-8
             ">
                 <div className="top-[5.5rem] sticky self-start max-xl:hidden">
                     {currentUser ? (

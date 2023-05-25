@@ -180,7 +180,7 @@ export default function Profile({ showing }: { showing: 'posts' | 'follows' | 'f
                                 )}
                             </div>
                             {profile!.about && (
-                                <p className='leading-[1.6]'>{profile!.about}</p>
+                                <p>{profile!.about}</p>
                             )}
                             {profile!.link && (
                                 <a href={profile!.link} className="block w-fit pb-1 text-blue-600" rel='noreferrer' target='_blank'>{profile!.link}</a>
