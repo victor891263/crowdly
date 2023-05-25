@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import {Link, useLocation, useNavigate} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import ThemeButton from "./ThemeButton"
 import BarsIcon from "../icons/BarsIcon"
 import BellIcon from '../icons/BellIcon'
 import getCurrentUser from "../utilities/getCurrentUser"
 import GitHubIcon from "../icons/GitHubIcon";
-import HandWavingIcon from "../icons/HandWavingIcon";
 import MobileMenu from "./MobileMenu";
 import axios from "axios";
 import getToken from "../utilities/getToken";
@@ -19,7 +18,6 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const currentUser = getCurrentUser()
     const navigate = useNavigate()
-    const { pathname } = useLocation()
 
     useEffect(() => {
         if (currentUser) {
@@ -35,7 +33,7 @@ export default function Header() {
                     handleError(error, (msg: string) => setError(msg), true)
                 })
         }
-    }, [])
+    }, [currentUser])
 
     return (
         <>
@@ -75,7 +73,7 @@ export default function Header() {
                             )}
                             <div className="flex gap-4 items-center justify-center ml-5">
                                 <ThemeButton className={'w-[22px] h-[22px]'} />
-                                <a href="https://github.com/victor891263/crowdly" target="_blank">
+                                <a href="https://github.com/victor891263/crowdly" target="_blank" rel="noreferrer">
                                     <GitHubIcon className={"w-[22px] h-[22px] p-[1px]"} />
                                 </a>
                             </div>
@@ -87,7 +85,7 @@ export default function Header() {
                                 <BellIcon className={'w-4 h-4'} />
                             </Link>
                             <ThemeButton className={'w-5 h-5'} />
-                            <a href="https://github.com/victor891263/crowdly" target="_blank">
+                            <a href="https://github.com/victor891263/crowdly" target="_blank" rel="noreferrer">
                                 <GitHubIcon className={"w-[22px] h-[22px] p-[1px]"} />
                             </a>
                             <button onClick={() => setIsMenuOpen(true)}>

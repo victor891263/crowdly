@@ -110,14 +110,14 @@ export default function Help() {
                                 <div>
                                     <h3>Contact directly</h3>
                                     <p className="mt-1.5 max-w-xs">Have a question and can't find an answer? Contact the developer directly.</p>
-                                    <a href='mailto:victor891263@gmail.com' target='_blank' className="block mt-2.5 font-medium text-blue-600 dark:text-blue-400">Send email</a>
+                                    <a href='mailto:victor891263@gmail.com' target='_blank' rel="noreferrer" className="block mt-2.5 font-medium text-blue-600 dark:text-blue-400">Send email</a>
                                 </div>
                             </div>
                             <div className="flex gap-4 mt-8">
                                 <div>
                                     <h3>View source code</h3>
                                     <p className="mt-1.5 max-w-xs">Crowdly is fully open-source and contributions are highly welcomed.</p>
-                                    <a href="https://github.com/victor891263/crowdly" target='_blank' className="block mt-2.5 font-medium text-blue-600 dark:text-blue-400">Visit GitHub</a>
+                                    <a href="https://github.com/victor891263/crowdly" target='_blank' rel="noreferrer" className="block mt-2.5 font-medium text-blue-600 dark:text-blue-400">Visit GitHub</a>
                                 </div>
                             </div>
                         </div>

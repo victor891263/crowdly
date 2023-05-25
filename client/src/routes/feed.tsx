@@ -36,7 +36,7 @@ export default function Feed({ isFeed }: { isFeed?: boolean }) {
         }).catch(error => {
             handleError(error, (msg: string) => setRetrievalError(msg))
         })
-    }, [isFeed]) // re-retrieve the data when visiting 'feed' from 'trending' and vice versa
+    }, [isFeed, currentUser]) // re-retrieve the data when visiting 'feed' from 'trending' and vice versa
 
     if (isFeed && !currentUser) return (
         <div className='flex flex-col items-center justify-center h-screen'>

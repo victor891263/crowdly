@@ -58,6 +58,7 @@ export default function HelpArticle() {
                                         ))}
                                     </ol>
                                 )
+                                return <div></div>
                             })}
                         </div>
                         <div className="lg:hidden mt-10 pt-8 border-t dark:border-gray-700">

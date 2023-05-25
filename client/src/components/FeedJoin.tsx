@@ -3,7 +3,6 @@ import {Link, useNavigate} from "react-router-dom";
 
 export default function FeedJoin() {
     const [username, setUsername] = useState('')
-    const navigate = useNavigate()
 
     return (
         <div>

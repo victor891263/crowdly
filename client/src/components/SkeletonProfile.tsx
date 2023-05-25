@@ -17,8 +17,8 @@ export default function SkeletonProfile() {
                 </div>
                 <p className='bg-gray-100'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque malesuada augue quis mi accumsan aliquam. Praesent placerat turpis eu lectus mollis, non egestas tellus tincidunt. Curabitur sagittis lacus sit amet dui sodales, sit amet mollis nibh mollis. Aenean fringilla sit amet ex sed suscipit.</p>
                 <div className="flex gap-4">
-                    <a className='bg-gray-100'><span>100</span> follows</a>
-                    <a className='bg-gray-100'><span>100</span> followers</a>
+                    <div className='bg-gray-100'><span>100</span> follows</div>
+                    <div className='bg-gray-100'><span>100</span> followers</div>
                 </div>
             </div>
 

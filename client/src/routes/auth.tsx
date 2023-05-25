@@ -19,7 +19,7 @@ export default function Auth({ newUser }: { newUser?: boolean }) {
     useEffect(() => {
         const name = searchParams.get('username')
         if (name) setUsername(name)
-    }, [])
+    }, [searchParams])
 
     const schema = Joi.object({
         username: Joi.string().alphanum().min(1).max(15).required(),

@@ -26,7 +26,7 @@ export default function FeedAddPost() {
             .catch(error => {
                 handleError(error, (msg: string) => setOperationError(msg), true)
             })
-    }, [])
+    }, [currentUser])
 
     function submitPost(e: any) {
         e.target.innerText = 'Submitting...'

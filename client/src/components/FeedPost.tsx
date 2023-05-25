@@ -1,7 +1,6 @@
 import React from 'react'
 import setTimeLabel from '../utilities/setTimeLabel'
 import {PostDetailed} from "../types"
-import TextBalloonIcon from "../icons/TextBalloonIcon"
 import ExclaimIcon from "../icons/ExclaimIcon";
 import {Link} from "react-router-dom";
 import Avatar from "./Avatar";
