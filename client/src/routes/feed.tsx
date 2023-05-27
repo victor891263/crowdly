@@ -50,7 +50,7 @@ export default function Feed({ isFeed }: { isFeed?: boolean }) {
         <MainWrapper>
             {isSearchOpen && <SearchBox close={() => setIsSearchOpen(false)} />}
             <div className='divide-y min-h-full flex flex-col'>
-                <div className="pb-6 pt-0.5 flex items-center justify-between">
+                <div className="pb-5 flex items-center justify-between">
                     <h2>{isFeed ? "Your feed" : "Trending"}</h2>
                     <button onClick={() => setIsSearchOpen(true)}>
                         <GlassIcon className={"w-4 h-4"} />

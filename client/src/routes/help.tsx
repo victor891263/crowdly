@@ -56,15 +56,15 @@ export default function Help() {
                         <div className="lg:w-8/12 lg:border-r lg:pr-6 w-full">
                             <div>
                                 <h2>Shortcuts</h2>
-                                <div className="md:grid-cols-2 mt-5 grid gap-y-3 font-medium text-indigo-600 ">
+                                <div className="md:grid-cols-2 mt-4 grid gap-y-3 font-medium text-indigo-600 ">
                                     {randomArticles.map((article, index) => (
                                         <Link to={`/help/articles/${article.id}`} className="w-fit" key={index}>{article.title}</Link>
                                     ))}
                                 </div>
                             </div>
-                            <div className="mt-14">
+                            <div className="mt-12">
                                 <h2>All topics</h2>
-                                <div className="grid-cols-2 md:grid-cols-3 mt-7 grid gap-4 sm:gap-[22px] font-semibold text-indigo-600 ">
+                                <div className="grid-cols-2 md:grid-cols-3 mt-6 grid gap-4 sm:gap-[22px] font-semibold text-indigo-600 ">
                                     <Link to="/help/getting started " className="shadow-sm flex flex-col items-center text-center p-6 border rounded-lg dark:bg-gray-800/75">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />

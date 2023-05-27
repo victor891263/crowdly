@@ -63,7 +63,7 @@ export default function HelpArticle() {
                         </div>
                         <div className="lg:hidden mt-10 pt-8 border-t">
                             <h2>Tagged in</h2>
-                            <div className="flex gap-2 flex-wrap mt-6">
+                            <div className="flex gap-2 flex-wrap mt-4">
                                 {article.topics.map((t, i) => (
                                     <Link to={`/help/${t}`} className="first-letter:capitalize border rounded-lg py-2 px-3 text-indigo-600 font-medium dark:bg-gray-800/75" key={i}>{t}</Link>
                                 ))}
@@ -72,12 +72,12 @@ export default function HelpArticle() {
                         <div className="lg:hidden mt-10 pt-8 border-t">
                             <h2 className='mb-3'>Related articles</h2>
                             {randomArticles.map((article, index) => (
-                                <Link to={`/help/articles/${article.id}`} className="block w-fit mt-3.5 font-medium text-indigo-600 " key={index}>{article.title}</Link>
+                                <Link to={`/help/articles/${article.id}`} className="block w-fit mt-3 font-medium text-indigo-600 " key={index}>{article.title}</Link>
                             ))}
                         </div>
                         <div className="mt-10 pt-8 md:pt-10 border-t grid grid-cols-2 gap-4">
                             {previousArticle ? (
-                                <Link to={`/help/articles/${previousArticle.id}`} className="block shadow-sm md:border rounded-xl md:py-3 md:px-4 md:dark:bg-gray-800/75">
+                                <Link to={`/help/articles/${previousArticle.id}`} className="block md:shadow-sm md:border rounded-xl md:py-3 md:px-5 md:dark:bg-gray-800/75">
                                     <div>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="rotate-180 w-3 h-auto inline"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                                         <div className="inline md:text-sm ml-1">Previous article</div>
@@ -88,7 +88,7 @@ export default function HelpArticle() {
                                 <div></div>
                             )}
                             {nextArticle ? (
-                                <Link to={`/help/articles/${nextArticle.id}`} className="text-right block shadow-sm md:border rounded-xl md:py-3 md:px-4 md:dark:bg-gray-800/75">
+                                <Link to={`/help/articles/${nextArticle.id}`} className="text-right block md:shadow-sm md:border rounded-xl md:py-3 md:px-5 md:dark:bg-gray-800/75">
                                     <div>
                                         <div className="inline md:text-sm mr-1">Next article</div>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-auto inline"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
@@ -103,14 +103,14 @@ export default function HelpArticle() {
 
                     <div className="max-lg:hidden w-4/12 pl-8 border-l">
                         <h2>Tagged in</h2>
-                        <div className="flex gap-2 flex-wrap mt-6 mb-10">
+                        <div className="flex gap-2 flex-wrap mt-4 mb-10">
                             {article.topics.map((t, i) => (
                                 <Link to={`/help/${t}`} className="first-letter:capitalize shadow-sm border rounded-lg py-2 px-3 text-indigo-600 font-medium dark:bg-gray-800/75" key={i}>{t}</Link>
                             ))}
                         </div>
                         <h2 className='mb-3'>Related articles</h2>
                         {randomArticles.map((article, index) => (
-                            <Link to={`/help/articles/${article.id}`} className="block w-fit mt-3.5 font-medium text-indigo-600 " key={index}>{article.title}</Link>
+                            <Link to={`/help/articles/${article.id}`} className="block w-fit mt-3 font-medium text-indigo-600 " key={index}>{article.title}</Link>
                         ))}
                     </div>
                 </div>
