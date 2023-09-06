@@ -1,11 +1,11 @@
 type Metadata = {
-    id: number
+    id: string
     createdAt: string
     updatedAt: string
 }
 
-export type UserTiny = {
-    id: number
+export type UserSmall = {
+    id: string
     username: string
     image?: string
 }
@@ -18,14 +18,11 @@ export type User = {
     link?: string
     follows: number
     followers: number
-} & Metadata
-
-export type UserDetailed = {
     followed: boolean
     followingMe: boolean
-} & User
+} & Metadata
 
-export type Post = {
+export type PostSmall = {
     body: string
     userId: number
     repliedId?: number
@@ -33,36 +30,21 @@ export type Post = {
     likes: number
     dislikes: number
     replies: number
+    User: UserSmall
 } & Metadata
 
-export type PostDetailed = {
-    User: {
-        id: number
-        username: string
-        image?: string
-    }
-} & Post
+export type Post = {
+    liked: boolean
+    disliked: boolean
+    repliedPosts: PostSmall[]
+} & PostSmall
 
-export type Like = {
-    postId: number
-    userId: number
-}
-
-export type Dislike = {
-    postId: number
-    userId: number
-}
-
-export type NotiType = {
+export type Notification = {
     postId?: number,
     isReply: boolean,
     targetUserId: number
     userId: number
-    User: {
-        id: number
-        username: string
-        image?: string
-    }
+    User: UserSmall
 } & Metadata
 
 // help section

@@ -5,7 +5,7 @@ const User = require('./user')
 
 const Post = sequelize.define('Post', {
     body: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(500),
         allowNull: false
     },
     userId: {

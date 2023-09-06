@@ -1,64 +1,50 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { ApolloClient, InMemoryCache, createHttpLink, ApolloProvider } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
 import './index.css'
-import Home from "./routes/home"
 import Help from './routes/help'
 import HelpTopic from "./routes/helpTopic"
 import HelpArticle from "./routes/helpArticle"
 import HelpSearch from "./routes/helpSearch"
 import About from './routes/about'
 import Auth from './routes/auth'
-import Feed from './routes/feed'
+import Home from './routes/home'
 import Post from "./routes/post"
 import Profile from "./routes/profile"
 import ErrorPage from './ErrorPage'
 import initTheme from "./utilities/initTheme"
 import reportWebVitals from './reportWebVitals'
-import SearchResults from "./routes/searchResults";
-import Notifications from "./routes/notifications";
+import SearchPage from "./routes/searchPage"
+import Notifications from "./routes/notifications"
+import MainWrapper from "./components/MainWrapper"
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Home />,
+        element: <MainWrapper><Home /></MainWrapper>,
         errorElement: <ErrorPage />
     },
     {
-        path: "/feed",
-        element: <Feed isFeed={true} />
-    },
-    {
-        path: "/trending",
-        element: <Feed />
-    },
-    {
         path: "/posts/:postId",
-        element: <Post />
+        element: <MainWrapper><Post /></MainWrapper>
     },
     {
         path: "/users/:userId",
-        element: <Profile showing={'posts'} />
-    },
-    {
-        path: "/users/:userId/follows",
-        element: <Profile showing={'follows'} />
-    },
-    {
-        path: "/users/:userId/followers",
-        element: <Profile showing={'followers'} />
+        element: <MainWrapper><Profile /></MainWrapper>
     },
     {
         path: "/search",
-        element: <SearchResults />
+        element: <MainWrapper><SearchPage /></MainWrapper>
     },
     {
         path: "/notifications",
-        element: <Notifications />
+        element: <MainWrapper><Notifications /></MainWrapper>
     },
     {
         path: "/about",
-        element: <About />
+        element: <MainWrapper><About /></MainWrapper>
     },
     {
         path: "/login",
@@ -70,28 +56,51 @@ const router = createBrowserRouter([
     },
     {
         path: "/help",
-        element: <Help />
+        element: <MainWrapper><Help /></MainWrapper>
     },
     {
         path: "/help/:topic",
-        element: <HelpTopic />
+        element: <MainWrapper><HelpTopic /></MainWrapper>
     },
     {
         path: "/help/articles/:articleId",
-        element: <HelpArticle />
+        element: <MainWrapper><HelpArticle /></MainWrapper>
     },
     {
         path: "/help/search",
-        element: <HelpSearch />
+        element: <MainWrapper><HelpSearch /></MainWrapper>
     },
 ])
+
+const httpLink = createHttpLink({
+    uri: process.env.REACT_APP_API_URL,
+})
+
+const authLink = setContext((_, { headers }) => {
+    // get the authentication token from local storage if it exists
+    const token = localStorage.getItem('jwt')
+    // return the headers to the context so httpLink can read them
+    return {
+        headers: {
+            ...headers,
+            authorization: token ? `Bearer ${token}` : '',
+        }
+    }
+})
+
+const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+})
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 )
 
 root.render(
-    <RouterProvider router={router} />
+    <ApolloProvider client={client}>
+        <RouterProvider router={router} />
+    </ApolloProvider>
 )
 
 initTheme()

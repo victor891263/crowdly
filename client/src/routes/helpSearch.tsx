@@ -14,25 +14,24 @@ export default function HelpSearch() {
 
     return (
         <>
-            <Header />
-            <div style={{ minHeight: `calc(100vh - 226px)` }} className="px-6 lg:px-8 container mx-auto pt-32 pb-16 xl:max-w-screen-xl">
-                <h1 className='first-letter:capitalize'>Search results</h1>
-                <p className="sm:mt-5 mt-4 text-sm">{result.length} articles found</p>
-                <div className="border-t pt-8 mt-9">
+            <div style={{ minHeight: `calc(100vh - 226px)` }} className="px-6 container mx-auto pt-40 pb-20 xl:max-w-screen-xl">
+                <h1 className='first-letter:capitalize text-3xl font-bold'>Search results</h1>
+                <div className="mt-4 text-slate-400">{result.length} articles found</div>
+                <div className="mt-14 max-w-screen-md">
                     {result.length > 0 ? (
-                        <div className="flex flex-col gap-7 lg:w-8/12 lg:pr-8">
+                        <div className="space-y-9">
                             {result.map((article, index) => (
                                 <div key={index}>
-                                    <Link to={`/help/articles/${article.id}`} className="font-medium text-lg text-indigo-600 ">{article.title}</Link>
-                                    <p className="mt-2">{article.content.find(content => content.type === 'text')!.body.slice(0, 200)}...</p>
+                                    <Link to={`/help/articles/${article.id}`} className="font-semibold text-lg text-violet-600">{article.title}</Link>
+                                    <p className="mt-3 line-clamp-2">{article.content.find(content => content.type === 'text')!.body}</p>
                                 </div>
                             ))}
                         </div>
                     ):(
-                        <div className='flex flex-col items-center justify-center py-10 grow'>
-                            <TextBalloonIcon slash={true} className={'h-8 w-8 text-gray-400'} />
-                            <h2 className='mt-4 mb-1'>No articles found</h2>
-                            <span>Sorry to tell you that we have no answers you're looking for.</span>
+                        <div className='flex flex-col justify-center py-10 grow'>
+                            <TextBalloonIcon slash={true} className={'h-10 w-10 text-slate-400/60 dark:text-gray-600'} />
+                            <h2 className='mt-5 subtitle'>No articles found</h2>
+                            <p className='mt-3'>Sorry to tell you that we don't have the answers you're looking for.</p>
                         </div>
                     )}
                 </div>

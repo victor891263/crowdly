@@ -1,27 +1,78 @@
-import React from "react"
+import React, {useContext, useState} from "react"
 import setTimeLabel from "../utilities/setTimeLabel"
-import {NotiType} from "../types"
-import Avatar from "./Avatar";
+import {Notification as NotificationType} from "../types"
+import {gql, useMutation} from "@apollo/client"
+import AvatarIcon from "../icons/AvatarIcon"
+import {useNavigate} from "react-router-dom"
+import NotificationsContext from "../notificationsContext"
+import PopUp from "./PopUp"
 
-export default function Notification({ noti, handleClick }: { noti: NotiType, handleClick: (e: any, n: NotiType) => void }) {
-    let label = ''
-    if (noti.postId) {
-        if (noti.isReply) label = ' replied to your post'
-        else label = ' reacted to your post'
-    } else {
-        label = ' is now following you'
+export default function Notification({ notification }: { notification: NotificationType }) {
+    const [error, setError] = useState('')
+
+    const label = notification.postId ? (notification.isReply ? ' replied to your post' : ' reacted to your post') : ' is now following you'
+    const navigate = useNavigate()
+
+    const { state, setState } = useContext(NotificationsContext)!
+
+    const DELETE_NOTIFICATION = gql`
+        mutation DeleteNotification($id: ID!) {
+            deleteNotification(id: $id)
+        }
+    `
+    const [deleteNotification, deleteOperation] = useMutation(DELETE_NOTIFICATION)
+
+    function handleDelete() {
+        deleteNotification({
+            variables: { id: notification.id }
+        }).then(data => {
+            if (data) {
+                // update the notification list
+                const newNotifications = [...state!].filter(n => n.id !== notification.id)
+                setState(newNotifications)
+
+                // redirect user to notification source
+                if (notification.postId) navigate(`/posts/${notification.postId}`)
+                else navigate(`/users/${notification.userId}`)
+            }
+        }).catch(error => {
+            if (error) setError(error.message)
+        })
     }
 
     return (
-        <button onClick={(e) => handleClick(e, noti)} className="flex items-center justify-between pt-4 pb-5 disabled:opacity-50">
-            <div className='flex items-center gap-3'>
-                <Avatar img={noti.User.image} className={'w-10 h-10'} svgClassName={'w-8 h-8'} />
-                <div>
-                    <p className='text-left'><span className="font-semibold">{noti.User.username}</span>{label}</p>
-                    <span className="sm:hidden text-left text-sm text-gray-400 block mt-1">{setTimeLabel(noti.createdAt)}</span>
-                </div>
-            </div>
-            <span className="max-sm:hidden text-sm text-gray-400 block pl-3">{setTimeLabel(noti.createdAt)}</span>
-        </button>
+        <>
+            <PopUp msg={error} color={'red'} />
+            <button onClick={handleDelete} disabled={deleteOperation.loading} className="flex items-center justify-between w-full py-5">
+                {notification.User ? (
+                    <div className='flex items-center space-x-3 sm:space-x-2.5'>
+                        {notification.User.image ? (
+                            <img src={notification.User.image} className='h-11 w-11 rounded-full' />
+                        ):(
+                            <AvatarIcon className='h-11 w-11 text-slate-400/50' />
+                        )}
+                        <div className='space-y-1'>
+                            <div>
+                                <span className='font-semibold'>{notification.User.username}</span>
+                                <span>{label}</span>
+                            </div>
+                            <div className='sm:hidden text-sm text-slate-400 text-left'>{setTimeLabel(notification.createdAt)}</div>
+                        </div>
+                    </div>
+                ):(
+                    <div className='flex items-center space-x-3'>
+                        <AvatarIcon className='h-11 w-11 text-slate-400/50' />
+                        <div className='space-y-1'>
+                            <div>
+                                <span className='font-semibold'>[anonymous]</span>
+                                <span>{label}</span>
+                            </div>
+                            <div className='sm:hidden text-sm text-slate-400 text-left'>{setTimeLabel(notification.createdAt)}</div>
+                        </div>
+                    </div>
+                )}
+                <span className="max-sm:hidden text-sm text-slate-400">{setTimeLabel(notification.createdAt)}</span>
+            </button>
+        </>
     )
 }

@@ -1,41 +1,35 @@
 require('dotenv').config()
-const express = require('express')
-require('express-async-errors')
-const cors = require('cors')
+const jwt = require('jsonwebtoken')
+const { ApolloServer } = require('@apollo/server')
+const { startStandaloneServer } = require('@apollo/server/standalone')
 
-// initialize api
-const app = express()
-app.use(cors({
-    origin: ["https://crowdlyapp.netlify.app", "http://localhost:3000"],
-    credentials: true,
-    methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    exposedHeaders: ['Content-Type', 'Authorization']
-}))
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-
-// handle errors that are not caught by anything
-process.on('uncaughtException', (error, source) => {
-    console.log('uncaughtException', error, source);
-});
-
-// handle promises that are rejected and not handled by anything
-process.on('unhandledRejection', (error, source) => {
-    console.log('unhandledRejection', error, source);
-});
+// graphQL schema and resolvers
+const typeDefs = require('./schema')
+const resolvers = require('./resolvers')
 
 // test database and handle disconnection
 require('./startup/initDb')()
 
-// routes
-app.use('/auth', require('./routes/auth'))
-app.use('/search', require('./routes/search'))
-app.use(require('./middleware/auth')) // authentication middleware
-app.use('/posts', require('./routes/posts'))
-app.use('/users', require('./routes/users'))
-app.use('/notifications', require('./routes/notifications'))
-app.use(require('./middleware/handleError'))
+// define apollo server
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    formatError(formattedError, error) {
+        return formattedError
+    }
+})
 
-// begin listening
-app.listen(process.env.PORT || 5000, () => console.log('API is running'))
+// initialize server
+startStandaloneServer(server, {
+    listen: {
+        port: 4000
+    },
+    context: async ({ req, res }) => {
+        const bearer = req.headers.authorization
+        // if a logged in user is present, decode the user's jwt and insert the decoded value into the context
+        if (bearer) {
+            const token = bearer.split(' ')[1]
+            return { user: jwt.verify(token, process.env.JWT_SECRET) }
+        }
+    }
+}).then(({ url }) => console.log(url))

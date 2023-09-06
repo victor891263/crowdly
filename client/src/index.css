@@ -7,29 +7,8 @@
         -webkit-font-smoothing: antialiased;
     }
 
-    input, textarea {
-        background: none;
-        outline: none;
-    }
-
-    h1 {
-        @apply sm:text-4xl text-3xl font-semibold tracking-tight
-    }
-
-    h2 {
-        @apply text-xl font-semibold
-    }
-
-    h3 {
-        @apply text-lg font-semibold
-    }
-
-    input, textarea {
-        @apply flex rounded-lg border shadow-sm focus:border-indigo-600 dark:bg-gray-800/75 dark:placeholder:text-gray-500 dark:focus:border-indigo-400
-    }
-
-    button:disabled {
-        @apply opacity-75 cursor-not-allowed
+    p {
+        line-height: 1.7;
     }
 
     /* clears the ‘X’ from Internet Explorer */
@@ -47,41 +26,133 @@
         display: none;
     }
 
-    #root {
-        @apply text-gray-700 dark:text-gray-300 dark:bg-gray-900
+    input, textarea {
+        background: none;
+        border: none;
+        outline: none;
     }
 }
 
-@layer components {
-    .btn-primary {
-        @apply font-medium rounded-lg bg-indigo-600 text-gray-100 dark:bg-indigo-500
-    }
-
-    .divide-y {
-        @apply dark:divide-gray-700/75
-    }
-
-    .border, .border-r, .border-b, .border-t, .border-l {
-        @apply dark:border-gray-700/75
-    }
-
-    .font-bold, .font-semibold {
-        @apply text-gray-900 dark:text-gray-100
-    }
+input[type='password']:not(.no-style),
+input[type='email']:not(.no-style),
+input[type='text']:not(.no-style),
+input[type='number']:not(.no-style),
+textarea:not(.no-style) {
+    @apply ring-1 ring-slate-300 rounded-md py-2 px-3 placeholder:text-slate-400 dark:placeholder:text-gray-500 dark:bg-gray-800/70
 }
 
-.bg-gray-100 {
+input[type='password']:not(.no-style):focus,
+input[type='email']:not(.no-style):focus,
+input[type='text']:not(.no-style):focus,
+input[type='number']:not(.no-style):focus,
+textarea:not(.no-style):focus {
+    @apply ring-violet-600
+}
+
+input[type='password']:disabled,
+input[type='email']:disabled,
+input[type='text']:disabled,
+input[type='number']:disabled,
+textarea:disabled {
+    @apply text-slate-400 cursor-not-allowed
+}
+
+textarea {
+    @apply flex resize-none overflow-hidden leading-[1.7] dark:placeholder:text-gray-500
+}
+
+button.primary,
+button.secondary,
+button.danger,
+a.primary,
+a.secondary,
+a.danger {
+    @apply font-medium text-[15px] leading-[1.4rem] py-2 px-3 rounded-md
+}
+
+button.primary,
+a.primary {
+    @apply bg-violet-600 text-white
+}
+
+button.primary:not(:disabled),
+a.primary:not(:disabled) {
+    @apply hover:bg-violet-700 dark:hover:bg-violet-400
+}
+
+button.secondary,
+a.secondary {
+    @apply ring-1 ring-slate-300 dark:bg-gray-800/70
+}
+
+button.secondary:not(:disabled),
+a.secondary:not(:disabled) {
+    @apply hover:bg-slate-100 dark:hover:bg-gray-800
+}
+
+button:disabled,
+a:disabled {
+    @apply cursor-not-allowed opacity-60
+}
+
+.subtitle {
+    @apply text-xl font-bold tracking-[-0.01em]
+}
+
+/* DARK MODE ONLY */
+
+.font-bold, .font-semibold {
+    @apply dark:text-white
+}
+
+.divide-y, .divide-x {
+    @apply dark:divide-gray-700
+}
+
+.border, .border-r, .border-b, .border-t, .border-l {
+    @apply dark:border-gray-700
+}
+
+.border-violet-600 {
+    @apply dark:border-violet-400
+}
+
+.ring-slate-300 {
+    @apply dark:ring-gray-700
+}
+
+.ring-violet-600 {
+    @apply dark:ring-violet-400
+}
+
+.bg-white {
+    @apply dark:bg-gray-900
+}
+
+.bg-slate-50 {
     @apply dark:bg-gray-800
 }
 
-.text-gray-400 {
+.bg-slate-100 {
+    @apply dark:bg-gray-800
+}
+
+.bg-violet-600 {
+    @apply dark:bg-violet-500
+}
+
+.text-slate-400 {
     @apply dark:text-gray-500
 }
 
-.text-indigo-600 {
-    @apply dark:text-indigo-400
+.text-violet-600 {
+    @apply dark:text-violet-400
 }
 
-.border-blue-600 {
-    @apply dark:border-blue-400
+.text-red-600 {
+    @apply dark:text-red-400
+}
+
+.help-article > *:first-of-type {
+    margin-top: 0 !important;
 }

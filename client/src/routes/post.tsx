@@ -1,260 +1,243 @@
-import React, {useEffect, useState} from "react"
-import MainWrapper from "../components/MainWrapper"
+import React, {useContext, useEffect, useState} from "react"
+import {useQuery, gql, useMutation} from '@apollo/client'
 import setTimeLabel from "../utilities/setTimeLabel"
 import FeedPost from "../components/FeedPost"
 import getCurrentUser from "../utilities/getCurrentUser"
 import {Link, useNavigate, useParams} from "react-router-dom"
-import ExclaimIcon from "../icons/ExclaimIcon"
-import Avatar from "../components/Avatar"
-import axios from "axios";
-import handleError from "../utilities/handleError";
-import resizeInput from "../utilities/resizeInput";
-import {PostDetailed} from "../types";
-import EmptyFolderIcon from "../icons/EmptyFolderIcon";
-import RetrievalWrapper from "../components/RetrievalWrapper";
-import PopUp from "../components/PopUp";
-import TextBox from "../components/TextBox";
-import getToken from "../utilities/getToken";
-import TextBalloonIcon from "../icons/TextBalloonIcon";
-import SkeletonPost from "../components/SkeletonPost";
-
-type Response = {
-    repliedPosts: PostDetailed[]
-    liked: boolean
-    disliked: boolean
-} & PostDetailed
+import {Post as PostType} from "../types"
+import PopUp from "../components/PopUp"
+import PostForm from "../components/PostForm"
+import TextBalloonIcon from "../icons/TextBalloonIcon"
+import GenericError from "../components/GenericError"
+import GenericLoading from "../components/GenericLoading"
+import UserWrapper from "../components/userWrapper"
+import AvatarIcon from "../icons/AvatarIcon"
+import LikeButton from "../components/LikeButton"
+import DislikeButton from "../components/DislikeButton"
+import handleTextareaResize from "../utilities/handleTextareaResize"
+import ButtonWithSpinner from "../components/ButtonWithSpinner"
+import ArrowIcon from "../icons/ArrowIcon"
+import UserIcon from "../icons/UserIcon"
+import NotificationsContext from "../notificationsContext";
 
 export default function Post() {
-    const [post, setPost] = useState<Response | null>(null)
+    const [post, setPost] = useState<PostType>()
     const [reply, setReply] = useState('')
 
     const [isQuoteBoxOpen, setIsQuoteBoxOpen] = useState(false)
     const [isEditBoxOpen, setIsEditBoxOpen] = useState(false)
 
-    const [retrievalError, setRetrievalError] = useState('')
-    const [operationError, setOperationError] = useState('')
-
-    const navigate = useNavigate()
     const { postId } = useParams()
+    const navigate = useNavigate()
     const currentUser = getCurrentUser()
+    const { setSuccessMsg } = useContext(NotificationsContext)
+
+    const GET_POST = gql`
+        query GetPost($id: ID!) {
+            post(id: $id) {
+                id
+                createdAt
+                updatedAt
+                body
+                userId
+                repliedId
+                quotedId
+                likes
+                liked
+                dislikes
+                disliked
+                replies
+                repliedPosts {
+                    id
+                    createdAt
+                    updatedAt
+                    body
+                    userId
+                    repliedId
+                    quotedId
+                    likes
+                    dislikes
+                    replies
+                    User {
+                        id
+                        username
+                        image
+                    }
+                }
+                User {
+                    id
+                    username
+                    image
+                }
+            }
+        }
+    `
+    const REPLY_TO_POST = gql`
+        mutation ReplyToPost($input: AddPostInput!) {
+            addPost(input: $input)
+        }
+    `
+    const DELETE_POST = gql`
+        mutation DeletePost($id: ID!, $repliedId: ID) {
+            deletePost(id: $id, repliedId: $repliedId)
+        }
+    `
+    const { loading, error, data } = useQuery<{ post: PostType }>(GET_POST, {
+        variables: { id: postId }
+    })
+    const [replyToPost, replyOperation] = useMutation<{ addPost: string }>(REPLY_TO_POST)
+    const [deletePost, deleteOperation] = useMutation(DELETE_POST)
 
     useEffect(() => {
-        // set the states to empty if new post has to be retrieved
-        setPost(null)
-        setRetrievalError('')
+        if (data && (!post)) {
+            setPost(data.post)
+        }
+    }, [data])
+
+    useEffect(() => {
+        // without these, the edit and quote boxes remain open after quoting a post or editing a post
+        setIsEditBoxOpen(false)
         setIsQuoteBoxOpen(false)
+    }, [postId])
 
-        axios.get(`${process.env.REACT_APP_API_URL}/posts/${postId}`, { headers: { Authorization: getToken() }})
-            .then(response => {
-                setPost(response.data)
-            })
-            .catch(error => {
-                handleError(error, (msg: string) => setRetrievalError(msg))
-            })
-    }, [postId]) // if postId is not given here, the component doesn't refresh if postId changes
-
-    function handleLike(e: any) {
-        if (post!.liked) {
-            e.target.disabled = true
-            axios.delete(`${process.env.REACT_APP_API_URL}/posts/${postId}/likes`, { headers: { Authorization: getToken() }})
-                .then(() => {
-                    setPost({ ...post, liked: false, likes: post!.likes - 1 } as Response)
-                })
-                .catch(error => {
-                    handleError(error, (msg: string) => setOperationError(msg), true)
-                })
-                .finally(() => {
-                    e.target.disabled = false
-                })
+    function handleReaction(isNew: boolean, type: 'like' | 'dislike') {
+        const newPost = {...post!}
+        if (isNew) {
+            newPost[`${type}d`] = true
+            newPost[`${type}s`] += 1
         } else {
-            e.target.disabled = true
-            axios.post(`${process.env.REACT_APP_API_URL}/posts/${postId}/likes`, null, { headers: { Authorization: getToken() }})
-                .then(() => {
-                    setPost({ ...post, liked: true, likes: post!.likes + 1 } as Response)
-                })
-                .catch(error => {
-                    handleError(error, (msg: string) => setOperationError(msg), true)
-                })
-                .finally(() => {
-                    e.target.disabled = false
-                })
+            newPost[`${type}d`] = false
+            newPost[`${type}s`] -= 1
         }
+        setPost(newPost)
     }
 
-    function handleDislike(e: any) {
-        if (post!.disliked) {
-            e.target.disabled = true
-            axios.delete(`${process.env.REACT_APP_API_URL}/posts/${postId}/dislikes`, { headers: { Authorization: getToken() }})
-                .then(() => {
-                    setPost({ ...post, disliked: false, dislikes: post!.dislikes - 1 } as Response)
-                })
-                .catch(error => {
-                    handleError(error, (msg: string) => setOperationError(msg), true)
-                })
-                .finally(() => {
-                    e.target.disabled = false
-                })
-        } else {
-            e.target.disabled = true
-            axios.post(`${process.env.REACT_APP_API_URL}/posts/${postId}/dislikes`, null, { headers: { Authorization: getToken() }})
-                .then(() => {
-                    setPost({ ...post, disliked: true, dislikes: post!.dislikes + 1 } as Response)
-                })
-                .catch(error => {
-                    handleError(error, (msg: string) => setOperationError(msg), true)
-                })
-                .finally(() => {
-                    e.target.disabled = false
-                })
-        }
+    function handleReply() {
+        replyToPost({
+            variables: {
+                input: { body: reply, repliedId: post!.id }
+            }
+        }).then(response => {
+            navigate(`/posts/${response.data?.addPost}`)
+        })
     }
 
-    function submitQuotedPost(e: any, body: string) {
-        e.target.innerText = 'Submitting...'
-        e.target.disabled = true
-        axios.post(`${process.env.REACT_APP_API_URL}/posts`, { body, quotedId: post!.id }, { headers: { Authorization: getToken() }})
-            .then(response => {
-                navigate(`/posts/${response.data.id}`)
-            })
-            .catch(error => {
-                handleError(error, (msg: string) => setOperationError(msg), true)
-                e.target.innerText = 'Submit'
-                e.target.disabled = false
-            })
+    function handleDelete() {
+        deletePost({
+            variables: {
+                id: post!.id,
+                repliedId: post!.repliedId
+            }
+        }).then(response => {
+            setSuccessMsg('Your post has been deleted successfully')
+            setTimeout(() => setSuccessMsg(''), 5000)
+            navigate('/')
+        })
     }
-
-    function submitEditedPost(e: any, body: string) {
-        e.target.innerText = 'Submitting...'
-        e.target.disabled = true
-        axios.put(`${process.env.REACT_APP_API_URL}/posts/${post!.id}`, { body }, { headers: { Authorization: getToken() }})
-            .then(response => {
-                navigate(0)
-            })
-            .catch(error => {
-                handleError(error, (msg: string) => setOperationError(msg), true)
-                e.target.innerText = 'Submit'
-                e.target.disabled = false
-            })
-    }
-
-    function deletePost(e: any) {
-        e.target.innerText = 'Deleting post...'
-        e.target.disabled = true
-        axios.delete(`${process.env.REACT_APP_API_URL}/posts/${post!.id}?repliedId=${post?.repliedId}`, { headers: { Authorization: getToken() }})
-            .then(response => {
-                navigate('/')
-            })
-            .catch(error => {
-                handleError(error, (msg: string) => setOperationError(msg), true)
-                e.target.innerText = 'Delete post'
-                e.target.disabled = false
-            })
-    }
-
-
-    function submitReply(e: any) {
-        e.target.innerText = 'Submitting...'
-        e.target.disabled = true
-        axios.post(`${process.env.REACT_APP_API_URL}/posts`, { body: reply, repliedId: post?.id, targetUserId: post?.User.id }, { headers: { Authorization: getToken() }})
-            .then(response => {
-                navigate(0)
-            })
-            .catch(error => {
-                handleError(error, (msg: string) => setOperationError(msg), true)
-                e.target.innerText = 'Submit'
-                e.target.disabled = false
-            })
-    }
-
 
     return (
-        <MainWrapper>
-            {operationError && <PopUp msg={operationError} />}
-            {isQuoteBoxOpen && <TextBox handleSubmit={submitQuotedPost} close={() => setIsQuoteBoxOpen(false)} />}
-            {isEditBoxOpen && <TextBox handleSubmit={submitEditedPost} close={() => setIsEditBoxOpen(false)} content={post!.body} deletePost={deletePost} />}
-            <RetrievalWrapper data={post} error={retrievalError} skeleton={<SkeletonPost />} >
+        <>
+            <PopUp msg={replyOperation.error ? replyOperation.error.message : ''} color={'red'} />
+            <PopUp msg={deleteOperation.error ? deleteOperation.error.message : ''} color={'red'} />
+            {(post && isQuoteBoxOpen) && <PostForm type={'quote'} close={() => setIsQuoteBoxOpen(false)} id={post.id} />}
+            {(post && isEditBoxOpen) && <PostForm type={'edit'} close={() => setIsEditBoxOpen(false)} id={post.id} content={post.body} />}
+            <UserWrapper>
+                {loading && <GenericLoading />}
+                {error && <GenericError msg={error.message} />}
                 {post && (
                     <div className='divide-y'>
-                        <div className="pb-7 space-y-4">
+                        <div className="pb-9 space-y-6">
                             <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2.5">
-                                    <Avatar img={post.User.image} className={'w-9 h-9'} svgClassName={'w-7 h-7'} />
-                                    <Link to={`/users/${post.User.id}`} className="font-semibold">{post.User.username}</Link>
-                                </div>
-                                <span className="text-gray-400">{setTimeLabel(post.createdAt)}</span>
+                                {post.User ? (
+                                    <Link to={`/users/${post.User.id}`} className='flex items-center space-x-2.5'>
+                                        {post.User.image ? (
+                                            <img src={post.User.image} className='h-12 w-12 rounded-full' />
+                                        ):(
+                                            <AvatarIcon className='h-12 w-12 text-slate-400/50' />
+                                        )}
+                                        <div className='font-semibold'>{post.User.username}</div>
+                                    </Link>
+                                ):(
+                                    <div className='flex items-center space-x-2'>
+                                        <AvatarIcon className='h-10 w-10 text-slate-400/50' />
+                                        <div className='font-semibold'>[anonymous]</div>
+                                    </div>
+                                )}
+                                <span className="text-slate-400">{setTimeLabel(post.createdAt)}</span>
                             </div>
-                            <p className='text-lg'>{post.body}</p>
+                            <p className='text-lg leading-[1.75]'>{post.body}</p>
                             <div className="flex items-center gap-4">
                                 <span><span className='font-semibold'>{post.likes}</span> likes</span>
                                 <span><span className='font-semibold'>{post.dislikes}</span> dislikes</span>
                             </div>
-                        </div>
-                        {post.repliedId && (
-                            <div className='py-4'>
-                                <Link to={`/posts/${post.repliedId}`} className='text-indigo-600'>View original post</Link>
-                            </div>
-                        )}
-                        {post.quotedId && (
-                            <div className='py-4'>
-                                <Link to={`/posts/${post.quotedId}`} className='text-indigo-600'>View quoted post</Link>
-                            </div>
-                        )}
-
-                        {currentUser && (
-                            <div className='flex justify-between py-4'>
-                                <div className='flex gap-5'>
-                                    {(currentUser && (currentUser.id !== post.userId)) && (
-                                        <>
-                                            <button disabled={post.disliked} onClick={handleLike} className='text-indigo-600'>{post.liked ? 'Liked' : 'Like'}</button>
-                                            <button disabled={post.liked} onClick={handleDislike} className='text-indigo-600'>{post.disliked ? 'Disliked' : 'Dislike'}</button>
-                                        </>
-                                    )}
-                                    <button onClick={() => setIsQuoteBoxOpen(true)} className='text-indigo-600'>Quote</button>
+                            {post.repliedId && (
+                                <div className='flex items-center space-x-1 text-violet-600'>
+                                    <div className='pt-0.5'><ArrowIcon className='h-5 w-5 rotate-[225deg]' /></div>
+                                    <Link to={`/posts/${post.repliedId}`} className=''>view what this post is replying to</Link>
                                 </div>
+                            )}
+                            {post.quotedId && (
+                                <div className='flex items-center space-x-1 text-violet-600'>
+                                    <div className='pt-0.5'><ArrowIcon className='h-5 w-5 rotate-[225deg]' /></div>
+                                    <Link to={`/posts/${post.quotedId}`} className='text-[15px]'>view what this post is quoting</Link>
+                                </div>
+                            )}
+                        </div>
+                        {currentUser && (
+                            <div className='flex space-x-2.5 py-9'>
+                                {(currentUser && (currentUser.id !== post.userId)) && (
+                                    <>
+                                        <LikeButton postId={post.id} liked={post.liked} disliked={post.disliked} onSuccess={handleReaction} />
+                                        <DislikeButton postId={post.id} liked={post.liked} disliked={post.disliked} onSuccess={handleReaction} />
+                                    </>
+                                )}
+                                <button onClick={() => setIsQuoteBoxOpen(true)} className='secondary'>Quote</button>
                                 {(currentUser && (currentUser.id === post.userId)) && (
-                                    <div className='flex gap-5'>
-                                        <button onClick={() => setIsEditBoxOpen(true)} className='text-indigo-600 '>Edit post</button>
-                                    </div>
+                                    <>
+                                        <button onClick={() => setIsEditBoxOpen(true)} className='secondary'>Edit post</button>
+                                        <ButtonWithSpinner handleClick={handleDelete} label={'Delete post'} isLoading={deleteOperation.loading} type={'secondary'} className={'text-red-600'} />
+                                    </>
                                 )}
                             </div>
                         )}
-                        {currentUser && (
-                            <div className="h-fit flex flex-col py-6">
-                                <div className="w-full">
+                        <div className='pt-8'>
+                            <h2 className='subtitle'>{post.repliedPosts.length} {post.repliedPosts.length > 1 ? 'replies' : 'reply'}</h2>
+                            {currentUser ? (
+                                <div className='mt-8 relative'>
                                     <textarea onChange={e => {
-                                        resizeInput(e)
+                                        handleTextareaResize(e)
                                         setReply(e.target.value)
-                                    }} value={reply} style={{ resize: 'none', overflow: 'hidden' }} className="w-full py-2.5 px-3.5 h-24" placeholder="Add something to the conversation" />
-                                    <button onClick={submitReply} className="btn-primary block mt-2 ml-auto text-sm py-2 px-3">Submit</button>
+                                    }} className='w-full h-32 !rounded-lg !py-2.5 !px-3.5 !pb-16' placeholder='What are your thoughts?' value={reply} />
+                                    <div className='absolute bottom-3 right-3'>
+                                        <ButtonWithSpinner handleClick={handleReply} label={'Post'} isLoading={replyOperation.loading} type={'primary'} />
+                                    </div>
+                                    <div className='absolute bottom-2.5 left-3.5 text-sm text-slate-400'>{reply.length}/500</div>
                                 </div>
-                            </div>
-                        )}
-                        {!currentUser && (
-                            <div className='py-4 flex items-center gap-1.5 text-gray-400'>
-                                <ExclaimIcon className={"w-5 h-5"} />
-                                <span>You must be logged in to participate</span>
-                            </div>
-                        )}
-                        {post.repliedPosts.length > 0 ? (
-                            <div>
-                                <h2 className='pt-6 pb-3'>{post.repliedPosts.length} {post.repliedPosts.length > 1 ? 'replies' : 'reply'}</h2>
-                                <div className='divide-y'>
+                            ):(
+                                <div className='mt-8'>
+                                    <div className='flex space-x-2 bg-slate-100 py-3 px-4 rounded-md text-slate-400'>
+                                        <div className='pt-0.5'><UserIcon outline={true} className={"w-[18px] h-[18px]"} /></div>
+                                        <span>You must be logged in to react or reply</span>
+                                    </div>
+                                </div>
+                            )}
+                            {post.repliedPosts.length > 0 ? (
+                                <div className='mt-1 divide-y'>
                                     {post.repliedPosts.map((reply, index) => (
                                         <FeedPost post={reply} key={index} />
                                     ))}
-                                    <span className='block pt-4 pb-8 text-center text-sm text-gray-400'>End of results</span>
                                 </div>
-                            </div>
-                        ):(
-                            <div className='flex flex-col items-center text-center py-10'>
-                                <TextBalloonIcon slash={true} className={'h-8 w-8 text-gray-400'} />
-                                <h2 className='mt-4 mb-1.5'>No replies found</h2>
-                                <span>Have an opinion? Why not reply to this thread?</span>
-                            </div>
-                        )}
+                            ):(
+                                <div className='flex flex-col items-center text-center py-16'>
+                                    <TextBalloonIcon slash={true} className={'h-10 w-10 text-slate-400/60 mx-auto dark:text-gray-600'} />
+                                    <div className='mt-5 subtitle'>No replies found</div>
+                                    <p className='mt-3'>Have an opinion? Why not reply to this thread?</p>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 )}
-            </RetrievalWrapper>
-        </MainWrapper>
+            </UserWrapper>
+        </>
     )
 }

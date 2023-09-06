@@ -1,29 +1,26 @@
 import React from "react"
-import {Link, useNavigate} from "react-router-dom";
-import getCurrentUser from "../utilities/getCurrentUser";
+import {Link} from "react-router-dom"
+import getCurrentUser from "../utilities/getCurrentUser"
 
 export default function FeedFooter() {
     const currentUser = getCurrentUser()
-    const navigate = useNavigate()
+
+    function logout() {
+        localStorage.removeItem('jwt')
+        localStorage.removeItem('rememberMe')
+        window.location.href = '/'
+    }
 
     return (
-        <div>
-            <div className="flex gap-3.5 items-center justify-center">
+        <div className='text-sm text-slate-400'>
+            <div className="flex gap-4 items-center justify-center">
+                <Link to="/">Home</Link>
+                <Link to="/about">About</Link>
+                <Link to="/help">Help</Link>
                 {currentUser ? (
-                    <>
-                        <Link to="/feed">Feed</Link>
-                        <Link to="/about">About</Link>
-                        <Link to="/help">Help</Link>
-                        <button onClick={() => {
-                            localStorage.removeItem('jwt')
-                            navigate('/')
-                        }} >Logout</button>
-                    </>
+                    <button onClick={logout} >Logout</button>
                 ):(
                     <>
-                        <Link to="/trending">Trending</Link>
-                        <Link to="/about">About</Link>
-                        <Link to="/help">Help</Link>
                         <Link to="/join">Join</Link>
                         <Link to="/login">Login</Link>
                     </>

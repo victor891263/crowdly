@@ -3,7 +3,7 @@ const sequelize = require('../startup/db')
 
 const User = sequelize.define('User', {
     username: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(20),
         allowNull: false,
         unique: true
     },
@@ -12,7 +12,7 @@ const User = sequelize.define('User', {
         allowNull: false
     },
     about: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(500)
     },
     follows: {
         type: DataTypes.INTEGER,
