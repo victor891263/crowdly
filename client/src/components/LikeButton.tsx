@@ -28,7 +28,7 @@ export default function LikeButton({ postId, liked, disliked, onSuccess }: { pos
             <button
                 onClick={handleLike}
                 disabled={likePostOperation.loading || deleteLikeOperation.loading || disliked}
-                className='secondary flex items-center space-x-1.5 !px-2'
+                className='secondary flex items-center space-x-1.5 !px-2 !rounded-r-none'
             >
                 {liked ? (
                     <ArrowIcon className='w-5 h-5 -rotate-90 text-violet-600' strokeWidth={2.5} />

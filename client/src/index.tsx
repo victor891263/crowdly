@@ -73,8 +73,9 @@ const router = createBrowserRouter([
 ])
 
 const httpLink = createHttpLink({
-    uri: process.env.REACT_APP_API_URL,
+    uri: process.env.REACT_APP_API_URL
 })
+// process.env.REACT_APP_API_URL http://localhost:4000
 
 const authLink = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists

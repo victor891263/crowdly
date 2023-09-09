@@ -29,7 +29,7 @@ export default function DislikeButton({ postId, liked, disliked, onSuccess }: { 
             <button
                 onClick={handleDislike}
                 disabled={dislikePostOperation.loading || deleteDislikeOperation.loading || liked}
-                className='secondary flex items-center space-x-1.5 !px-2'
+                className='secondary flex items-center space-x-1.5 !px-2 !rounded-l-none'
             >
                 {disliked ? (
                     <ArrowIcon className='w-5 h-5 rotate-90 text-violet-600' strokeWidth={2.5} />

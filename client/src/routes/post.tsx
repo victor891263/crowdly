@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react"
-import {useQuery, gql, useMutation} from '@apollo/client'
+import {useQuery, gql, useMutation, useLazyQuery} from '@apollo/client'
 import setTimeLabel from "../utilities/setTimeLabel"
 import FeedPost from "../components/FeedPost"
 import getCurrentUser from "../utilities/getCurrentUser"
@@ -82,22 +82,22 @@ export default function Post() {
             deletePost(id: $id, repliedId: $repliedId)
         }
     `
-    const { loading, error, data } = useQuery<{ post: PostType }>(GET_POST, {
-        variables: { id: postId }
-    })
+    const [getPost, { loading, error }] = useLazyQuery<{ post: PostType }>(GET_POST)
     const [replyToPost, replyOperation] = useMutation<{ addPost: string }>(REPLY_TO_POST)
     const [deletePost, deleteOperation] = useMutation(DELETE_POST)
-
-    useEffect(() => {
-        if (data && (!post)) {
-            setPost(data.post)
-        }
-    }, [data])
 
     useEffect(() => {
         // without these, the edit and quote boxes remain open after quoting a post or editing a post
         setIsEditBoxOpen(false)
         setIsQuoteBoxOpen(false)
+        // without this, previous post doesn't disappear
+        setPost(undefined)
+        // retrieve data
+        getPost({
+            variables: { id: postId }
+        }).then(response => {
+            setPost(response.data!.post)
+        })
     }, [postId])
 
     function handleReaction(isNew: boolean, type: 'like' | 'dislike') {
@@ -165,7 +165,7 @@ export default function Post() {
                                 )}
                                 <span className="text-slate-400">{setTimeLabel(post.createdAt)}</span>
                             </div>
-                            <p className='text-lg leading-[1.75]'>{post.body}</p>
+                            <p className='text-lg leading-[1.7]'>{post.body}</p>
                             <div className="flex items-center gap-4">
                                 <span><span className='font-semibold'>{post.likes}</span> likes</span>
                                 <span><span className='font-semibold'>{post.dislikes}</span> dislikes</span>
@@ -186,10 +186,10 @@ export default function Post() {
                         {currentUser && (
                             <div className='flex space-x-2.5 py-9'>
                                 {(currentUser && (currentUser.id !== post.userId)) && (
-                                    <>
+                                    <div className='flex'>
                                         <LikeButton postId={post.id} liked={post.liked} disliked={post.disliked} onSuccess={handleReaction} />
                                         <DislikeButton postId={post.id} liked={post.liked} disliked={post.disliked} onSuccess={handleReaction} />
-                                    </>
+                                    </div>
                                 )}
                                 <button onClick={() => setIsQuoteBoxOpen(true)} className='secondary'>Quote</button>
                                 {(currentUser && (currentUser.id === post.userId)) && (

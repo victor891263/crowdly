@@ -4,6 +4,7 @@
 
 @layer base {
     html {
+        @apply max-sm:text-[15px];
         -webkit-font-smoothing: antialiased;
     }
 
@@ -27,9 +28,11 @@
     }
 
     input, textarea {
+        appearance: none;
         background: none;
         border: none;
         outline: none;
+        -webkit-appearance: none;
     }
 }
 
@@ -58,7 +61,7 @@ textarea:disabled {
 }
 
 textarea {
-    @apply flex resize-none overflow-hidden leading-[1.7] dark:placeholder:text-gray-500
+    @apply flex resize-none overflow-hidden leading-[1.6] dark:placeholder:text-gray-500
 }
 
 button.primary,
@@ -151,8 +154,4 @@ a:disabled {
 
 .text-red-600 {
     @apply dark:text-red-400
-}
-
-.help-article > *:first-of-type {
-    margin-top: 0 !important;
 }
