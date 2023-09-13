@@ -27,9 +27,10 @@ module.exports = async (_, args, context) => {
         userId: currentUserId
     })
 
-    // increment the value of 'likes' of the post with the specified id
+    // increment the value of 'likes' and 'points' of the post with the specified id
     await Post.update({
-        likes: Sequelize.literal('likes + 1')
+        likes: Sequelize.literal('likes + 1'),
+        points: Sequelize.literal('points + 1')
     }, {
         where: { id: postId }
     })

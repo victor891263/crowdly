@@ -9,7 +9,7 @@ export default function getHelpArticles(): Article[] {
             content: [
                 {
                     type: 'text',
-                    body: 'Unlike other social media websites, our platform does not require an email address for registration. Instead, you only need to choose a unique username and a password.'
+                    body: 'To sign up, you need an email address and you need to pick a password and a unique username.'
                 },
                 {
                     type: 'head',
@@ -18,8 +18,9 @@ export default function getHelpArticles(): Article[] {
                 {
                     type: 'list',
                     body: [
-                        'Click on the "Join" button at the top or the "Create account" and "Join" buttons in the feed and about pages respectively.',
-                        'On the registration page, enter a unique username that you want to associate with your account. The username should be distinctive and not already in use by another user.',
+                        'Click on the "Join" button at the top or the "Get started" and "Join" buttons in the feed and about pages respectively.',
+                        'On the registration page, enter an email address. Later, an email containing a unique link will be sent to this email address. You will then need to click on that link to verify your email address and finish creating your account.',
+                        'Also, a unique username that you want to associate with your account will need to be picked. The username should be distinctive and not already in use by another user.',
                         'Choose a strong password. It is important to select a password that is unique and not easily guessable.',
                         'Once you have entered a unique username and a strong password, click on the "Create account" button to complete the registration process.'
                     ]
@@ -85,7 +86,7 @@ export default function getHelpArticles(): Article[] {
                 {
                     type: 'list',
                     body: [
-                        'Your password is essential for accessing your account, and it cannot be changed or revealed once the account is created.',
+                        'Your password is essential for accessing your account. It can be changed as many times as you want but you will need to enter your current password to do that.',
                         'It is recommended to choose a strong and unique password to prevent unauthorized access to your account.',
                         'Make sure to remember your password and avoid sharing it with others.'
                     ]
@@ -140,7 +141,7 @@ export default function getHelpArticles(): Article[] {
                     body: [
                         'Your post will appear in your own feed, allowing you to easily keep track of your own activity.',
                         'Users who follow you will see your post in their respective feeds, increasing its visibility among your followers.',
-                        'Other users can interact with your post by giving it a like or dislike. This provides a way for users to express their reaction to your content.',
+                        'Other users can interact with your post by giving it a upvote or downvote. This provides a way for users to express their reaction to your content.',
                         'Additionally, users can reply to your post, initiating a conversation and encouraging further engagement.'
                     ]
                 },
@@ -194,7 +195,7 @@ export default function getHelpArticles(): Article[] {
                 },
                 {
                     type: 'text',
-                    body: 'Editing a post does not affect the ability of users to react or reply to it. Users can still engage with the post, provide likes or dislikes, and participate in conversations by replying to the edited version of the post.'
+                    body: 'Editing a post does not affect the ability of users to react or reply to it. Users can still engage with the post, provide upvotes or downvotes, and participate in conversations by replying to the edited version of the post.'
                 },
             ],
             lastUpdate: new Date(2023, 4, 22)
@@ -224,7 +225,7 @@ export default function getHelpArticles(): Article[] {
                 {
                     type: 'list',
                     body: [
-                        'All reactions made to the post, including likes, dislikes, and other responses, will be removed and no longer visible to users.',
+                        'All reactions made to the post, including upvotes, downvotes, and other responses, will be removed and no longer visible to users.',
                         'Any quotes or replies associated with the post will also be deleted, resulting in the removal of related discussions and conversations.',
                         'Deleted posts cannot be retrieved or restored. Once a post is deleted, it is permanently removed from the platform.'
                     ]
@@ -261,7 +262,7 @@ export default function getHelpArticles(): Article[] {
                 {
                     type: 'list',
                     body: [
-                        'Users can like, dislike, and reply to your quoted post, providing feedback and engaging in conversations.',
+                        'Users can upvote, downvote, and reply to your quoted post, providing feedback and engaging in conversations.',
                         'Quoted posts can be further quoted by other users, allowing for the expansion of discussions and the sharing of perspectives.'
                     ]
                 },
@@ -277,7 +278,7 @@ export default function getHelpArticles(): Article[] {
                     type: 'list',
                     body: [
                         'Editing a quoted post allows you to modify both your commentary and the original content. The changes made will be reflected in the quoted post.',
-                        'Deleting a quoted post will remove it from your profile and also eliminate all associated likes, dislikes, replies, and any subsequent quotes. Deleted quoted posts cannot be recovered.'
+                        'Deleting a quoted post will remove it from your profile and also eliminate all associated upvotes, downvotes, replies, and any subsequent quotes. Deleted quoted posts cannot be recovered.'
                     ]
                 },
             ],
@@ -309,7 +310,7 @@ export default function getHelpArticles(): Article[] {
                     type: 'list',
                     body: [
                         'Your reply will be visible to anyone who visits the post page, allowing for broader engagement and participation in discussions.',
-                        'Users can express their reaction to your reply by giving it a like or dislike, encouraging feedback and indicating agreement or disagreement.',
+                        'Users can express their reaction to your reply by giving it a upvote or downvote, encouraging feedback and indicating agreement or disagreement.',
                         'Anyone can reply to your reply, initiating a chain of conversations and facilitating a diverse exchange of perspectives.',
                         'It is also possible for users to quote your reply, further expanding on its content and sharing it along with their commentary.'
                     ]
@@ -330,7 +331,7 @@ export default function getHelpArticles(): Article[] {
                     type: 'list',
                     body: [
                         'Editing a reply allows you to modify its content, providing an opportunity to clarify or enhance your response.',
-                        'Deleting a reply will remove it from the post page, along with all associated likes, dislikes, quotes, and replies. Deleted replies cannot be recovered.'
+                        'Deleting a reply will remove it from the post page, along with all associated upvotes, downvotes, quotes, and replies. Deleted replies cannot be recovered.'
                     ]
                 },
             ],
@@ -338,24 +339,24 @@ export default function getHelpArticles(): Article[] {
         },
         {
             id: 8,
-            topics: ['getting started', 'likes and dislikes'],
+            topics: ['getting started', 'voting system'],
             title: 'Liking and disliking',
             content: [
                 {
                     type: 'text',
-                    body: 'Reacting allows you to express your agreement or disagreement with a post through likes and dislikes. To react to a post on Crowdly, follow these steps:'
+                    body: 'Reacting allows you to express your agreement or disagreement with a post through upvotes and downvotes. To react to a post on Crowdly, follow these steps:'
                 },
                 {
                     type: 'list',
                     body: [
                         'Locate the post you wish to react to on Crowdly.',
-                        'Click on the respective "like" or "dislike" button associated with the post.',
+                        'Click on the respective "upvote" or "downvote" button associated with the post.',
                         'By clicking the button, you express your agreement or disagreement, or simply indicate whether you like or dislike the post.'
                     ]
                 },
                 {
                     type: 'text',
-                    body: 'Each post on Crowdly displays the total number of likes and dislikes it has received. This information provides an overview of the overall sentiment and reception of the post within the community.'
+                    body: 'Each post on Crowdly displays the total number of upvotes and downvotes it has received. This information provides an overview of the overall sentiment and reception of the post within the community.'
                 },
                 {
                     type: 'head',
@@ -364,9 +365,9 @@ export default function getHelpArticles(): Article[] {
                 {
                     type: 'list',
                     body: [
-                        'You can remove your like or dislike from a post at any time by clicking on the respective reaction button again.',
+                        'You can remove your upvote or downvote from a post at any time by clicking on the respective reaction button again.',
                         'You can switch from liking a post to disliking a post, or vice versa, by clicking on the opposite reaction button.',
-                        'It is important to note that you cannot like and dislike a post simultaneously. You can only choose one reaction for each post.'
+                        'It is important to note that you cannot upvote and downvote a post simultaneously. You can only choose one reaction for each post.'
                     ]
                 },
                 {
@@ -375,7 +376,7 @@ export default function getHelpArticles(): Article[] {
                 },
                 {
                     type: 'text',
-                    body: 'When you like or dislike a post on Crowdly, a notification will be sent to the user who made the post. This notification informs them about the reaction received and encourages engagement and further interactions. When someone else likes or dislikes your posts, quotes, and replies, you will be notified too.'
+                    body: 'When you upvote or downvote a post on Crowdly, a notification will be sent to the user who made the post. This notification informs them about the reaction received and encourages engagement and further interactions. When someone else upvotes or downvotes your posts, quotes, and replies, you will be notified too.'
                 },
                 {
                     type: 'head',
@@ -383,7 +384,7 @@ export default function getHelpArticles(): Article[] {
                 },
                 {
                     type: 'text',
-                    body: `You cannot like or dislike posts that you have made, including replies and quotes. This limitation ensures that the reaction feature remains focused on engaging with others' content and promoting diverse perspectives within the community.`
+                    body: `You cannot upvote or downvote posts that you have made, including replies and quotes. This limitation ensures that the reaction feature remains focused on engaging with others' content and promoting diverse perspectives within the community.`
                 },
             ],
             lastUpdate: new Date(2023, 4, 22)

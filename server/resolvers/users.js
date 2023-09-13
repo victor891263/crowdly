@@ -9,7 +9,7 @@ module.exports = async (_, args, context) => {
         where: {
             username: { [Op.iLike]: `%${username}%` }
         },
-        attributes: ['id', 'username']
+        attributes: ['id', 'username', 'image']
     })
 
     return JSONSimplify(profiles)

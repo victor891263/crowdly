@@ -1,3 +1,7 @@
+const sendRecoveryInstructions = require('./resolvers/sendRecoveryInstructions')
+const resetAccount = require('./resolvers/resetAccount')
+const verifyUser = require('./resolvers/verifyUser')
+const verifyNewEmail = require('./resolvers/verifyNewEmail')
 const login = require('./resolvers/login')
 const feed = require('./resolvers/feed')
 const trending = require('./resolvers/trending')
@@ -15,7 +19,10 @@ const followUser = require('./resolvers/followUser')
 const addPost = require('./resolvers/addPost')
 const likePost = require('./resolvers/likePost')
 const dislikePost = require('./resolvers/dislikePost')
+const cancelEmailUpdate = require('./resolvers/cancelEmailUpdate')
 const editUser = require('./resolvers/editUser')
+const editUserEmail = require('./resolvers/editUserEmail')
+const editUserPassword = require('./resolvers/editUserPassword')
 const editPost = require('./resolvers/editPost')
 const deleteUser = require('./resolvers/deleteUser')
 const deletePost = require('./resolvers/deletePost')
@@ -27,6 +34,8 @@ const userSmall = require('./resolvers/userSmall')
 
 module.exports = {
     Query: {
+        verifyUser,
+        verifyNewEmail,
         feed,
         trending,
         posts,
@@ -46,13 +55,18 @@ module.exports = {
         User: userSmall
     },
     Mutation: {
+        sendRecoveryInstructions,
+        resetAccount,
         login,
         addUser,
         followUser,
         addPost,
         likePost,
         dislikePost,
+        cancelEmailUpdate,
         editUser,
+        editUserEmail,
+        editUserPassword,
         editPost,
         deleteUser,
         deletePost,

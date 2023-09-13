@@ -40,9 +40,9 @@ export default function FeedPost({ post, showReplyLabel }: { post: PostSmall, sh
                 </div>
             )}
             <div className="flex gap-x-4 text-sm">
-                <span><span className='font-semibold'>{post.likes}</span> likes</span>
-                <span><span className='font-semibold'>{post.dislikes}</span> dislikes</span>
+                <span><span className='font-semibold'>{post.points}</span> points</span>
                 <span><span className='font-semibold'>{post.replies}</span> replies</span>
+                <span><span className='font-semibold'>{post.quotes}</span> quotes</span>
             </div>
         </Link>
     )

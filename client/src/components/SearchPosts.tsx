@@ -17,6 +17,8 @@ export default function SearchPosts({ keyword }: { keyword: string }) {
                 userId
                 repliedId
                 quotedId
+                points
+                quotes
                 likes
                 dislikes
                 replies

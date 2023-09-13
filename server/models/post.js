@@ -28,6 +28,16 @@ const Post = sequelize.define('Post', {
         allowNull: false,
         defaultValue: 0
     },
+    points: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    quotes: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
     replies: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -42,9 +52,11 @@ User.hasMany(Post, {
 Post.belongsTo(User, {
     foreignKey: 'userId'
 })
+
 /*
 Post.sync({ alter: true })
     .then(() => console.log('The `posts` table was just (re)created!'))
     .catch(error => console.log('Error synchronizing `posts` table', error))
 */
+
 module.exports = Post

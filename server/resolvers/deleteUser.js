@@ -1,7 +1,7 @@
 const User = require('../models/user')
 const {GraphQLError} = require("graphql")
 
-module.exports = async (_, args, context) => {
+module.exports = async (_, __, context) => {
     // deny access if no user is logged in
     if (!context.user) {
         throw new GraphQLError(`You don't have permission to do this`, {

@@ -7,7 +7,7 @@ import TextBalloonIcon from "../icons/TextBalloonIcon"
 import React from "react"
 import {Link} from "react-router-dom"
 
-export default function PostsForFeed({ sortBy }: { sortBy: 'Date' | 'Engagement' }) {
+export default function PostsForFeed({ sortBy }: { sortBy: 'Date' | 'Engagement' | 'Points' }) {
     const GET_FEED = gql`
             query GetFeed {
                 feed {
@@ -20,6 +20,8 @@ export default function PostsForFeed({ sortBy }: { sortBy: 'Date' | 'Engagement'
                     quotedId
                     likes
                     dislikes
+                    points
+                    quotes
                     replies
                     User {
                         id
@@ -45,6 +47,13 @@ export default function PostsForFeed({ sortBy }: { sortBy: 'Date' | 'Engagement'
             sortedPosts.sort((a, b) => {
                 if ((a.likes + a.dislikes) < (b.likes + b.dislikes)) return 1
                 if ((a.likes + a.dislikes) > (b.likes + b.dislikes)) return -1
+                return 0
+            })
+        }
+        if (sortBy === 'Points') {
+            sortedPosts.sort((a, b) => {
+                if (a.points < b.points) return 1
+                if (a.points > b.points) return -1
                 return 0
             })
         }

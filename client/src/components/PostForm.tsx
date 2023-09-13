@@ -7,7 +7,7 @@ import handleTextareaResize from "../utilities/handleTextareaResize"
 import ButtonWithSpinner from "./ButtonWithSpinner"
 import CrossIcon from "../icons/CrossIcon"
 
-export default function PostForm({ type, content, id, close, closeMenu }: { type: 'add' | 'edit' | 'quote', content?: string, id?: string, close: () => void, closeMenu?: () => void }) {
+export default function PostForm({ type, content, id, userId, close, closeMenu }: { type: 'add' | 'edit' | 'quote', content?: string, id?: string, userId?: string, close: () => void, closeMenu?: () => void }) {
     const [body, setBody] = useState(content || '')
     const [inputError, setInputError] = useState('')
     const navigate = useNavigate()
@@ -61,7 +61,7 @@ export default function PostForm({ type, content, id, close, closeMenu }: { type
         })
         if (type === 'quote') quotePost({
             variables: {
-                input: { body, quotedId: id }
+                input: { body, quotedId: id, targetUserId: userId }
             }
         }).then((response) => {
             navigate(`/posts/${response.data?.addPost}`)
@@ -70,10 +70,10 @@ export default function PostForm({ type, content, id, close, closeMenu }: { type
 
     return (
         <>
-            {quotingOperation.error && <PopUp msg={quotingOperation.error.message} color={'red'} />}
-            {editingOperation.error && <PopUp msg={editingOperation.error.message} color={'red'} />}
+            <PopUp msg={quotingOperation.error ? quotingOperation.error.message : ''} color={'red'} />
+            <PopUp msg={editingOperation.error ? editingOperation.error.message : ''} color={'red'} />
             <BoxFullScreen close={close}>
-                <div className='max-w-md w-full py-20'>
+                <div className='max-w-md w-full m-auto py-24'>
                     <h2 className='subtitle'>{(type === 'add' && 'New post') || (type === 'edit' && 'Edit post') || (type === 'quote' && 'Quote post') || ''}</h2>
                     <div className='mt-8 relative'>
                         <textarea

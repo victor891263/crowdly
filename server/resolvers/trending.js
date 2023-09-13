@@ -14,7 +14,7 @@ module.exports = async (_, __, context) => {
         include: [
             {
                 model: User,
-                attributes: ['username']
+                attributes: ['username', 'image']
             }
         ],
         order: [Sequelize.literal('total DESC')]

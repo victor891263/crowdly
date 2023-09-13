@@ -15,7 +15,9 @@ module.exports = async (_, args, context) => {
 
     const notificationId = args.id
 
-    await Notification.destroy({
+    await Notification.update({
+        seen: true
+    }, {
         where: { id: notificationId }
     })
 

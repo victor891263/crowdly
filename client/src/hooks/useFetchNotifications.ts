@@ -13,7 +13,9 @@ export default function useFetchNotifications() {
                 updatedAt
                 postId
                 isReply
+                isQuote
                 targetUserId
+                seen
                 userId
                 User {
                     id

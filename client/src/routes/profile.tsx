@@ -1,7 +1,6 @@
-import React, {useState, useContext} from "react"
-import {useNavigate, useParams} from "react-router-dom"
-import {useQuery, gql, useMutation} from '@apollo/client'
-import NotificationsContext from "../notificationsContext"
+import React, {useState, useEffect} from "react"
+import {useParams} from "react-router-dom"
+import {gql, useMutation, useLazyQuery} from '@apollo/client'
 import {User} from "../types"
 import getCurrentUser from "../utilities/getCurrentUser"
 import EditProfile from "../components/EditProfile"
@@ -14,16 +13,19 @@ import ProfileFollowing from "../components/ProfileFollowing"
 import ProfileFollowers from "../components/ProfileFollowers"
 import UserIcon from "../icons/UserIcon"
 import CalendarIcon from "../icons/CalendarIcon"
+import PopUp from "../components/PopUp";
+import ButtonWithSpinner from "../components/ButtonWithSpinner";
+import LinkIcon from "../icons/LinkIcon";
 
 export default function Profile() {
+    const [profile, setProfile] = useState<User>()
     const [showing, setShowing] = useState<'posts' | 'follows' | 'followers'>('posts')
 
     const [isEditBoxOpen, setIsEditBoxOpen] = useState(false)
+    const [updateSuccessMsg, setUpdateSuccessMsg] = useState('')
 
     const { userId } = useParams()
     const currentUser = getCurrentUser()
-    const navigate = useNavigate()
-    const { setSuccessMsg } = useContext(NotificationsContext)
 
     const GET_USER = gql`
         query GetUser($id: ID!) {
@@ -31,9 +33,13 @@ export default function Profile() {
                 id
                 createdAt
                 updatedAt
+                email
+                newEmail
                 username
-                image
+                name
                 about
+                link
+                image
                 follows
                 followers
                 followed
@@ -51,81 +57,88 @@ export default function Profile() {
             unfollow(id: $id)
         }
     `
-    const DELETE = gql`
-        mutation Delete($id: ID!) {
-            deleteUser(id: $id)
-        }
-    `
-    const { loading, error, data } = useQuery<{ user: User }>(GET_USER, {
+    const [getUser, { loading, error }] = useLazyQuery<{ user: User }>(GET_USER, {
         variables: { id: userId }
     })
     const [follow, followOperation] = useMutation(FOLLOW)
     const [unfollow, unfollowOperation] = useMutation(UNFOLLOW)
-    const [deleteUser, deleteOperation] = useMutation(DELETE)
 
-    function handleDelete() {
-        deleteUser({
+    useEffect(() => {
+        getUser({
             variables: { id: userId }
-        }).then(() => {
-            setSuccessMsg('Your account has been deleted successfully')
-            setTimeout(() => setSuccessMsg(''), 5000)
-            navigate('/')
+        }).then(response => {
+            setProfile(response.data!.user)
+        })
+    }, [])
+
+    function handleFollow() {
+        follow({
+            variables: { id: profile!.id }
+        }).then(response => {
+            const newProfile = {...profile!}
+            newProfile.followed = true
+            newProfile.followers += 1
+            setProfile(newProfile)
         })
     }
 
-    if (data && followOperation.data) {
-        data.user.followed = true
-        data.user.followers += 1
-    }
-    if (data && unfollowOperation.data) {
-        data.user.followed = false
-        data.user.followers -= 1
+    function handleUnfollow() {
+        unfollow({
+            variables: { id: profile!.id }
+        }).then(response => {
+            const newProfile = {...profile!}
+            newProfile.followed = false
+            newProfile.followers -= 1
+            setProfile(newProfile)
+        })
     }
 
     return (
         <UserWrapper>
-            {(data && isEditBoxOpen) && <EditProfile user={data.user} close={() => setIsEditBoxOpen(false)} />}
+            <PopUp msg={updateSuccessMsg || ''} color={'green'} />
+            <PopUp msg={followOperation.error ? followOperation.error.message : ''} color={'red'} />
+            <PopUp msg={unfollowOperation.error ? unfollowOperation.error.message : ''} color={'red'} />
+            {(profile && isEditBoxOpen) && <EditProfile user={profile} setUser={setProfile} onSuccess={setUpdateSuccessMsg} close={() => setIsEditBoxOpen(false)} />}
             {loading && <GenericLoading />}
             {error && <GenericError msg={error.message} />}
-            {data && (
+            {profile && (
                 <div>
                     <div className="space-y-6 pb-7">
                         <div className='flex justify-between items-start'>
-                            {data.user.image ? (
-                                <img src={data.user.image} className='h-32 w-32 rounded-full' />
+                            {profile.image ? (
+                                <img src={profile.image} className='h-32 w-32 rounded-full' />
                             ):(
                                 <AvatarIcon className='h-32 w-32 text-slate-400/50' />
                             )}
                             {currentUser && (
-                                (data.user.id === String(currentUser.id)) ? (
-                                    <div className='flex sm:space-x-2 max-sm:flex-col-reverse'>
-                                        <button onClick={handleDelete} className='secondary text-red-600 max-sm:mt-3'>Delete account</button>
-                                        <button onClick={() => setIsEditBoxOpen(true)} className='secondary'>Edit profile</button>
-                                    </div>
+                                (profile.id === String(currentUser.id)) ? (
+                                    <button onClick={() => setIsEditBoxOpen(true)} className='secondary'>Edit profile</button>
                                 ):(
-                                    data.user.followed ? (
-                                        <button onClick={() => unfollow({ variables: { id: data.user.id } })} className='primary'>Unfollow</button>
+                                    profile.followed ? (
+                                        <ButtonWithSpinner handleClick={handleUnfollow} label={'Unfollow'} isLoading={unfollowOperation.loading} type={'secondary'} />
                                     ):(
-                                        <button onClick={() => follow({ variables: { id: data.user.id } })} className='primary'>Follow</button>
+                                        <ButtonWithSpinner handleClick={handleFollow} label={'Follow'} isLoading={followOperation.loading} type={'primary'} />
                                     )
                                 )
                             )}
                         </div>
                         <div className="space-y-0.5">
-                            <div className='subtitle'>{data.user.name || data.user.username}</div>
-                            <div className='font-medium text-slate-400'>@{data.user.username}</div>
+                            <div className='subtitle'>{profile.name || profile.username}</div>
+                            <div className='font-medium text-slate-400'>@{profile.username}</div>
                         </div>
-                        <p>{data.user.about || 'This user has not added an introduction yet.'}</p>
-                        {data.user.link && (
-                            <a href={data.user.link} className="block w-fit pb-1 text-indigo-600" rel='noreferrer' target='_blank'>{data.user.link}</a>
-                        )}
-
+                        <p className='whitespace-pre-wrap'>{profile.about || 'This user has not added an introduction yet.'}</p>
                         <div className='space-y-1.5 py-0.5 text-slate-400'>
                             <div className='flex items-center space-x-1.5'>
                                 <CalendarIcon className={"w-[18px] h-[18px]"} />
-                                <span>Joined on {new Date(data.user.createdAt).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                                <span>Joined on {new Date(profile.createdAt).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                             </div>
-                            {data.user.followingMe && (
+                            {profile.link && (
+                                <div className='flex items-center space-x-1.5'>
+                                    <LinkIcon className={"w-[18px] h-[18px]"} />
+                                    <a href={profile.link} rel='noreferrer' target='_blank'>{profile.link}</a>
+                                </div>
+                            )}
+                            {profile.followingMe && (
                                 <div className='flex items-center space-x-1.5'>
                                     <UserIcon outline={true} className={"w-[18px] h-[18px]"} />
                                     <span>Following you</span>
@@ -133,8 +146,8 @@ export default function Profile() {
                             )}
                         </div>
                         <div className="flex gap-4">
-                            <span><span className='font-semibold'>{data.user.follows}</span> follows</span>
-                            <span><span className='font-semibold'>{data.user.followers}</span> followers</span>
+                            <span><span className='font-semibold'>{profile.follows}</span> follows</span>
+                            <span><span className='font-semibold'>{profile.followers}</span> followers</span>
                         </div>
                     </div>
                     <div className="flex font-medium pt-2">
@@ -144,13 +157,13 @@ export default function Profile() {
                         <div className='border-b flex-grow'></div>
                     </div>
                     {(showing === 'posts') && (
-                        <ProfilePosts id={data.user.id} />
+                        <ProfilePosts id={profile.id} />
                     )}
                     {(showing === 'follows') && (
-                        <ProfileFollowing id={data.user.id} />
+                        <ProfileFollowing id={profile.id} />
                     )}
                     {(showing === 'followers') && (
-                        <ProfileFollowers id={data.user.id} />
+                        <ProfileFollowers id={profile.id} />
                     )}
                 </div>
             )}

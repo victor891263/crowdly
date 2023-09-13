@@ -2,6 +2,7 @@ import DislikeIcon from "../icons/DislikeIcon"
 import {gql, useMutation} from "@apollo/client"
 import PopUp from "./PopUp"
 import ArrowIcon from "../icons/ArrowIcon";
+import ChevronIcon from "../icons/ChevronIcon";
 
 export default function DislikeButton({ postId, liked, disliked, onSuccess }: { postId: string, liked: boolean, disliked: boolean, onSuccess: (isNew: boolean, type: 'like' | 'dislike') => void }) {
     const DISLIKE_POST = gql`
@@ -24,17 +25,17 @@ export default function DislikeButton({ postId, liked, disliked, onSuccess }: { 
 
     return (
         <>
-            {dislikePostOperation.error && <PopUp msg={dislikePostOperation.error.message} color={'red'} />}
-            {deleteDislikeOperation.error && <PopUp msg={deleteDislikeOperation.error.message} color={'red'} />}
+            <PopUp msg={dislikePostOperation.error ? dislikePostOperation.error.message : ''} color={'red'} />
+            <PopUp msg={deleteDislikeOperation.error ? deleteDislikeOperation.error.message : ''} color={'red'} />
             <button
                 onClick={handleDislike}
                 disabled={dislikePostOperation.loading || deleteDislikeOperation.loading || liked}
-                className='secondary flex items-center space-x-1.5 !px-2 !rounded-l-none'
+                className='secondary flex items-center space-x-1.5 !px-2 !rounded-l-none ml-px'
             >
                 {disliked ? (
-                    <ArrowIcon className='w-5 h-5 rotate-90 text-violet-600' strokeWidth={2.5} />
+                    <ChevronIcon className='w-5 h-5 text-violet-600' strokeWidth={2.5} />
                 ):(
-                    <ArrowIcon className='w-5 h-5 rotate-90' />
+                    <ChevronIcon className='w-5 h-5' />
                 )}
             </button>
         </>

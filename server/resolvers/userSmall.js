@@ -6,7 +6,7 @@ module.exports = async (parent, args, context) => {
 
     const user = await User.findOne({
         where: { id: userId },
-        attributes: ['id', 'username']
+        attributes: ['id', 'username', 'image']
     })
 
     return JSONSimplify(user)

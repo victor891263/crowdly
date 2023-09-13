@@ -33,5 +33,8 @@ module.exports = async (_, args, context) => {
     }
 
     // create the json web token and send it to the client
-    return jwt.sign({ id: user.id }, process.env.JWT_SECRET)
+    return jwt.sign({
+        id: user.id,
+        isVerified: !user.emailToken // if verification id still exists, that means the user is unverified
+    }, process.env.JWT_SECRET)
 }

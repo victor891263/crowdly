@@ -12,6 +12,8 @@ export type UserSmall = {
 
 export type User = {
     username: string
+    email: string
+    newEmail?: string
     image?: string
     about?: string
     name?: string
@@ -29,6 +31,8 @@ export type PostSmall = {
     quotedId?: number
     likes: number
     dislikes: number
+    points: number
+    quotes: number
     replies: number
     User: UserSmall
 } & Metadata
@@ -40,9 +44,11 @@ export type Post = {
 } & PostSmall
 
 export type Notification = {
-    postId?: number,
-    isReply: boolean,
+    postId?: number
+    isReply: boolean
+    isQuote: boolean
     targetUserId: number
+    seen: boolean
     userId: number
     User: UserSmall
 } & Metadata

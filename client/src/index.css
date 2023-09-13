@@ -61,16 +61,15 @@ textarea:disabled {
 }
 
 textarea {
-    @apply flex resize-none overflow-hidden leading-[1.6] dark:placeholder:text-gray-500
+    @apply flex resize-none overflow-hidden leading-[1.7] dark:placeholder:text-gray-500
 }
 
 button.primary,
 button.secondary,
-button.danger,
 a.primary,
-a.secondary,
-a.danger {
-    @apply font-medium text-[15px] leading-[1.4rem] py-2 px-3 rounded-md
+a.secondary {
+    @apply font-medium leading-[1.4rem] py-2 px-3 rounded-md;
+    font-size: calc(1rem - 1px);
 }
 
 button.primary,
@@ -93,6 +92,11 @@ a.secondary:not(:disabled) {
     @apply hover:bg-slate-100 dark:hover:bg-gray-800
 }
 
+button.secondary:disabled,
+a.secondary:disabled {
+    @apply bg-slate-100 dark:bg-gray-800/70
+}
+
 button:disabled,
 a:disabled {
     @apply cursor-not-allowed opacity-60
@@ -100,6 +104,15 @@ a:disabled {
 
 .subtitle {
     @apply text-xl font-bold tracking-[-0.01em]
+}
+
+.upload-button {
+    @apply cursor-pointer font-medium leading-[1.4rem] py-2 px-3 rounded-md ring-1 ring-slate-300 dark:bg-gray-800/70;
+    font-size: calc(1rem - 1px);
+}
+
+.upload-button:not(:disabled) {
+    @apply hover:bg-slate-100 dark:hover:bg-gray-800
 }
 
 /* DARK MODE ONLY */
@@ -154,4 +167,8 @@ a:disabled {
 
 .text-red-600 {
     @apply dark:text-red-400
+}
+
+.semismall-text {
+    font-size: calc(1rem - 1px);
 }

@@ -7,7 +7,7 @@ import React from "react"
 import FeedPost from "./FeedPost"
 import TextBalloonIcon from "../icons/TextBalloonIcon"
 
-export default function AllPosts({ sortBy }: { sortBy: 'Date' | 'Engagement' }) {
+export default function AllPosts({ sortBy }: { sortBy: 'Date' | 'Engagement' | 'Points' }) {
     const GET_ALL_POSTS = gql`
             query GetAllPosts {
                 trending {
@@ -20,6 +20,8 @@ export default function AllPosts({ sortBy }: { sortBy: 'Date' | 'Engagement' }) 
                     quotedId
                     likes
                     dislikes
+                    points
+                    quotes
                     replies
                     User {
                         id
@@ -45,6 +47,13 @@ export default function AllPosts({ sortBy }: { sortBy: 'Date' | 'Engagement' }) 
             sortedPosts.sort((a, b) => {
                 if ((a.likes + a.dislikes) < (b.likes + b.dislikes)) return 1
                 if ((a.likes + a.dislikes) > (b.likes + b.dislikes)) return -1
+                return 0
+            })
+        }
+        if (sortBy === 'Points') {
+            sortedPosts.sort((a, b) => {
+                if (a.points < b.points) return 1
+                if (a.points > b.points) return -1
                 return 0
             })
         }

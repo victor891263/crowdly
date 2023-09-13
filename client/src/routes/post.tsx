@@ -19,6 +19,7 @@ import ButtonWithSpinner from "../components/ButtonWithSpinner"
 import ArrowIcon from "../icons/ArrowIcon"
 import UserIcon from "../icons/UserIcon"
 import NotificationsContext from "../notificationsContext";
+import BoxFullScreen from "../components/BoxFullScreen";
 
 export default function Post() {
     const [post, setPost] = useState<PostType>()
@@ -26,6 +27,8 @@ export default function Post() {
 
     const [isQuoteBoxOpen, setIsQuoteBoxOpen] = useState(false)
     const [isEditBoxOpen, setIsEditBoxOpen] = useState(false)
+
+    const [isConfirmationOpen, setIsConfirmationOpen] = useState(false)
 
     const { postId } = useParams()
     const navigate = useNavigate()
@@ -42,6 +45,8 @@ export default function Post() {
                 userId
                 repliedId
                 quotedId
+                points
+                quotes
                 likes
                 liked
                 dislikes
@@ -57,6 +62,8 @@ export default function Post() {
                     quotedId
                     likes
                     dislikes
+                    points
+                    quotes
                     replies
                     User {
                         id
@@ -103,9 +110,13 @@ export default function Post() {
     function handleReaction(isNew: boolean, type: 'like' | 'dislike') {
         const newPost = {...post!}
         if (isNew) {
+            if (type === 'like') newPost.points += 1
+            if (type === 'dislike') newPost.points -= 1
             newPost[`${type}d`] = true
             newPost[`${type}s`] += 1
         } else {
+            if (type === 'like') newPost.points -= 1
+            if (type === 'dislike') newPost.points += 1
             newPost[`${type}d`] = false
             newPost[`${type}s`] -= 1
         }
@@ -115,9 +126,10 @@ export default function Post() {
     function handleReply() {
         replyToPost({
             variables: {
-                input: { body: reply, repliedId: post!.id }
+                input: { body: reply, repliedId: post!.id, targetUserId: post!.User.id }
             }
         }).then(response => {
+            setReply('')
             navigate(`/posts/${response.data?.addPost}`)
         })
     }
@@ -139,8 +151,17 @@ export default function Post() {
         <>
             <PopUp msg={replyOperation.error ? replyOperation.error.message : ''} color={'red'} />
             <PopUp msg={deleteOperation.error ? deleteOperation.error.message : ''} color={'red'} />
-            {(post && isQuoteBoxOpen) && <PostForm type={'quote'} close={() => setIsQuoteBoxOpen(false)} id={post.id} />}
+            {(post && isQuoteBoxOpen) && <PostForm type={'quote'} close={() => setIsQuoteBoxOpen(false)} id={post.id} userId={post.User.id} />}
             {(post && isEditBoxOpen) && <PostForm type={'edit'} close={() => setIsEditBoxOpen(false)} id={post.id} content={post.body} />}
+            {isConfirmationOpen && (
+                <BoxFullScreen close={() => setIsConfirmationOpen(false)} >
+                    <div className='max-w-sm w-full m-auto py-24'>
+                        <h2 className='subtitle mb-3.5'>Are you sure?</h2>
+                        <p className='mb-6'>Deleting your post will delete all the replies made to it. This action is not reversible.</p>
+                        <ButtonWithSpinner handleClick={handleDelete} label={'Delete post'} isLoading={deleteOperation.loading} type={'secondary'} className={'text-red-600'} />
+                    </div>
+                </BoxFullScreen>
+            )}
             <UserWrapper>
                 {loading && <GenericLoading />}
                 {error && <GenericError msg={error.message} />}
@@ -165,10 +186,10 @@ export default function Post() {
                                 )}
                                 <span className="text-slate-400">{setTimeLabel(post.createdAt)}</span>
                             </div>
-                            <p className='text-lg leading-[1.7]'>{post.body}</p>
+                            <p className='text-lg leading-[1.7] whitespace-pre-wrap'>{post.body}</p>
                             <div className="flex items-center gap-4">
-                                <span><span className='font-semibold'>{post.likes}</span> likes</span>
-                                <span><span className='font-semibold'>{post.dislikes}</span> dislikes</span>
+                                <span><span className='font-semibold'>{post.points}</span> points <sup>(+{post.likes}/-{post.dislikes})</sup></span>
+                                <span><span className='font-semibold'>{post.quotes}</span> quotes</span>
                             </div>
                             {post.repliedId && (
                                 <div className='flex items-center space-x-1 text-violet-600'>
@@ -179,7 +200,7 @@ export default function Post() {
                             {post.quotedId && (
                                 <div className='flex items-center space-x-1 text-violet-600'>
                                     <div className='pt-0.5'><ArrowIcon className='h-5 w-5 rotate-[225deg]' /></div>
-                                    <Link to={`/posts/${post.quotedId}`} className='text-[15px]'>view what this post is quoting</Link>
+                                    <Link to={`/posts/${post.quotedId}`} className=''>view what this post is quoting</Link>
                                 </div>
                             )}
                         </div>
@@ -195,7 +216,7 @@ export default function Post() {
                                 {(currentUser && (currentUser.id === post.userId)) && (
                                     <>
                                         <button onClick={() => setIsEditBoxOpen(true)} className='secondary'>Edit post</button>
-                                        <ButtonWithSpinner handleClick={handleDelete} label={'Delete post'} isLoading={deleteOperation.loading} type={'secondary'} className={'text-red-600'} />
+                                        <button onClick={() => setIsConfirmationOpen(true)} className='secondary text-red-600'>Delete post</button>
                                     </>
                                 )}
                             </div>

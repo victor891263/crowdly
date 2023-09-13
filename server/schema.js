@@ -3,8 +3,12 @@ module.exports =`#graphql
         id: ID!
         createdAt: String
         updatedAt: String
+        email: String
+        newEmail: String
         username: String!
+        name: String
         about: String
+        link: String
         image: String
         follows: Int
         followers: Int
@@ -21,6 +25,8 @@ module.exports =`#graphql
         quotedId: Int
         likes: Int!
         dislikes: Int!
+        points: Int!
+        quotes: Int!
         replies: Int!
         liked: Boolean
         disliked: Boolean
@@ -33,11 +39,15 @@ module.exports =`#graphql
         updatedAt: String!
         postId: Int
         isReply: Boolean!
+        isQuote: Boolean!
         targetUserId: Int!
+        seen: Boolean!
         userId: Int!
         User: User
     }
     type Query {
+        verifyUser(id: ID!): String
+        verifyNewEmail(id: ID!): Boolean
         feed: [Post]
         trending: [Post]
         posts(body: String!): [Post]
@@ -50,15 +60,20 @@ module.exports =`#graphql
         notifications: [Notification]
     }
     type Mutation {
-        login(input: LoginInput!): String!
-        addUser(input: AddUserInput!): String!
+        sendRecoveryInstructions(email: String!): Boolean
+        resetAccount(id: ID!, password: String!): Boolean
+        login(input: LoginInput!): String
+        addUser(input: AddUserInput!): String
         followUser(id: ID!): Boolean
-        addPost(input: AddPostInput!): String!
+        addPost(input: AddPostInput!): String
         likePost(id: ID!): Boolean
         dislikePost(id: ID!): Boolean
-        editUser(input: EditUserInput!): Boolean
+        cancelEmailUpdate: Boolean
+        editUser(input: EditUserInput!, newImg: String): User
+        editUserEmail(email: String!): Boolean
+        editUserPassword(currentPassword: String!, newPassword: String!): Boolean
         editPost(input: EditPostInput!, id: ID!): Boolean
-        deleteUser(id: ID!): Boolean
+        deleteUser: Boolean
         deletePost(id: ID!, repliedId: ID): Boolean
         deleteLike(id: ID!): Boolean
         deleteDislike(id: ID!): Boolean
@@ -70,6 +85,7 @@ module.exports =`#graphql
         password: String!
     }
     input AddUserInput {
+        email: String!
         username: String!
         password: String!
     }
@@ -77,10 +93,14 @@ module.exports =`#graphql
         body: String!
         repliedId: String
         quotedId: String
+        targetUserId: String
     }
     input EditUserInput {
         username: String
+        name: String
         about: String
+        link: String
+        image: String
     }
     input EditPostInput {
         body: String!

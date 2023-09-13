@@ -10,7 +10,9 @@ module.exports = async (_, args, context) => {
     // get this user's data
     const profile = await User.findOne({
         where: { id: profileId },
-        attributes: ['id', 'username', 'about', 'follows', 'followers', 'createdAt', 'updatedAt']
+        attributes: {
+            exclude: ['password', 'resetToken', 'emailToken', 'newEmailToken']
+        }
     })
 
     // if a user with the given id doesn't exist, tell that to the client, instead of proceeding

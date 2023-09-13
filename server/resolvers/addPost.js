@@ -38,12 +38,22 @@ module.exports = async (_, args, context) => {
         })
     }
 
+    // if the post is a quote, find the target post and increment its quote count
+    if (postData.quotedId) {
+        await Post.update({
+            quotes: Sequelize.literal('quotes + 1')
+        }, {
+            where: { id: postData.quotedId }
+        })
+    }
+
     // if the post is a reply, first grab the id of the user that created the post that is being replied to
     // then send a notification to the creator of the post (if the post is a reply)
-    if (postData.repliedId) {
+    if (postData.repliedId || postData.quotedId) {
         await Notification.create({
             postId: createdPost.id,
-            isReply: true,
+            isReply: !!postData.repliedId,
+            isQuote: !!postData.quotedId,
             userId: currentUserId,
             targetUserId: postData.targetUserId
         })

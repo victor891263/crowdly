@@ -26,9 +26,10 @@ module.exports = async (_, args, context) => {
         }
     })
 
-    // decrement the value of 'dislikes' of the post with the specified id
+    // decrement the value of 'dislikes' and increment the value of 'points' of the post with the specified id
     await Post.update({
-        dislikes: Sequelize.literal('dislikes - 1')
+        dislikes: Sequelize.literal('dislikes - 1'),
+        points: Sequelize.literal('points + 1')
     }, {
         where: { id: postId }
     })

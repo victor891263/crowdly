@@ -1,5 +1,6 @@
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
+const {v2: cloudinary} = require("cloudinary")
 const { ApolloServer } = require('@apollo/server')
 const { startStandaloneServer } = require('@apollo/server/standalone')
 
@@ -19,6 +20,13 @@ const server = new ApolloServer({
     }
 })
 
+// setup cloudinary
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+})
+
 // initialize server
 startStandaloneServer(server, {
     listen: {
@@ -26,6 +34,7 @@ startStandaloneServer(server, {
     },
     context: async ({ req, res }) => {
         const bearer = req.headers.authorization
+
         // if a logged in user is present, decode the user's jwt and insert the decoded value into the context
         if (bearer) {
             const token = bearer.split(' ')[1]

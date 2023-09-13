@@ -9,7 +9,6 @@ import HelpTopic from "./routes/helpTopic"
 import HelpArticle from "./routes/helpArticle"
 import HelpSearch from "./routes/helpSearch"
 import About from './routes/about'
-import Auth from './routes/auth'
 import Home from './routes/home'
 import Post from "./routes/post"
 import Profile from "./routes/profile"
@@ -19,8 +18,20 @@ import reportWebVitals from './reportWebVitals'
 import SearchPage from "./routes/searchPage"
 import Notifications from "./routes/notifications"
 import MainWrapper from "./components/MainWrapper"
+import Unverified from "./routes/unverified"
+import Verify from "./routes/verify"
+import VerifyEmail from "./routes/verifyEmail"
+import Login from "./routes/login"
+import Join from "./routes/join"
+import Recover from "./routes/recover"
+import getCurrentUser from "./utilities/getCurrentUser"
+import Reset from "./routes/reset"
+import sysend from "sysend";
 
-const router = createBrowserRouter([
+const currentUser = getCurrentUser()
+
+// common routes
+const routes = [
     {
         path: "/",
         element: <MainWrapper><Home /></MainWrapper>,
@@ -39,20 +50,8 @@ const router = createBrowserRouter([
         element: <MainWrapper><SearchPage /></MainWrapper>
     },
     {
-        path: "/notifications",
-        element: <MainWrapper><Notifications /></MainWrapper>
-    },
-    {
         path: "/about",
         element: <MainWrapper><About /></MainWrapper>
-    },
-    {
-        path: "/login",
-        element: <Auth />
-    },
-    {
-        path: "/join",
-        element: <Auth newUser={true} />
     },
     {
         path: "/help",
@@ -70,6 +69,53 @@ const router = createBrowserRouter([
         path: "/help/search",
         element: <MainWrapper><HelpSearch /></MainWrapper>
     },
+]
+
+// if there is a logged-in user
+const userRouter = createBrowserRouter([
+    ...routes,
+    {
+        path: '/verifymail/:id',
+        element: <VerifyEmail />
+    },
+    {
+        path: "/notifications",
+        element: <MainWrapper><Notifications /></MainWrapper>
+    }
+])
+
+// if nobody is logged in
+const guestRouter = createBrowserRouter([
+    ...routes,
+    {
+        path: "/login",
+        element: <Login />
+    },
+    {
+        path: "/join",
+        element: <Join />
+    },
+    {
+        path: '/recover',
+        element: <Recover />
+    },
+    {
+        path: '/reset',
+        element: <Reset />
+    }
+])
+
+// if there is a logged-in user but that user hasn't verified their account
+const unverifiedRouter = createBrowserRouter([
+    {
+        path: '/',
+        element: <Unverified />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/verify/:id',
+        element: <Verify />
+    }
 ])
 
 const httpLink = createHttpLink({
@@ -100,11 +146,19 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <ApolloProvider client={client}>
-        <RouterProvider router={router} />
+        <RouterProvider router={currentUser ? (currentUser.isVerified ? userRouter : unverifiedRouter) : guestRouter} />
     </ApolloProvider>
 )
 
 initTheme()
+
+// if the user has closed all tabs and if they didnt select "remember me" when they logged in, log them out
+sysend.track('close', data => {
+    if ((data.count === 0) && (!localStorage.getItem('rememberMe'))) {
+        localStorage.removeItem('jwt')
+        localStorage.removeItem('rememberMe')
+    }
+})
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

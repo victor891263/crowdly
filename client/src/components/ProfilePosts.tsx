@@ -17,6 +17,8 @@ export default function ProfilePosts({ id }: { id: string }) {
                 userId
                 repliedId
                 quotedId
+                points
+                quotes
                 likes
                 dislikes
                 replies
