@@ -9,6 +9,7 @@ import GlassIcon from "../icons/GlassIcon"
 import CrossIcon from "../icons/CrossIcon"
 import NotificationButton from "./NotificationButton"
 import PostForm from "./PostForm"
+import HandWavingColoredIcon from "../icons/HandWavingColoredIcon";
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -36,7 +37,7 @@ export default function Header() {
                     <nav className={'semismall-text p-5 sm:p-6 shadow-md bg-white rounded-lg overflow-hidden transition-all dark:bg-gray-800 ' + (isMenuOpen ? (currentUser ? 'max-sm:h-[336px]' : 'max-sm:h-[274px]') : 'max-sm:h-[60px]')}>
                         <div className='flex items-center justify-between'>
                             <Link to={'/'} className='flex items-center space-x-1.5' >
-                                <div className='bg-violet-600 rounded-full h-3.5 w-3.5'></div>
+                                <HandWavingColoredIcon className='h-4 w-4' />
                                 <div>Crowdly</div>
                             </Link>
                             <div className='flex items-center space-x-5'>

@@ -340,7 +340,7 @@ export default function getHelpArticles(): Article[] {
         {
             id: 8,
             topics: ['getting started', 'voting system'],
-            title: 'Liking and disliking',
+            title: 'Upvoting and downvoting',
             content: [
                 {
                     type: 'text',
