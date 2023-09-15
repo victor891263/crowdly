@@ -172,3 +172,19 @@ a:disabled {
 .semismall-text {
     font-size: calc(1rem - 1px);
 }
+
+.small-height {
+    height: calc(1.25rem - 2px);
+}
+
+.small-width {
+    width: calc(1.25rem - 2px);
+}
+
+.faq-opener {
+    cursor: pointer;
+}
+
+.faq-opener:checked ~ p {
+    display: block;
+}

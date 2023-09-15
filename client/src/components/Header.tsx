@@ -36,10 +36,7 @@ export default function Header() {
                 <div className='px-6 lg:max-w-screen-lg container mx-auto'>
                     <nav className={'semismall-text p-5 sm:p-6 shadow-md bg-white rounded-lg overflow-hidden transition-all dark:bg-gray-800 ' + (isMenuOpen ? (currentUser ? 'max-sm:h-[336px]' : 'max-sm:h-[274px]') : 'max-sm:h-[60px]')}>
                         <div className='flex items-center justify-between'>
-                            <Link to={'/'} className='flex items-center space-x-1.5' >
-                                <HandWavingColoredIcon className='h-4 w-4' />
-                                <div>Crowdly</div>
-                            </Link>
+                            <Link to={'/'} className='flex items-center space-x-1.5' >👋 Crowdly</Link>
                             <div className='flex items-center space-x-5'>
                                 <div className='flex items-center space-x-5 max-sm:hidden'>
                                     <Link to={'/about'}>About</Link>
@@ -57,7 +54,7 @@ export default function Header() {
                                     )}
                                 </div>
                                 <div className='flex items-center space-x-4 sm:space-x-5'>
-                                    <Link to={'/search'} ><GlassIcon className={'h-[18px] w-[18px]'} /></Link>
+                                    <Link to={'/search'} ><GlassIcon className={'small-height small-width'} /></Link>
                                     {currentUser && <NotificationButton />}
                                     <button onClick={() => setIsMenuOpen(!isMenuOpen)} className='sm:hidden'>
                                         {isMenuOpen ? <CrossIcon className='h-6 w-6' /> : <MenuIcon className='h-6 w-6' />}

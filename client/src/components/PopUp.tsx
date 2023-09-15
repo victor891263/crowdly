@@ -17,8 +17,8 @@ export default function PopUp({ msg, color }: { msg: string, color: 'red' | 'gre
             <div className={'p-3 pr-4 rounded-md text-white w-fit mx-auto flex space-x-3' + ((color === 'red' ? ' bg-red-700' : '') || (color === 'green' ? ' bg-green-700' : ''))}>
                 <div className='relative'>
                     <div className='absolute top-0 left-0 h-full flex items-center'>
-                        {color === 'red' && <CrossIcon className={'h-[19px] w-[19px]'} strokeWidth={2} />}
-                        {color === 'green' && <CheckIcon className={'h-[19px] w-[19px]'} strokeWidth={2} />}
+                        {color === 'red' && <CrossIcon className={'small-height small-width'} strokeWidth={2} />}
+                        {color === 'green' && <CheckIcon className={'small-height small-width'} strokeWidth={2} />}
                     </div>
                     <div className='leading-[1.6] semismall-text text-transparent'>W</div>
                 </div>

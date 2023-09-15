@@ -100,7 +100,7 @@ const guestRouter = createBrowserRouter([
         element: <Recover />
     },
     {
-        path: '/reset',
+        path: '/reset/:id',
         element: <Reset />
     }
 ])

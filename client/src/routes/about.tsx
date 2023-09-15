@@ -2,19 +2,24 @@ import React, {useState} from 'react'
 import Footer from "../components/Footer"
 import CheckIcon from "../icons/CheckIcon"
 import {Link} from "react-router-dom"
+import FAQBox from "../components/FAQBox"
+import getFAQ from "../utilities/getFAQ"
 
 export default function About() {
     const [username, setUsername] = useState('')
 
+    const faqs = getFAQ()
+
     return (
         <>
-            <div className="px-6 lg:px-8 container mx-auto pt-40 pb-20 space-y-32 sm:space-y-40 xl:max-w-screen-xl">
-                <section className="space-y-24 xl:space-y-12">
-                    <div>
-                        <h2 className="max-w-xl mx-auto text-3xl font-bold tracking-tight text-center sm:text-5xl dark:text-white">Crowdly is a <span className="text-violet-600">trouble-free</span> social platform.</h2>
-                        <p className="max-w-xl mx-auto mt-5 leading-normal text-xl text-center text-gray-700 dark:text-gray-300">Designed to bring people together and inspire meaningful conversations, Crowdly helps you discover new connections and share your thoughts with the world.</p>
-                    </div>
+            <div className="px-6 lg:px-8 container mx-auto pt-56 pb-20 space-y-32 sm:space-y-40 xl:max-w-screen-xl">
+                <section className='max-w-xl mx-auto
+max-w-xl mx-auto'>
+                    <h2 className="text-3xl font-bold tracking-tight text-center sm:text-5xl dark:text-white">Crowdly is a <span className="text-violet-600">trouble-free</span> social platform.</h2>
+                    <p className="mt-5 leading-normal text-xl text-center text-gray-700 dark:text-gray-300">Designed to bring people together and inspire meaningful conversations, Crowdly helps you discover new connections and share your thoughts with the world.</p>
+                </section>
 
+                <section className="space-y-24 xl:space-y-12">
                     <div className="grid lg:gap-8 lg:grid-cols-2 lg:items-center">
                         <div>
                             <div className="font-black text-4xl text-gray-400 sm:text-5xl dark:text-gray-600">1</div>
@@ -103,8 +108,20 @@ export default function About() {
                     </dl>
                 </section>
 
-                <section className="bg-violet-600 text-white p-6 rounded-2xl flex flex-col justify-center space-y-8 sm:p-10 lg:space-y-0 lg:space-x-12 lg:justify-between lg:flex-row">
-                    <div className="max-w-sm flex flex-col space-y-4 text-center max-lg:mx-auto lg:text-left">
+                <section>
+                    <div className="max-w-lg mx-auto text-center">
+                        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl dark:text-white">Your questions answered.</h2>
+                        <p className="mt-4 text-lg text-gray-700 dark:text-gray-300">We've compiled answers to your most common questions. If you have more questions, feel free to reach out.</p>
+                    </div>
+                    <div className='mt-14 grid xl:grid-cols-2 gap-5'>
+                        {faqs.map(faq => (
+                            <FAQBox title={faq.title} body={faq.body} />
+                        ))}
+                    </div>
+                </section>
+
+                <section className="bg-violet-600 text-white p-6 pt-10 rounded-2xl flex flex-col justify-center space-y-8 sm:p-10 lg:space-y-0 lg:space-x-12 lg:justify-between lg:flex-row">
+                    <div className="max-w-md flex flex-col space-y-4 text-center max-lg:mx-auto lg:text-left">
                         <h1 className="text-3xl font-bold tracking-tight leading-none !text-gray-100 sm:text-4xl">Join us now</h1>
                         <p className="text-lg">Create a Crowdly account and start connecting with the crowd and share your stories!</p>
                     </div>
@@ -121,20 +138,3 @@ export default function About() {
         </>
     )
 }
-
-
-/*
-
-<section className="max-w-lg mx-auto text-center">
-                    <h2 className="text-3xl font-bold tracking-tight sm:text-4xl dark:text-white">Crowdly is open-source</h2>
-                    <p className="mt-4 text-lg text-gray-700 dark:text-gray-300">Pellentesque viverra, leo id euismod laoreet, nunc risus molestie orci, vel faucibus quam justo id mauris.</p>
-                    <button className="mt-6 inline-flex items-center px-6 py-3 rounded-lg bg-violet-600 text-gray-50">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current w-7 h-7 text-gray-50"><path d="M 5.4160156 2.328125 L 12.935547 10.158203 C 13.132547 10.363203 13.45925 10.363203 13.65625 10.158203 L 15.179688 8.5742188 C 15.405688 8.3392188 15.354312 7.956875 15.070312 7.796875 C 11.137313 5.571875 6.2620156 2.811125 5.4160156 2.328125 z M 3.140625 2.8476562 C 3.055625 3.0456562 3 3.2629063 3 3.5039062 L 3 20.591797 C 3 20.788797 3.044375 20.970625 3.109375 21.140625 L 11.576172 12.324219 C 11.762172 12.131219 11.762172 11.826813 11.576172 11.632812 L 3.140625 2.8476562 z M 17.443359 9.2578125 C 17.335484 9.2729375 17.233297 9.32375 17.154297 9.40625 L 15.015625 11.632812 C 14.829625 11.825812 14.829625 12.130219 15.015625 12.324219 L 17.134766 14.529297 C 17.292766 14.694297 17.546141 14.729188 17.744141 14.617188 C 19.227141 13.777188 20.226563 13.212891 20.226562 13.212891 C 20.725562 12.909891 21.007 12.443547 21 11.935547 C 20.992 11.439547 20.702609 10.981938 20.224609 10.710938 C 20.163609 10.676937 19.187672 10.124359 17.763672 9.3183594 C 17.664172 9.2623594 17.551234 9.2426875 17.443359 9.2578125 z M 13.296875 13.644531 C 13.165875 13.644531 13.034047 13.696328 12.935547 13.798828 L 5.4746094 21.566406 C 6.7566094 20.837406 11.328781 18.249578 15.050781 16.142578 C 15.334781 15.981578 15.386156 15.599281 15.160156 15.363281 L 13.65625 13.798828 C 13.55775 13.696328 13.427875 13.644531 13.296875 13.644531 z"></path></svg>
-                        <span className="flex flex-col items-start ml-4 leading-none">
-                            <span className="mb-1 text-xs">GET IT ON</span>
-                            <span className="font-semibold title-font">Google Play</span>
-                        </span>
-                    </button>
-                </section>
-
- */

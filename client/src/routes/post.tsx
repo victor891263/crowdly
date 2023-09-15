@@ -237,7 +237,7 @@ export default function Post() {
                             ):(
                                 <div className='mt-8'>
                                     <div className='flex space-x-2 bg-slate-100 py-3 px-4 rounded-md text-slate-400'>
-                                        <div className='pt-0.5'><UserIcon outline={true} className={"w-[18px] h-[18px]"} /></div>
+                                        <div className='pt-0.5'><UserIcon outline={true} className={"small-height small-width"} /></div>
                                         <span>You must be logged in to react or reply</span>
                                     </div>
                                 </div>

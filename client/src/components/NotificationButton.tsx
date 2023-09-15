@@ -14,7 +14,7 @@ export default function NotificationButton() {
             <PopUp msg={error || ''} color={'red'} />
             <Link to={`/notifications`} className='relative'>
                 {(unseen && (unseen.length > 0)) && (
-                    <div className='absolute -top-[5px] -right-[5px] text-[0.625rem] text-white bg-violet-600 rounded pt-0.5 px-1'>
+                    <div className='absolute -top-[0.3125rem] -right-[0.3125rem] text-[0.625rem] text-white bg-violet-600 rounded pt-0.5 px-1'>
                         <span className='leading-[0px]'>{unseen.length}</span>
                     </div>
                 )}

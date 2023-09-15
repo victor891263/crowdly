@@ -129,18 +129,18 @@ export default function Profile() {
                         <p className='whitespace-pre-wrap'>{profile.about || 'This user has not added an introduction yet.'}</p>
                         <div className='space-y-1.5 py-0.5 text-slate-400'>
                             <div className='flex items-center space-x-1.5'>
-                                <CalendarIcon className={"w-[18px] h-[18px]"} />
+                                <CalendarIcon className={"small-height small-width"} />
                                 <span>Joined on {new Date(profile.createdAt).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                             </div>
                             {profile.link && (
                                 <div className='flex items-center space-x-1.5'>
-                                    <LinkIcon className={"w-[18px] h-[18px]"} />
+                                    <LinkIcon className={"small-height small-width"} />
                                     <a href={profile.link} rel='noreferrer' target='_blank'>{profile.link}</a>
                                 </div>
                             )}
                             {profile.followingMe && (
                                 <div className='flex items-center space-x-1.5'>
-                                    <UserIcon outline={true} className={"w-[18px] h-[18px]"} />
+                                    <UserIcon outline={true} className={"small-height small-width"} />
                                     <span>Following you</span>
                                 </div>
                             )}
