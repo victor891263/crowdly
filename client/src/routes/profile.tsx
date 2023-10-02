@@ -69,7 +69,7 @@ export default function Profile() {
         }).then(response => {
             setProfile(response.data!.user)
         })
-    }, [])
+    }, [userId])
 
     function handleFollow() {
         follow({
@@ -122,7 +122,7 @@ export default function Profile() {
                                 )
                             )}
                         </div>
-                        <div className="space-y-0.5">
+                        <div>
                             <div className='subtitle'>{profile.name || profile.username}</div>
                             <div className='font-medium text-slate-400'>@{profile.username}</div>
                         </div>

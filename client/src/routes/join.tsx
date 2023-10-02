@@ -61,7 +61,7 @@ export default function Join() {
                         <div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
                             <div className='max-w-sm text-white'>
                                 <h1 className='text-2xl font-bold tracking-tight'>Join the community</h1>
-                                <p className="mt-4 leading-[1.6]">Bringing people together and inspire meaningful conversations, helping you discover new connections and share your ideas with the world.</p>
+                                <p className="mt-4">Bringing people together and inspire meaningful conversations, helping you discover new connections and share your ideas with the world.</p>
                             </div>
                         </div>
                     </div>

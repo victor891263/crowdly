@@ -16,7 +16,7 @@ module.exports = async (_, args, context) => {
     // get data (from users table) of users that this user has followed
     const users = await User.findAll({
         where: { id: userIds },
-        attributes: ['id', 'username']
+        attributes: ['id', 'username', 'image']
     })
 
     return JSONSimplify(users)

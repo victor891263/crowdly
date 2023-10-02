@@ -43,7 +43,7 @@ export default function ProfileFollowers({ id }: { id: string }) {
                     <div className='flex flex-col items-center text-center py-16'>
                         <UserIcon slash={true} className={'h-10 w-10 text-slate-400/60 mx-auto dark:text-gray-600'} />
                         <div className='mt-5 subtitle'>No users found</div>
-                        <p className='mt-3'>It looks like this user hasn't followed anyone yet.</p>
+                        <p className='mt-3'>It looks like this user hasn't been followed by anyone yet.</p>
                     </div>
                 )
             )}

@@ -19,9 +19,9 @@ export default function UserWrapper({ children }: { children: ReactNode }) {
             ):(
                 <div className='pt-40 pb-20 pr-10 max-lg:hidden'>
                     <div className='mb-5 bg-slate-100 p-7 pt-6 rounded-xl'>
-                        <h2 className='text-lg font-bold tracking-[0] mb-3.5'>Join Crowdly today</h2>
-                        <p className='leading-[1.65]'>You just need to provide an email and pick a username.</p>
-                        <Link to={'/join'} className='mt-6 block w-fit primary'>Get started</Link>
+                        <h2 className='text-lg font-bold tracking-[0] mb-2'>Join Crowdly today</h2>
+                        <p>You just need to provide an email and pick a username.</p>
+                        <Link to={'/join'} className='mt-5 block w-fit primary'>Get started</Link>
                     </div>
                     <FeedFooter />
                 </div>

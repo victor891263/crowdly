@@ -43,7 +43,7 @@ export default function HelpArticle() {
                     <div className="sm:mt-14 sm:pt-14 mt-12 pt-12 border-t flex flex-col gap-4 whitespace-pre-wrap">
                         {article.content.map((c, i) => {
                             if (c.type === 'head') return (
-                                <h2 className='mt-6 mb-1 subtitle' key={i}>{c.body}</h2>
+                                <h2 className='mt-6 subtitle' key={i}>{c.body}</h2>
                             )
                             if (c.type === 'text') return (
                                 <p key={i}>{c.body}</p>
@@ -76,23 +76,23 @@ export default function HelpArticle() {
                     </div>
                     <div className="sm:mt-14 sm:pt-14 mt-12 pt-12 border-t grid grid-cols-2 gap-4">
                         {previousArticle ? (
-                            <Link to={`/help/articles/${previousArticle.id}`} className="block secondary max-sm:!ring-0 max-sm:!p-0 max-sm:dark:!bg-gray-900 sm:!py-4 sm:!px-5">
+                            <Link to={`/help/articles/${previousArticle.id}`} className="block secondary max-sm:!ring-0 max-sm:!p-0 max-sm:dark:!bg-gray-900 sm:!py-3 sm:!px-4">
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="rotate-180 w-3 h-auto inline"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                                     <div className="inline md:text-sm ml-1">Previous</div>
                                 </div>
-                                <div className="max-sm:hidden mt-1 font-medium text-violet-600 !text-base">{previousArticle.title}</div>
+                                <div className="max-sm:hidden font-medium text-violet-600 !text-base">{previousArticle.title}</div>
                             </Link>
                         ):(
                             <div></div>
                         )}
                         {nextArticle ? (
-                            <Link to={`/help/articles/${nextArticle.id}`} className="text-right block secondary max-sm:!ring-0 max-sm:!p-0 max-sm:dark:!bg-gray-900 sm:!py-4 sm:!px-5">
+                            <Link to={`/help/articles/${nextArticle.id}`} className="text-right block secondary max-sm:!ring-0 max-sm:!p-0 max-sm:dark:!bg-gray-900 sm:!py-3 sm:!px-4">
                                 <div>
                                     <div className="inline md:text-sm mr-1">Next</div>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-auto inline"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                                 </div>
-                                <div className="max-sm:hidden mt-1 font-medium text-violet-600 !text-base">{nextArticle.title}</div>
+                                <div className="max-sm:hidden font-medium text-violet-600 !text-base">{nextArticle.title}</div>
                             </Link>
                         ):(
                             <div></div>

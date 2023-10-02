@@ -186,20 +186,20 @@ export default function Post() {
                                 )}
                                 <span className="text-slate-400">{setTimeLabel(post.createdAt)}</span>
                             </div>
-                            <p className='text-lg leading-[1.7] whitespace-pre-wrap'>{post.body}</p>
+                            <p className='text-lg leading-[1.55] whitespace-pre-wrap'>{post.body}</p>
                             <div className="flex items-center gap-4">
                                 <span><span className='font-semibold'>{post.points}</span> points <sup>(+{post.likes}/-{post.dislikes})</sup></span>
                                 <span><span className='font-semibold'>{post.quotes}</span> quotes</span>
                             </div>
                             {post.repliedId && (
                                 <div className='flex items-center space-x-1 text-violet-600'>
-                                    <div className='pt-0.5'><ArrowIcon className='h-5 w-5 rotate-[225deg]' /></div>
+                                    <div><ArrowIcon className='h-5 w-5 rotate-[225deg]' /></div>
                                     <Link to={`/posts/${post.repliedId}`} className=''>view what this post is replying to</Link>
                                 </div>
                             )}
                             {post.quotedId && (
                                 <div className='flex items-center space-x-1 text-violet-600'>
-                                    <div className='pt-0.5'><ArrowIcon className='h-5 w-5 rotate-[225deg]' /></div>
+                                    <div><ArrowIcon className='h-5 w-5 rotate-[225deg]' /></div>
                                     <Link to={`/posts/${post.quotedId}`} className=''>view what this post is quoting</Link>
                                 </div>
                             )}
@@ -238,7 +238,7 @@ export default function Post() {
                                 <div className='mt-8'>
                                     <div className='flex space-x-2 bg-slate-100 py-3 px-4 rounded-md text-slate-400'>
                                         <div className='pt-0.5'><UserIcon outline={true} className={"small-height small-width"} /></div>
-                                        <span>You must be logged in to react or reply</span>
+                                        <span className="semismall-text font-medium">You must be logged in to react or reply</span>
                                     </div>
                                 </div>
                             )}

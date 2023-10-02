@@ -29,13 +29,13 @@ export default function FeedPost({ post, showReplyLabel }: { post: PostSmall, sh
             <p>{post.body}</p>
             {post.quotedId && (
                 <div className='!mt-4 flex items-center space-x-0.5 text-slate-400'>
-                    <div className='pt-0.5'><ArrowIcon className='h-4 w-4 rotate-[225deg]' /></div>
+                    <div><ArrowIcon className='h-4 w-4 rotate-[225deg]' /></div>
                     <span className="text-sm">quoting another post</span>
                 </div>
             )}
             {(showReplyLabel && post.repliedId) && (
                 <div className='!mt-4 flex items-center space-x-0.5 text-slate-400'>
-                    <div className='pt-0.5'><ArrowIcon className='h-4 w-4 rotate-[225deg]' /></div>
+                    <div><ArrowIcon className='h-4 w-4 rotate-[225deg]' /></div>
                     <span className="text-sm">replying to another post</span>
                 </div>
             )}
