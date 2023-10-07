@@ -20,6 +20,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+      
+      - name: Create the SSL file
+        run: echo ${{ secrets.SSL }} > ./server/ssl.crt
 
       - name: Log in to the Container registry
         uses: docker/login-action@v2
