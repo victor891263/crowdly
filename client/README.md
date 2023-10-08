@@ -1,35 +1,59 @@
-# Crowdly
+# Crowdly - Front-end
 
-Crowdly is a platform for users to share content to the world.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Development
+## Run on your local machine
 
-Crowdly's client is made using React, TypeScript, and TailwindCSS.
+Before you begin, make sure you have the following prerequisites installed on your system:
 
-### `npm start`
+- **Node.js**: Make sure you have Node.js installed on your system. You can download it from the [official Node.js website](https://nodejs.org/).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To run the front-end on your local machine, follow these steps:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. **Clone the repository:**
 
-### `npm test`
+    ```
+    git clone https://github.com/victor891263/crowdly.git
+    cd client
+    ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Install dependencies:**
 
-### `npm run build`
+    ```
+    npm install
+    ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Configure environment variables:**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    Create a `.env.local` file in the root directory and specify the API endpoint.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. **Run tests:**
 
-### Learn More
+    ```
+    npm test
+    ```
+
+    Launches the test runner in the interactive watch mode. View the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+5. **Start the development server:**
+
+    ```
+    npm start
+    ```
+
+    Open your web browser and navigate to `http://localhost:3000` to view the app. Now you have the front-end running locally on your machine. The page will reload if you make edits. You will also see any lint errors in the console.
+
+## Building
+
+Run the following command to build the app for production to the `build` folder.
+
+```
+npm run build
+```
+
+It correctly bundles the front-end in production mode and optimizes the build for the best performance and deployment-ready. See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
