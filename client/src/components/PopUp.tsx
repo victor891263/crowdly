@@ -13,7 +13,7 @@ export default function PopUp({ msg, color }: { msg: string, color: 'red' | 'gre
     }, [msg])
 
     return (
-        <div className={'fixed bottom-0 left-0 w-screen z-50 p-6 pt-0 flex justify-center ' + (label.length > 0 ? 'transition' : 'scale-90 opacity-0')}>
+        <div className={'fixed bottom-0 left-0 w-screen z-50 p-6 pt-0 flex justify-center ' + (label.length > 0 ? 'transition' : 'scale-90 opacity-0')} data-testid='popUp' >
             <div className={'p-3 pr-4 rounded-md text-white w-fit mx-auto flex space-x-3' + ((color === 'red' ? ' bg-red-700' : '') || (color === 'green' ? ' bg-green-700' : ''))}>
                 <div className='relative'>
                     <div className='absolute top-0 left-0 h-full flex items-center'>

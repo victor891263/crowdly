@@ -56,7 +56,7 @@ export default function Header() {
                                 <div className='flex items-center space-x-4 sm:space-x-5'>
                                     <Link to={'/search'} ><GlassIcon className={'small-height small-width'} /></Link>
                                     {currentUser && <NotificationButton />}
-                                    <button onClick={() => setIsMenuOpen(!isMenuOpen)} className='sm:hidden'>
+                                    <button onClick={() => setIsMenuOpen(!isMenuOpen)} className='sm:hidden' data-testid='nav-menu-toggle-btn' >
                                         {isMenuOpen ? <CrossIcon className='h-6 w-6' /> : <MenuIcon className='h-6 w-6' />}
                                     </button>
                                 </div>
